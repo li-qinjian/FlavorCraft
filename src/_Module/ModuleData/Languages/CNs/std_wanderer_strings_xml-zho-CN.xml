@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+    <tags>
+        <tag language="Chinese" />
+        <!-- 语言标签改为中文 -->
+    </tags>
+    <strings>
+        <!-- 智者，男性帝国总督模板漫游者 -->
+        <string id="UCWna001" text="{HERO.FIRSTNAME} 智者" />
+        <string id="UCWps001" text="我不介意聊聊这些事。" />
+        <string id="UCWba001" text="我曾是库赛特边境一座城堡的总督，成功抵御过多次围攻。能让城堡保持繁荣且令敌人畏惧，这是我的骄傲。" />
+        <string id="UCWbb001" text="或许是我太过出色，引起了当地一位贵族的嫉妒。他担心我会盖过他的风头，便劝我离开，还暗示会找任何借口将我囚禁。" />
+        <string id="UCWbc001" text="我对政治不感兴趣，所以拒绝离开。结果，他诬陷我从国库偷了黄金，还说我把赃物藏在私人住处，这迫使我不得不空手离开。" />
+        <string id="UCWr1001" text="大人，我能理解您的遭遇。" />
+        <string id="UCWr2001" text="这只是你的一面之词，或许你不过是个衣着光鲜的强盗罢了。" />
+        <string id="UCWbd001" text="我希望能有第二次机会；如今我被迫在酒馆消磨时光，有什么活就干什么。若能再管理一处领地，我定会证明自己既能保其繁荣，又能守其安全。" />
+        <string id="UCWgb001" text="我懂作战，也会管理领地，而且做工程师或商人的工作也不在话下。" />
+
+        <string id="UCWna002" text="{HERO.FIRSTNAME} 苦命人" />
+    </strings>
+</base>

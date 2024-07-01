@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+	<tags>
+		<tag language="English" />
+	</tags>
+	<strings>
+	<!-- the wise, male empire governor template wanderer-->
+		<string id="UCWna001" text="{HERO.FIRSTNAME} the Wise" />
+		<string id="UCWps001" text="I don't mind talking about it." />
+		<string id="UCWba001" text="I was the governor of a castle on the Kuzhait border and successufully defended it in many sieges. It was my pride to be able to keep it prosperious and feared by our enemies." />
+		<string id="UCWbb001" text="I was maybe a bit too successful as a local noble got jealous. He was scared i could overshadow his skills. So he asked me to leave, suggesting that he would emprison me for any reason he could find." />
+		<string id="UCWbc001" text="I'm not into politics so I refused to leave. Consequently, he claimed I had stolen gold from the treasury and hidden some in my personal quarters, which forced me to leave without any of my belongings." />
+		<string id="UCWr1001" text="I could understand this, sir." />
+		<string id="UCWr2001" text="It's your version of the story, maybe you are simply a well dressed robber." />
+		<string id="UCWbd001" text="I wish i could have a second chance; I am forced to spend my time in taverns, taking whatever work can be found. If i can get another settlement to manage I'll prove that it's possible to keep it both prosperous and secure." />
+		<string id="UCWgb001" text="I know how to fight and manage a settlement, but I am also able to do engineer or trader jobs without much trouble." />
+	</strings>
+</base>

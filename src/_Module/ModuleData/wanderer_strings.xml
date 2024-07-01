@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<strings>
+    <!-- the wise. -->
+    <string id="prebackstory.uc_wanderer_empire_0" text="{=UCWps001}I don't mind talking a bit." />
+    <string id="backstory_a.uc_wanderer_empire_0" text="{=UCWba001}I was the governor of a castle on the Kuzhait border and successufully defended it in many sieges. It was my pride to be able to keep it prosperious and feared by our enemies." />
+    <string id="backstory_b.uc_wanderer_empire_0" text="{=UCWbb001}I was maybe a bit too successful as a local noble got jealous.  He was scared i could overshadow his skills. So he asked me to leave, suggesting that he would emprison me for any reason he could find." />
+    <string id="backstory_c.uc_wanderer_empire_0" text="{=UCWbc001}I'm not into politics so I refused to leave. Consequently, he claimed I had stolen gold from the treasury and hiddeen some in my personal quarters, which forced me to leave without any of my belongings." />
+    <string id="response_1.uc_wanderer_empire_0" text="{=UCWr1001}I could understand this, sir." />
+    <string id="response_2.uc_wanderer_empire_0" text="{=UCWr2001}It's your version of the story, maybe you are simply a well dressed robber." />
+    <string id="backstory_d.uc_wanderer_empire_0" text="{=UCWbd001}I wish i could have a second chance; I am forced to spend my time in taverns, taking whatever work can be found. If i can get another settlement to manage I'll prove that it's possible to keep it both prosperous and secure." />
+    <string id="generic_backstory.uc_wanderer_empire_0" text="{=UCWgb001}I know how to fight and manage a settlement, but I am also able to do engineer or trader jobs without much trouble." />
+
+    <!-- female herbalist -->
+    <string
+		id="prebackstory.uc_wanderer_empire_1"
+		text="{=xSbEUPK4}You know, we women suffer greatly when you warriors have your sport..." />
+    <string
+		id="backstory_a.uc_wanderer_empire_1"
+		text="{=ifBURmmv}I lived in a village to the north of here, across the gulf. It is a cruel land; there is no strong king, and lords think nothing of ravaging their neighbor's lands. My mother was skilled in the use of herbs to treat disease and wounds. I had a happy peaceful childhood - until one day, a month before I was to be married." />
+    <string
+		id="backstory_b.uc_wanderer_empire_1"
+		text="{=WBE6MeCl}That was the day my life changed. A band from a nearby village came and attacked us. We had done them no harm; we had never even thought of them as our enemies. But they wanted our cattle. They killed my mother and the youth who I was to marry, and burned our village. Everything gone. Those who lived fled into the woods." />
+    <string
+		id="backstory_c.uc_wanderer_empire_1"
+		text="{=hOsJjMZ8}I expect that my kin will soon return to their homes, but I will not.  I cannot... I cannot be in a place where I am at the mercy of any beast on the rampage. I will ply my trade among warriors. I will learn to harm as well as to heal. And if the time comes for me to marry, I will live in a land where there is a king, even a tyrant, rather than raising a family amid the war of all against all." />
+    <string
+		id="response_1.uc_wanderer_empire_1"
+		text="{=31XTldnZ}I am sorry for your fate, my lady." />
+    <string
+		id="response_2.uc_wanderer_empire_1"
+		text="{=l4A16aGs}It's a cruel world, and if you think a warrior's life is any easier, you have a painful lesson in store." />
+    <string
+		id="backstory_d.uc_wanderer_empire_1"
+		text="{=iYbBHXNA}At any rate, if you know of a warband who is looking for someone who knows how to treat wounds, I would be grateful." />
+    <string
+		id="generic_backstory.uc_wanderer_empire_1"
+		text="{=N0yE1Ptz}I was an herbalist in a village in the north. But our home was raided, and I've been forced to wander in search of work. There are many like me on the roads of Calradia." />
+</strings>

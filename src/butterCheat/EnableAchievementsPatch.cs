@@ -1,9 +1,7 @@
 ﻿using HarmonyLib;
 
-namespace ButterAchievements;
+namespace FlavorCraft;
 
-//StoryMode.GameComponents.CampaignBehaviors.AchievementsCampaignBehavior.CheckAchievementSystemActivity() : bool @060003DE
-// Token: 0x060003DE RID: 990 RVA: 0x00017B98 File Offset: 0x00015D98
 [HarmonyPatch(
     typeof(StoryMode.GameComponents.CampaignBehaviors.AchievementsCampaignBehavior),
     nameof(StoryMode.GameComponents.CampaignBehaviors.AchievementsCampaignBehavior.CheckAchievementSystemActivity)

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NPCCharacters>
+    <!-- WANDERER CHARACTERS BEGIN -->
+    <!-- WANDERERS OF EMPIRE -->
+    <!-- Engineer who refused to comply with guild backscratching -->
+    <NPCCharacter id="uc_wanderer_empire_0" name="{=UCWna001}{FIRSTNAME} the Wise" voice="curt" age="37" default_group="Infantry" is_template="true" is_hero="false" culture="Culture.empire" occupation="Wanderer">
+        <face>
+            <face_key_template value="NPCCharacter.villager_empire" />
+        </face>
+        <!--<Hero id="uc_wanderer_empire_0" faction="Kingdom.empire"  is_template="true" /> -->
+        <Traits>
+            <Trait id="WandererEquipment" value="1" />
+            <Trait id="RomanHair" value="1" />
+            <Trait id="PeltastFightingSkills" value="2" />
+            <Trait id="EngineerSkills" value="3" />
+            <Trait id="Politician" value="3" />
+            <Trait id="Manager" value="1" />
+            <Trait id="Mercy" value="-1" />
+            <Trait id="Calculating" value="1" />
+        </Traits>
+        <Equipments>
+            <EquipmentSet id="npc_companion_equipment_template_empire" civilian="true" />
+            <EquipmentSet id="npc_companion_equipment_template_empire" />
+        </Equipments>
+    </NPCCharacter>
+    <!-- female herbalist -->
+    <NPCCharacter id="uc_wanderer_empire_1" default_group="infantry" name="{=UCWna002}{FIRSTNAME} the Priestess of Shallya" occupation="Wanderer" culture="Culture.empire" voice="curt" age="21" is_female="true" is_template="true" is_hero="false">
+        <face>
+            <BodyProperties version="4" age="22.09" weight="0.2299" build="0.1366"  key="0002F0070088300467B6965374700511699357A637C637977A8895B9A672433A008236030863536400000000000000000000000000000000000000006F142083"  />
+        </face>
+        <Traits>
+            <Trait id="ArcherFIghtingSkills" value="1" />
+            <Trait id="Surgeon" value="8" />
+            <Trait id="Calculating" value="1" />
+            <Trait id="Mercy" value="5" />
+            <Trait id="Valor" value="7" />
+            <!-- <Trait id="ShallyaDevoted" value="7" /> -->
+        </Traits>
+        <Equipments>
+            <EquipmentSet id="npc_companion_equipment_template_empire" />
+            <EquipmentSet id="npc_companion_equipment_template_empire" civilian="true" />
+        </Equipments>
+    </NPCCharacter>
+</NPCCharacters>

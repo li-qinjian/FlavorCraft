@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+    <tags>
+        <tag language="简体中文" />
+    </tags>
+    <strings>
+        <string id="FlavorCraftModDisplayName" text="风味匠造" />
+
+        <string id="PG_Debug" text="调试选项" />
+        <string id="Settings_Debug_MSG" text="启用调试" />
+        <string id="Settings_Debug_LOG" text="生成日志" />
+
+        <!-- 锻造 -->
+        <string id="PG_Crafting" text="锻造系统调整" />
+        <string id="Settings_Crafting_01" text="隐藏锁定武器" />
+        <string id="Settings_Crafting_01_Desc" text="防止已经锁定的武器显示在冶炼清单，以防止意外冶炼.[默认: false]." />
+        <string id="Settings_Crafting_02" text="解锁零件" />
+        <string id="Settings_Crafting_02_Desc" text="当你熔炼一件武器时解锁制造它的零件[默认: false]." />
+        <string id="Settings_Crafting_03" text="经验值" />
+        <string id="Settings_Crafting_03_Desc" text="经验值倍增(X5)." />
+        <string id="Settings_Crafting_04" text="快捷键" />
+        <string id="Settings_Crafting_04_Desc" text="开启锻造热键" />
+
+        <!-- 杂项 -->
+        <string id="PG_Sundry" text="杂项" />
+        <string id="Settings_Sundry_01" text="军需官交易" />
+        <string id="Settings_Sundry_01_Desc" text="交易由军需官进行, 经验由军需官获得 [默认 : false]." />
+        <string id="Settings_Sundry_02" text="无法格挡的刺击" />
+        <string id="Settings_Sundry_02_Desc" text="让突刺攻击只能被盾牌格挡、招架或完美防御所阻挡。普通格挡会让攻击直接穿透敌人。 [默认 : false]." />
+        <string id="Settings_Sundry_03" text="关闭夜战" />
+        <string id="Settings_Sundry_03_Desc" text="关闭夜战[默认: false]." />
+        <string id="Settings_Sundry_04" text="流浪者失踪几率" />
+        <string id="Settings_Sundry_04_Desc" text="流浪者失踪几率[0.1~1.0, 默认0.1]." />
+        <string id="Settings_Sundry_05" text="分享战利品" />
+        <string id="Settings_Sundry_05_Desc" text="分享战利品[默认: false]." />
+        <string id="Settings_Sundry_06" text="物品前缀" />
+        <string id="Settings_Sundry_06_Desc" text="物品前缀[默认'cla_']." />
+
+        <!-- AI -->
+        <string id="PG_AI" text="AI调整" />
+        <string id="Settings_AI_01" text="减少撤退" />
+        <string id="Settings_AI_01_Desc" text="减少AI因士气或攻城不利无脑溃逃." />
+        <string id="Settings_AI_02" text="溃逃阈值" />
+        <string id="Settings_AI_02_Desc" text="战损比超过阀值后AI士兵才会溃逃[0.0~1.0, 默认0.5]." />
+        <!--<string id="Settings_AI_03" text="军团控制" />
+        <string id="Settings_AI_03_Desc" text="禁止玩家家族部队加入军团." />
+        <string id="Settings_AI_03" text="消耗马匹" />
+        <string id="Settings_AI_03_Desc" text="AI升级部队消耗马匹." />-->
+        
+        <!-- Muse's Armory -->
+        <string id="swf_armoury_enter" text="造访军械库" />
+        <string id="swf_armoury_enter_Desc" text="当你漫步在街头时，看到了一个指向 {CULTURE} 兵工厂的标牌。出于好奇，你朝着标牌指示的方向走去。转了几个弯后，你到了那里，却只看到一片混乱的景象。学徒们在师傅们的呵斥声中忙得团团转。持续不断的敲打金属的声音让你的耳朵开始作痛，你能感觉到皮肤上的热度。空气中弥漫的烟雾也让你的眼睛感到刺痛。就在你开始觉得来这里是个错误的时候，一个身材高大的男人向你走来。经过简短的交谈，他告诉你，他代表着 {CITY} 的锻造公会，虽然他们的大部分产品是供应给军队的，但也会留出一部分供公众购买。他带你来到一个展台，那里陈列着他们的产品。他向你保证，他们的商品质量上乘，不过他又小声嘀咕说，他们最精良的作品只提供给为 {RULE_RANK} 效力的人。" />
+        <string id="swf_armoury_buy_not_faction" text="浏览公共军械库" />
+        <string id="swf_armoury_buy_faction" text="浏览军用军械库" />
+        <string id="swf_armoury_leave" text="回到镇上" />
+
+        <!-- Notify Messages -->
+        <string id="FC_MSG_1" text="额外武器槽已经装备了旗帜，请先移除旗帜在装备武器." />
+        <string id="FC_MSG_2" text="攻击方伤亡率: {RATE}." />
+        
+        <!-- ShowTraitExp Messages -->
+        <string id="cKKYSB0z" text="你失去了 {AMOUNT} {GOLD_ICON}." />
+        <string id="eAGeVRjI" text="你获得了 {GOLD_AMOUNT}{GOLD_ICON}." />
+        <string id="OKUTPdaa" text="Level." />
+
+        <!-- Tournament Module Strings -->
+        <string id="RBM_TOU_003" text="恭喜你，奖品前缀[{Name}]获取成功！掷骰:{Roll} 需求:{Need}" />
+        <string id="RBM_TOU_004" text="很遗憾，奖品前缀[{Name}]获取失败。掷骰:{Roll} 需求:{Need}" />
+        
+        <!-- Vanilla CNS -->
+        <string id="DI9P2HDG" text="堆叠锥头箭"/>
+        <string id="NkV2c6YX" text="堆叠草原箭"/>
+        <string id="cwFyqrfv" text="技能等级达到250及以上每级士兵生命值{VALUE}。"/>
+        <string id="baFazbmR" text="铁矿石{@Plural}成车的铁矿石{\@}"/>
+        <string id="3JaHZA3Y" text="「一大袋」{ITEMNAME}"/>
+        <string id="85WO1MKG" text="「精良」的{ITEMNAME}"/>
+        <string id="8Tal0XIj" text="「极品」{ITEMNAME}"/>
+        <string id="BA9c7gPb" text="「厚」{ITEMNAME}"/>
+        <string id="bAdxUq7s" text="「优良」的{ITEMNAME}"/>
+        <string id="fdgcpipH" text="「平衡」的{ITEMNAME}"/>
+        <string id="Q5HVyNWJ" text="「定制」的{ITEMNAME}"/>
+        <string id="w3jn7Ahz" text="「豪华」的{ITEMNAME}"/>
+        <string id="WbaIorOh" text="「调谐」的{ITEMNAME}"/>
+        <string id="xeb1b5PQ" text="「优质」{ITEMNAME}"/>
+        <string id="zPqPvf0o" text="「上蜡」的{ITEMNAME}"/>
+        <string id="lRf4t9Qg" text="「传奇」的{ITEMNAME}"/>
+    </strings>
+</base>

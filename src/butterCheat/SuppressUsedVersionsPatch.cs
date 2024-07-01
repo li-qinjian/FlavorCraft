@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 
-namespace ButterAchievements;
+namespace FlavorCraft;
 
 [HarmonyPatch(typeof(Campaign), "DeterminedSavedStats")]
 public static class SuppressUsedVersionsPatch

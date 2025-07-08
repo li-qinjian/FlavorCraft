@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.Library;
+using FlavorCraft.Utils;
 
 namespace FlavorCraft
 {
@@ -20,7 +20,7 @@ namespace FlavorCraft
             {
                 if (NoNightBattlePatch.lastMapWeatherModel != __instance)
                 {
-                    //InformationManager.DisplayMessage(new InformationMessage("NoNightBattle: set time from " + __result.ToString("0.0") + " to 9.0"));
+                    IM.WriteMessage("NoNightBattle: set time from " + __result.ToString("0.0") + " to 9.0", IM.MsgType.Notify);
                     NoNightBattlePatch.lastMapWeatherModel = __instance;
                 }
                 __result = 9f;
@@ -29,7 +29,7 @@ namespace FlavorCraft
             {
                 if (NoNightBattlePatch.lastMapWeatherModel != __instance)
                 {
-                    //InformationManager.DisplayMessage(new InformationMessage("NoNightBattle: set time from " + __result.ToString("0.0") + " to 15.0"));
+                    IM.WriteMessage("NoNightBattle: set time from " + __result.ToString("0.0") + " to 15.0", IM.MsgType.Notify);
                     NoNightBattlePatch.lastMapWeatherModel = __instance;
                 }
                 __result = 15f;

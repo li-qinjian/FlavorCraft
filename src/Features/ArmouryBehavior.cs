@@ -1,18 +1,17 @@
 ﻿using FlavorCraft.Utils;
 using Helpers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.Inventory;
 using TaleWorlds.CampaignSystem.Overlay;
-using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
 
@@ -34,48 +33,63 @@ namespace FlavorCraft
         }
         private void OnGameLoadFinished()
         {
-            if (Statics._settings is not null && !Statics._settings.Debug)
-                return;
+            //if (Statics._settings is not null && !Statics._settings.Debug)
+            //    return;
 
             foreach (CharacterObject characterObject in Campaign.Current.Characters)
             {
                 if (isRegularTroop(characterObject) && characterObject.StringId.StartsWith("tor_"))
                 {
                     CharacterObject tor_troop = Game.Current.ObjectManager.GetObject<CharacterObject>(characterObject.StringId);
-                    if (tor_troop != null)
+                    if (tor_troop != null && Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(tor_troop))
                     {
                         string name = characterObject.Name.ToString();
-                        int level = characterObject.Level;
+                        int tier = characterObject.Tier;
 
-                        int _athletics = characterObject.GetSkillValue(DefaultSkills.Athletics);
-                        int _riding = characterObject.GetSkillValue(DefaultSkills.Riding);
-                        int _one_hand = characterObject.GetSkillValue(DefaultSkills.OneHanded);
-                        int _two_hand = characterObject.GetSkillValue(DefaultSkills.TwoHanded);
-                        int _polearm = characterObject.GetSkillValue(DefaultSkills.Polearm);
-                        int _bow = characterObject.GetSkillValue(DefaultSkills.Bow);
-                        int _throwing = characterObject.GetSkillValue(DefaultSkills.Throwing);
-                        int _crossbow = characterObject.GetSkillValue(DefaultSkills.Crossbow);
-
-                        if (level > 30)
+                        HashSet<SkillObject> relevantSkills = new HashSet<SkillObject>();
+                        // 获取所有战斗装备（排除民用装备）
+                        List<Equipment> battleEquipments = (from x in characterObject.AllEquipments where !x.IsCivilian select x).ToList();
+                        foreach (Equipment eupipment in battleEquipments)
                         {
-                            IM.WriteMessage(name, IM.MsgType.Notify);
+                            for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumEquipmentSetSlots; equipmentIndex++)
+                            {
+                                EquipmentElement itemRosterElement = eupipment[equipmentIndex];
+                                if (itemRosterElement.Item != null)
+                                {
+                                    SkillObject skill = itemRosterElement.Item.RelevantSkill;
+                                    if (skill != null)
+                                        relevantSkills.Add(skill);
+                                }
+                            }
                         }
 
-                        // 同步技能属性
-                        //MBCharacterSkills skills = MBObjectManager.Instance.CreateObject<MBCharacterSkills>(characterObject.StringId);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.Crossbow, this.Crossbow);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.Bow, this.Bow);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.Throwing, this.Throwing);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.OneHanded, this.OneHand);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.TwoHanded, this.TwoHand);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.Polearm, this.Polearm);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.Athletics, this.Athletics);
-                        //skills.Skills.SetPropertyValue(DefaultSkills.Riding, this.Riding);
-                        //FieldInfo field3 = characterObject.GetType().GetField("DefaultCharacterSkills", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                        //if (field3 != null)
-                        //{
-                        //    field3.SetValue(characterObject, skills);
-                        //}
+                        IM.WriteMessage("update skills of :" + name, IM.MsgType.Notify);
+
+                        HashSet<SkillObject> wholeSkills = new HashSet<SkillObject>();
+                        wholeSkills.Add(DefaultSkills.OneHanded);
+                        wholeSkills.Add(DefaultSkills.TwoHanded);
+                        wholeSkills.Add(DefaultSkills.Polearm);
+                        wholeSkills.Add(DefaultSkills.Bow);
+                        wholeSkills.Add(DefaultSkills.Crossbow);
+                        wholeSkills.Add(DefaultSkills.Throwing);
+                        wholeSkills.Add(DefaultSkills.Riding);
+                        wholeSkills.Add(DefaultSkills.Athletics);
+
+                        MBCharacterSkills mbSkills = MBObjectManager.Instance.CreateObject<MBCharacterSkills>(characterObject.StringId);
+                        foreach (SkillObject skill in wholeSkills)
+                        {
+                            mbSkills.Skills.SetPropertyValue(skill, tier * 10);
+                        }
+                        foreach (SkillObject skill in relevantSkills)
+                        {
+                            mbSkills.Skills.SetPropertyValue(skill, tier * 30);
+                        }
+
+                        FieldInfo fieldSkills = characterObject.GetType().GetField("DefaultCharacterSkills", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                        if (fieldSkills != null)
+                        {
+                            fieldSkills.SetValue(characterObject, mbSkills);
+                        }
                     }
                     
                 }
@@ -162,28 +176,18 @@ namespace FlavorCraft
             args.MenuTitle = new TextObject("Armoury", null);
         }
 
-        //private void GetEquipmentsByCulture(ItemRoster itemRoster, string strCulture)
-        //{
-        //    CultureObject @object = Campaign.Current.ObjectManager.GetObject<CultureObject>(strCulture);
-        //    //ItemRoster itemRoster = new ItemRoster();
-        //    foreach (ItemObject itemObject in Items.All)
-        //    {
-        //        if (itemObject.Culture == @object /*&& itemObject.Tierf > 2f && !itemObject.NotMerchandise*/ && (itemObject.IsCraftedWeapon || itemObject.IsMountable || itemObject.ArmorComponent != null) && !itemObject.IsCraftedByPlayer)
-        //        {
-        //            itemRoster.AddToCounts(itemObject, 5);
-        //        }
-        //    }
-        //}
 
         public void openArmoury(bool elite)
         {
-            //if (Hero.MainHero.Gold < 100000)
-            //    GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, 100000, false);
-
             ItemRoster itemRoster = new ItemRoster();
             foreach (ItemObject itemObject in Items.All)
             {
                 if (itemObject.Culture != Settlement.CurrentSettlement.Culture || itemObject.IsCraftedByPlayer)
+                    continue;
+
+                if (elite && itemObject.Tier <= ItemObject.ItemTiers.Tier3)
+                    continue;
+                else if (!elite && itemObject.Tier > ItemObject.ItemTiers.Tier3)
                     continue;
 
                 if (Statics._settings is not null && !Statics._settings.ItemPrefix.IsEmpty())
@@ -192,24 +196,26 @@ namespace FlavorCraft
                         continue;
                 }
 
+                itemRoster.AddToCounts(itemObject, 1);
+
                 //Browse all armors/wepapons/horses
-                if ( itemObject.IsCraftedWeapon || itemObject.ItemType == ItemObject.ItemTypeEnum.Shield || itemObject.IsMountable )
-                {
-                    itemRoster.AddToCounts(itemObject, 1);
-                }
+                //if ( itemObject.IsCraftedWeapon || itemObject.ItemType == ItemObject.ItemTypeEnum.Shield || itemObject.IsMountable )
+                //{
+                //    itemRoster.AddToCounts(itemObject, 1);
+                //}
 
-                if (itemObject.ArmorComponent != null)
-                {
-                    bool bIsMetal = false;
-                    ArmorComponent.ArmorMaterialTypes armorMaterialTypes = itemObject.ArmorComponent.MaterialType;
-                    if (armorMaterialTypes == ArmorComponent.ArmorMaterialTypes.Chainmail || armorMaterialTypes == ArmorComponent.ArmorMaterialTypes.Plate)
-                        bIsMetal = true;
+                //if (itemObject.ArmorComponent != null)
+                //{
+                //    bool bIsMetal = false;
+                //    ArmorComponent.ArmorMaterialTypes armorMaterialTypes = itemObject.ArmorComponent.MaterialType;
+                //    if (armorMaterialTypes == ArmorComponent.ArmorMaterialTypes.Chainmail || armorMaterialTypes == ArmorComponent.ArmorMaterialTypes.Plate)
+                //        bIsMetal = true;
 
-                    if (elite && bIsMetal)
-                        itemRoster.AddToCounts(itemObject, 1);
-                    else if (!elite && !bIsMetal)
-                        itemRoster.AddToCounts(itemObject, 1);
-                }
+                //    if (elite && bIsMetal)
+                //        itemRoster.AddToCounts(itemObject, 1);
+                //    else if (!elite && !bIsMetal)
+                //        itemRoster.AddToCounts(itemObject, 1);
+                //}
             }
 
             InventoryManager.OpenScreenAsTrade(itemRoster, Settlement.CurrentSettlement.Town, InventoryManager.InventoryCategoryType.None, null);

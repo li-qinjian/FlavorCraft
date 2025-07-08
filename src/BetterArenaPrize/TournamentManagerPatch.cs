@@ -1,10 +1,8 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
-//using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.TournamentGames;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -43,42 +41,34 @@ namespace FlavorCraft
                     {
                         foreach (ItemModifier im in viableEM)
                         {
+                            TextObject modifer_name = im.Name;
+                            if (modifer_name != null)
+                                modifer_name.SetTextVariable("ITEMNAME", "");
+
                             float randomFloat = MBRandom.RandomFloat * 100f;
                             int roll = 100 - MathF.Round(randomFloat);
                             int rollNeeded = 100 - MathF.Round(im.ProductionDropScore);
                             if (roll >= rollNeeded)
                             {
                                 TextObject Description = new TextObject(StringConstants.RBM_TOU_003, null);
-
-                                Description.SetTextVariable("Name", im.Name.ToString());
+                                Description.SetTextVariable("Name", modifer_name?.ToString());
                                 Description.SetTextVariable("Roll", roll);
                                 Description.SetTextVariable("Need", rollNeeded);
 
-                                Description.SetTextVariable("ITEMNAME", "");
+                                
                                 IM.WriteMessage(Description.ToString(), IM.MsgType.Notify);
 
-                                //MBTextManager.SetTextVariable("Name", im.Name.ToString());
-                                //MBTextManager.SetTextVariable("Roll", roll);
-                                //MBTextManager.SetTextVariable("Need", rollNeeded);
-                                //InformationManager.DisplayMessage(new InformationMessage(new TextObject("{=RBM_TOU_003}Congratulations, you successfully rolled for {Name} item modifier, rolled:{Roll} needed: {Need}").ToString()));
                                 eePrize.SetModifier(im);
                                 break;
                             }
                             else
                             {
                                 TextObject Description = new TextObject(StringConstants.RBM_TOU_004, null);
-
-                                Description.SetTextVariable("Name", im.Name.ToString());
+                                Description.SetTextVariable("Name", modifer_name?.ToString());
                                 Description.SetTextVariable("Roll", roll);
                                 Description.SetTextVariable("Need", rollNeeded);
 
-                                Description.SetTextVariable("ITEMNAME", "");
                                 IM.WriteMessage(Description.ToString(), IM.MsgType.Notify);
-
-                                //MBTextManager.SetTextVariable("Name", im.Name.ToString());
-                                //MBTextManager.SetTextVariable("Roll", roll);
-                                //MBTextManager.SetTextVariable("Need", rollNeeded);
-                                //InformationManager.DisplayMessage(new InformationMessage(new TextObject("{=RBM_TOU_004}You missed roll for {Name} item modifier, rolled:{Roll} needed: {Need}").ToString()));
                             }
                         }
                     }

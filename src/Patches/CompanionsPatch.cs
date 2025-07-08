@@ -139,8 +139,7 @@ namespace FlavorCraft
                     ____heroForPerkReset.HeroDeveloper.RemoveFocus(____selectedSkillForReset, numFocus);
                     ____heroForPerkReset.HeroDeveloper.UnspentFocusPoints += numFocus;
 
-                    if (Statics._settings is not null && Statics._settings.Debug)
-                        IM.WriteMessage(____heroForPerkReset.Name + "回收了浪费的专精点", IM.MsgType.Notify);
+                    IM.WriteMessage(____heroForPerkReset.Name + "回收了浪费的专精点", IM.MsgType.Notify);
                 }
             }
         }

@@ -151,7 +151,7 @@ namespace FlavorCraft
                 // 获取当前武器类型允许的最大金属材料数量
                 var metalCap = GetMetalMax(item.WeaponComponent.PrimaryWeapon.WeaponClass);
 
-                // 若金属材料超过上限，按顺序减少高级金属（从Iron6到Iron2）
+                // 若金属材料超过上限，按顺序减少金属（从Iron2到Iron6）
                 if (metalCount > 0 && metalCap > 0)
                 {
                     while (metalCount > metalCap)

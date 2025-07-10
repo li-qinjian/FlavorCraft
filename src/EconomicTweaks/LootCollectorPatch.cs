@@ -59,14 +59,14 @@ namespace FlavorCraft
 
             // 累积选取高价值物品
             ItemRoster result = new ItemRoster();
-            int accumulatedValue = 0;
 
+            int accumulatedValue = 0;
             foreach (var element in sortedElements)
             {
                 var itemValue = element.EquipmentElement.Item.Value;
                 var elementTotalValue = itemValue * element.Amount;
 
-                if (accumulatedValue + itemValue > targetValue)
+                if (result.Count > 0 && accumulatedValue + itemValue > targetValue)
                     break;
 
                 if (accumulatedValue + elementTotalValue < targetValue)
@@ -85,8 +85,8 @@ namespace FlavorCraft
             // 生成统计摘要
             string statsSummary = $@"
 挑选战利品:
-- 原始物品数: {itemRoster.Count}
 - 保留比例: {retainedRatio:P}
+- 原始物品数: {itemRoster.Count}
 - 选中物品数: {result.Count}
 ";
 

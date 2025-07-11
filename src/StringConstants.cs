@@ -20,6 +20,9 @@ namespace FlavorCraft {
         public const string Settings_Crafting_04 = "{=Settings_Crafting_04}Hot Keys";
         public const string Settings_Crafting_04_Desc = "{=Settings_Crafting_04_Desc}Enables Hot Keys in weapon cafting process.";
 
+        public const string Settings_Crafting_05 = "{=Settings_Crafting_05}SmeltingOutput";
+        public const string Settings_Crafting_05_Desc = "{=Settings_Crafting_05_Desc}Reduce SmeltingOutput of non-palyer crafting weapon.";
+
         //<!-- Sundry -->
         public const string PG_Sundry = "{=PG_Sundry}Sundry";
         public const string Settings_Sundry_01 = "{=Settings_Sundry_01}Quartermaster do trading.";

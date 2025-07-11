@@ -81,6 +81,10 @@ namespace FlavorCraft.Settings
         [SettingPropertyGroup(StringConstants.PG_Crafting)]
         public bool EnableCraftingHotKeys { get; set; } = false;
 
+        [SettingPropertyBool(StringConstants.Settings_Crafting_05, IsToggle = false, Order = 4, RequireRestart = false, HintText = StringConstants.Settings_Crafting_05_Desc)]
+        [SettingPropertyGroup(StringConstants.PG_Crafting)]
+        public bool ReduceSmeltingOutput { get; set; } = false;
+
         #endregion Crafting
 
         //~ Sundry Options
@@ -138,6 +142,7 @@ namespace FlavorCraft.Settings
                 AutoLearnSmeltedParts = false,
                 SmithingXpModifiers = false,
                 EnableCraftingHotKeys = false,
+                ReduceSmeltingOutput = false,
 
                 EnableUnblockableThrust = false,
                 TradingByQuartermaster = false,
@@ -163,6 +168,7 @@ namespace FlavorCraft.Settings
                 AutoLearnSmeltedParts = true,
                 SmithingXpModifiers = true,
                 EnableCraftingHotKeys = true,
+                ReduceSmeltingOutput = true,
 
                 EnableUnblockableThrust = true,
                 TradingByQuartermaster = true,

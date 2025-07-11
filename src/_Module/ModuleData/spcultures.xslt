@@ -13,8 +13,18 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="Culture[@id='empire']/notable_and_wanderer_templates">
     <xsl:copy>
         <xsl:copy-of select="*"/>
-        <template name="NPCCharacter.uc_wanderer_empire_0" />
-        <template name="NPCCharacter.uc_wanderer_empire_1" />
+        <template name="NPCCharacter.spc_wanderer_empire_0" />
+        <!-- Engineer who refused to comply with guild backscratching -->
+        <template name="NPCCharacter.spc_wanderer_empire_11" />
+        <!--upper-class dispossessed, refused a bad marriage -->
+    </xsl:copy>
+</xsl:template>
+
+<xsl:template match="Culture[@id='khuzait']/notable_and_wanderer_templates">
+    <xsl:copy>
+        <xsl:copy-of select="*"/>
+        <template name="NPCCharacter.spc_wanderer_khuzait_9" />     
+        <!-- tomboy daughter of caravan guard -->
     </xsl:copy>
 </xsl:template>
     

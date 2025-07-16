@@ -32,7 +32,9 @@ namespace FlavorCraft
             if (item.IsCraftedByPlayer)
             {
                 MBObjectManager.Instance.UnregisterObject(item);
-                IM.WriteMessage(item!.Name + "被销毁了!", IM.MsgType.Notify);
+                if (Statics._settings is not null && !Statics._settings.Debug)
+                    IM.WriteMessage(item!.Name + "被销毁了!", IM.MsgType.Notify);
+
                 return;   //非玩家锻造武器
             }
 
@@ -47,7 +49,6 @@ namespace FlavorCraft
                         openPartMethodInfo.Invoke(__instance, new object[] { piece, item.WeaponDesign.Template, true });
                 }
             }
-
         }
 
         private static void GetMethodInfo()
@@ -62,7 +63,9 @@ namespace FlavorCraft
             if (craftedItem != null && craftedItem.IsCraftedByPlayer)
             {
                 MBObjectManager.Instance.UnregisterObject(craftedItem);
-                IM.WriteMessage(craftedItem!.Name + "被销毁了!", IM.MsgType.Notify);
+
+                if (Statics._settings is not null && !Statics._settings.Debug)
+                    IM.WriteMessage(craftedItem!.Name + "被销毁了!", IM.MsgType.Notify);
             }
         }
 
@@ -74,18 +77,25 @@ namespace FlavorCraft
             return false;
         }
 
-        //[HarmonyPatch("AddItemToHistory")]
-        //[HarmonyPrefix]
-        //private static bool AddItemToHistory_Prefix(WeaponDesign design, List<WeaponDesign> ____craftingHistory)
-        //{
-        //    int rangeToBeRemoved = ____craftingHistory.Count - 20;
-        //    if (rangeToBeRemoved > 0)
-        //    {
-        //        ____craftingHistory.RemoveRange(0, rangeToBeRemoved + 1);
-        //    }
-        //    ____craftingHistory.Add(design);
-        //    return false;
-        //}
+        [HarmonyPatch("AddItemToHistory")]
+        [HarmonyPrefix]
+        private static bool AddItemToHistory_Prefix(WeaponDesign design, List<WeaponDesign> ____craftingHistory)
+        {
+            if (____craftingHistory.Contains(design))
+            {
+                if (Statics._settings is not null && !Statics._settings.Debug)
+                    IM.WriteMessage(design!.Name + "模板已经存在", IM.MsgType.Notify);
+                return false;
+            }
+
+            int rangeToBeRemoved = ____craftingHistory.Count - 10;
+            if (rangeToBeRemoved > 0)
+            {
+                ____craftingHistory.RemoveRange(0, rangeToBeRemoved + 1);
+            }
+            ____craftingHistory.Add(design);
+            return false;
+        }
 
         //[HarmonyPatch("CreateCraftedWeaponInCraftingOrderMode")]
         //[HarmonyPrefix]

@@ -10,11 +10,11 @@ using TaleWorlds.CampaignSystem.CraftingSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.Smelting;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 //using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.GameComponents;
 //using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign.Order;
-//using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
+using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
 
 namespace FlavorCraft
 {
@@ -83,8 +83,8 @@ namespace FlavorCraft
         {
             if (____craftingHistory.Contains(design))
             {
-                if (Statics._settings is not null && !Statics._settings.Debug)
-                    IM.WriteMessage(design!.Name + "模板已经存在", IM.MsgType.Notify);
+                //if (Statics._settings is not null && !Statics._settings.Debug)
+                IM.WriteMessage(design.WeaponName + "已经存在", IM.MsgType.Notify);
                 return false;
             }
 

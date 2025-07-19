@@ -43,14 +43,14 @@
         </SubModule>
     </SubModules>
     <Xmls>
-        <XmlNode>
+		<!--<XmlNode>
             <XmlName id="SPCultures" path="spcultures" />
             <IncludedGameTypes>
                 <GameType value = "Campaign" />
                 <GameType value = "CampaignStoryMode" />
             </IncludedGameTypes>
         </XmlNode>
-        <!-- <XmlNode>
+         <XmlNode>
             <XmlName id="NPCCharacters" path="ucspecialcharacters" />
             <IncludedGameTypes>
                 <GameType value = "Campaign" />

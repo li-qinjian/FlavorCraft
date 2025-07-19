@@ -8,13 +8,13 @@ public static class DefaultSettlementFoodModelPatch
     [HarmonyPostfix]
     public static void NumberOfProsperityToEatOneFood_Getter(ref int __result)
     {
-        __result = 100;   //vanilla 40
+        __result = 80;   //vanilla 40
     }
 
     [HarmonyPatch(nameof(DefaultSettlementFoodModel.NumberOfMenOnGarrisonToEatOneFood), MethodType.Getter)]
     [HarmonyPostfix]
     public static void NumberOfMenOnGarrisonToEatOneFood_Getter(ref int __result)
     {
-        __result = 50;   //vanilla 20
+        __result = 40;   //vanilla 20
     }
 }

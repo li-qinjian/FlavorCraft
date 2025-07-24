@@ -43,6 +43,12 @@ namespace FlavorCraft {
         public const string Settings_Sundry_06 = "{=Settings_Sundry_06}Browse Armory";
         public const string Settings_Sundry_06_Desc = "{=Settings_Sundry_06_Desc}Item prefix.";
 
+        public const string Settings_Sundry_07 = "{=Settings_Sundry_07}CRR.";
+        public const string Settings_Sundry_07_Desc = "{=Settings_Sundry_07_Desc}CRR_Desc [Native : false].";
+
+        //<!-- Messages -->
+        public const string CRR_MSG_1 = "{=CRR_MSG_1}MGS_1.";
+
         //<!-- AI -->
         public const string PG_AI = "{=PG_AI}AI";
         public const string Settings_AI_01 = "{=Settings_AI_01}Seige AI.";

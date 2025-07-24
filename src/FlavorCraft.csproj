@@ -36,6 +36,9 @@
         <Compile Remove="battleAI\IbsSiegeLanePatch.cs" />
         <Compile Remove="BetterArenaPrize\TournamentGamePatch.cs" />
         <Compile Remove="CombatTweaks\SandboxAgentApplyDamageModel.cs" />
+        <Compile Remove="CRR\DefaultBattleRewardModelPatch.cs" />
+        <Compile Remove="CRR\LootCollectorPatch.cs" />
+        <Compile Remove="CRR\MapEventSidePatch.cs" />
         <Compile Remove="EconomicTweaks\DefaultItemValueModelPatch.cs" />
         <Compile Remove="EconomicTweaks\DefaultPrisonerRecruitmentCalculationModel_Patch.cs" />
         <Compile Remove="EconomicTweaks\ItemModifier_Patch.cs" />

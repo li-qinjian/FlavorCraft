@@ -37,7 +37,9 @@
         <string id="Settings_Sundry_05_Desc" text="分享战利品[默认: false]." />
         <string id="Settings_Sundry_06" text="物品前缀" />
         <string id="Settings_Sundry_06_Desc" text="物品前缀[默认'cla_']." />
-
+        <string id="Settings_Sundry_07" text="文化限制" />
+        <string id="Settings_Sundry_07_Desc" text="限制招募异文化兵种 [默认 : false]." />
+        
         <!-- AI -->
         <string id="PG_AI" text="AI调整" />
         <string id="Settings_AI_01" text="减少撤退" />
@@ -61,16 +63,16 @@
         <string id="FC_MSG_2" text="攻击方伤亡率: {RATE}." />
         
         <!-- ShowTraitExp Messages -->
-        <string id="cKKYSB0z" text="你失去了 {AMOUNT} {GOLD_ICON}." />
+        <!--<string id="cKKYSB0z" text="你失去了 {AMOUNT} {GOLD_ICON}." />
         <string id="eAGeVRjI" text="你获得了 {GOLD_AMOUNT}{GOLD_ICON}." />
-        <string id="OKUTPdaa" text="等级." />
+        <string id="OKUTPdaa" text="等级." />-->
 
         <!-- Tournament Module Strings -->
         <string id="RBM_TOU_003" text="恭喜你，奖品前缀[{Name}]获取成功！掷骰:{Roll} 需求:{Need}" />
         <string id="RBM_TOU_004" text="很遗憾，奖品前缀[{Name}]获取失败。掷骰:{Roll} 需求:{Need}" />
         
         <!-- Vanilla CNS -->
-        <string id="DI9P2HDG" text="堆叠锥头箭"/>
+        <!--<string id="DI9P2HDG" text="堆叠锥头箭"/>
         <string id="NkV2c6YX" text="堆叠草原箭"/>
         <string id="cwFyqrfv" text="技能等级达到250及以上每级士兵生命值{VALUE}。"/>
         <string id="baFazbmR" text="铁矿石{@Plural}成车的铁矿石{\@}"/>
@@ -85,6 +87,6 @@
         <string id="WbaIorOh" text="「调谐」的{ITEMNAME}"/>
         <string id="xeb1b5PQ" text="「优质」{ITEMNAME}"/>
         <string id="zPqPvf0o" text="「上蜡」的{ITEMNAME}"/>
-        <string id="lRf4t9Qg" text="「传奇」的{ITEMNAME}"/>
+        <string id="lRf4t9Qg" text="「传奇」的{ITEMNAME}"/>-->
     </strings>
 </base>

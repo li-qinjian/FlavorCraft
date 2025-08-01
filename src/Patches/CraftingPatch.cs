@@ -109,6 +109,23 @@ namespace FlavorCraft
         //    });
         //    return true;
         //}
+
+        [HarmonyPatch("AddResearchPoints")]
+        [HarmonyPrefix]
+        private static bool AddResearchPoints(CraftingTemplate craftingTemplate, int researchPoints)
+        {
+            if (Statics._settings is not null && !Statics._settings.AutoLearnSmeltedParts)
+                return true;
+
+            if (craftingTemplate.StringId.StartsWith("tor_"))
+            {
+                IM.WriteMessage(craftingTemplate.TemplateName.ToString(), IM.MsgType.Notify);
+
+                return false;
+            }
+
+            return true;
+        }
     }
 
     [HarmonyPatch(typeof(DefaultSmithingModel))]
@@ -269,6 +286,30 @@ namespace FlavorCraft
 
             return false;
         }
+
+        //[HarmonyPrefix]
+        //[HarmonyPatch(typeof(DefaultSmithingModel), "GetPartResearchGainForSmeltingItem")]
+        //public static bool GetPartResearchGainForSmeltingItem_Prefix(ItemObject item, Hero hero, ref int __result)
+        //{
+        //    if (Statics._settings is not null && !Statics._settings.AutoLearnSmeltedParts)
+        //        return true;
+
+        //    __result = 0;
+
+        //    return false;
+        //}
+
+        //[HarmonyPrefix]
+        //[HarmonyPatch(typeof(DefaultSmithingModel), "GetPartResearchGainForSmithingItem")]
+        //public static bool GetPartResearchGainForSmithingItem_Prefix(ItemObject item, Hero hero, ref int __result)
+        //{
+        //    if (Statics._settings is not null && !Statics._settings.AutoLearnSmeltedParts)
+        //        return true;
+
+        //    __result = 0;
+
+        //    return false;
+        //}
     }
 
     //[HarmonyPatch(typeof(WeaponDesignVM))]

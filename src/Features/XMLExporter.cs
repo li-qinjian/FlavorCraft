@@ -149,6 +149,22 @@ namespace FlavorCraft
             File.WriteAllText(path, s);
         }
 
+        /// <summary>
+        /// Gets bookmarked units of specified occupation type using optimized single LINQ query
+        /// </summary>
+        /// <param name="type">The occupation type to filter by</param>
+        /// <returns>List of bookmarked units sorted by StringId</returns>
+        public List<CharacterObject> GetBookmarkedUnits(Occupation type)
+        {
+            // Use LINQ to directly filter and sort, avoiding multiple traversals and intermediate collections
+            return Game.Current.ObjectManager.GetObjectTypeList<CharacterObject>()
+                .Where(character => !character.IsHero &&
+                                   character.Occupation == type &&
+                                   Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(character))
+                .OrderBy(character => character.StringId)
+                .ToList();
+        }
+
         private void exportTree()
         {
             {
@@ -159,11 +175,11 @@ namespace FlavorCraft
                 string text2 = "";
                 text2 += "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
                 text2 += "<NPCCharacters>\n";
-                foreach (CharacterObject character in XMLExporter.getBookmarkedUnits(Occupation.Soldier))
+                foreach (CharacterObject character in GetBookmarkedUnits(Occupation.Soldier))
                 {
                     this.exportCharacter(character, ref text2);
                 }
-                foreach (CharacterObject character in XMLExporter.getBookmarkedUnits(Occupation.Mercenary))
+                foreach (CharacterObject character in GetBookmarkedUnits(Occupation.Mercenary))
                 {
                     this.exportCharacter(character, ref text2);
                 }
@@ -179,45 +195,13 @@ namespace FlavorCraft
                 string text2 = "";
                 text2 += "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
                 text2 += "<NPCCharacters>\n";
-                foreach (CharacterObject character in XMLExporter.getBookmarkedUnits(Occupation.Bandit))
+                foreach (CharacterObject character in GetBookmarkedUnits(Occupation.Bandit))
                 {
                     this.exportCharacter(character, ref text2);
                 }
                 text2 += "</NPCCharacters>\n";
                 File.WriteAllText(text, text2);
             }
-        }
-
-        private class CharacterObjectComparer : IComparer<CharacterObject>
-        {
-            // 区别于CompareTo()单参数，此处为双参数
-            public int Compare(CharacterObject x, CharacterObject y)
-            {
-                if (x != null && y != null)
-                    return x.StringId.CompareTo(y.StringId);
-                else
-                    return 0;
-            }
-        }
-
-        public static List<CharacterObject> getBookmarkedUnits(Occupation type)
-        {
-            List<CharacterObject> list = (from character in Game.Current.ObjectManager.GetObjectTypeList<CharacterObject>()
-                                          where !character.IsHero && character.Occupation == type
-                                          select character).ToList<CharacterObject>();
-
-            List<CharacterObject> changedList = new List<CharacterObject>();
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(list[i]))
-                {
-                    changedList.Add(list[i]);
-                }
-            }
-
-            changedList.Sort(new CharacterObjectComparer());
-
-            return changedList;
         }
 
         private string getFaceKey(string cultureId)

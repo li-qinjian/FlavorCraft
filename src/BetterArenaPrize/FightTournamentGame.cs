@@ -1,4 +1,5 @@
 using HarmonyLib;
+using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.TournamentGames;
 using TaleWorlds.Core;
@@ -20,7 +21,7 @@ namespace FlavorCraft
             }
             else
             {
-                ____possibleRegularRewardItemObjectsCache.Clear(); 
+                ____possibleRegularRewardItemObjectsCache.Clear();
             }
 
             MBList<ItemObject> mblist = new MBList<ItemObject>();
@@ -68,7 +69,7 @@ namespace FlavorCraft
             }
             else
             {
-                ____possibleEliteRewardItemObjectsCache.Clear(); 
+                ____possibleEliteRewardItemObjectsCache.Clear();
             }
 
             foreach (string objectName in new string[]
@@ -126,6 +127,20 @@ namespace FlavorCraft
                 return true;
 
             ____possibleEliteRewardItemObjectsCache.Sort((ItemObject x, ItemObject y) => x.Value.CompareTo(y.Value));
+
+            //don't run original
+            return false;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(FightTournamentGame), "CanBeAParticipant")]
+        public static bool CachePossibleEliteRewardItems_Prefix(CharacterObject character, bool considerSkills, ref bool __result)
+        {
+            if (!character.IsHero)
+            {
+                return character.Tier >= 3;
+            }
+            __result = !considerSkills || character.HeroObject.GetSkillValue(DefaultSkills.OneHanded) >= 100 || character.HeroObject.GetSkillValue(DefaultSkills.TwoHanded) >= 100 || character.HeroObject.GetSkillValue(DefaultSkills.Polearm) >= 100 || character.HeroObject.GetSkillValue(DefaultSkills.Bow) >= 100;
 
             //don't run original
             return false;

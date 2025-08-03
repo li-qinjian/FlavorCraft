@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using System.Reflection;
 using TaleWorlds.CampaignSystem.Party;
-//using FlavorCraft.Utils;
-//using TaleWorlds.Core;
+using FlavorCraft.Utils;
+using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Actions;
 //using TaleWorlds.CampaignSystem.MapEvents;
@@ -16,21 +16,21 @@ namespace FlavorCraft
         [HarmonyPrefix]
         public static bool CaptureWoundedHeroes_Prefix(object lootCollector, PartyBase defeatedParty, bool isSurrender)
         {
-            //if (defeatedParty.LeaderHero != null && defeatedParty.LeaderHero.IsWounded && !isSurrender)
-            //{
-            //    if (defeatedParty.MemberRoster.TotalManCount > 50)
-            //    {
-            //        float healthyRatio = (float)defeatedParty.MemberRoster.TotalHealthyCount / (float)defeatedParty.MemberRoster.TotalManCount;
-            //        if (MBRandom.RandomFloat < healthyRatio && defeatedParty.MemberRoster.TotalHealthyCount > 10)
-            //        {
-            //            //defeatedParty.LeaderHero.HitPoints = 21;
-            //            if (Statics._settings is not null && Statics._settings.Debug)
-            //                IM.WriteMessage(defeatedParty.LeaderHero.Name + " was rescued by his/her own troops.", IM.MsgType.Notify);
+            if (defeatedParty.LeaderHero != null && defeatedParty.LeaderHero.IsWounded && !isSurrender)
+            {
+                if (defeatedParty.MemberRoster.TotalManCount > 50)
+                {
+                    float healthyRatio = (float)defeatedParty.MemberRoster.TotalHealthyCount / (float)defeatedParty.MemberRoster.TotalManCount;
+                    if (MBRandom.RandomFloat < healthyRatio && defeatedParty.MemberRoster.TotalHealthyCount > 10)
+                    {
+                        //defeatedParty.LeaderHero.HitPoints = 21;
+                        if (Statics._settings is not null && Statics._settings.Debug)
+                            IM.WriteMessage(defeatedParty.LeaderHero.Name + " was rescued by his/her own troops.", IM.MsgType.Notify);
 
-            //            return false;
-            //        }
-            //    }
-            //}
+                        return false;
+                    }
+                }
+            }
 
             if (defeatedParty.LeaderHero != null && defeatedParty.LeaderHero.IsWounded || isSurrender)
             {

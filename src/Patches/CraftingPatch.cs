@@ -83,8 +83,9 @@ namespace FlavorCraft
         {
             if (____craftingHistory.Contains(design))
             {
-                //if (Statics._settings is not null && !Statics._settings.Debug)
-                IM.WriteMessage(design.WeaponName + "已经存在", IM.MsgType.Notify);
+                if (Statics._settings is not null && !Statics._settings.Debug)
+                    IM.WriteMessage("design 已经存在", IM.MsgType.Notify);
+
                 return false;
             }
 
@@ -119,7 +120,8 @@ namespace FlavorCraft
 
             if (craftingTemplate.StringId.StartsWith("tor_"))
             {
-                IM.WriteMessage(craftingTemplate.TemplateName.ToString(), IM.MsgType.Notify);
+                if (Statics._settings is not null && !Statics._settings.Debug)
+                    IM.WriteMessage(craftingTemplate.TemplateName.ToString(), IM.MsgType.Notify);
 
                 return false;
             }
@@ -207,22 +209,22 @@ namespace FlavorCraft
                     }
                 }
 
-                //if (item.WeaponComponent.PrimaryWeapon.WeaponClass != WeaponClass.TwoHandedPolearm)
-                //{
-                //    // 非双手长柄武器熔炼时不产出木材
-                //    __result[(int)CraftingMaterials.Wood] = 0;
-                //}
-                //else if (__result[(int)CraftingMaterials.Wood] > 1)
-                //{
-                //    // 双手长柄武器熔炼时至多产出1单位木材
-                //    __result[(int)CraftingMaterials.Wood] = 1;
-                //}
+                if (item.WeaponComponent.PrimaryWeapon.WeaponClass != WeaponClass.TwoHandedPolearm)
+                {
+                    // 非双手长柄武器熔炼时不产出木材
+                    __result[(int)CraftingMaterials.Wood] = 0;
+                }
+                else if (__result[(int)CraftingMaterials.Wood] > 1)
+                {
+                    // 双手长柄武器熔炼时至多产出1单位木材
+                    __result[(int)CraftingMaterials.Wood] = 1;
+                }
 
-                // 确保熔炼产出至少包含1个Iron1（基础金属）
-                //if (__result[(int)CraftingMaterials.Iron1] == 0 && metalCap > 0)
-                //{
-                //    __result[(int)CraftingMaterials.Iron1]++;
-                //}
+                //确保熔炼产出至少包含1个Iron1（基础金属）
+                if (__result[(int)CraftingMaterials.Iron1] == 0 && metalCap > 0)
+                {
+                    __result[(int)CraftingMaterials.Iron1]++;
+                }
             }
         }
 

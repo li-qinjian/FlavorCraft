@@ -34,7 +34,6 @@
         <Compile Remove="BannerBearerFix\GeneralsAndCaptainsAssignmentLogic.cs" />
         <Compile Remove="battleAI\IbsMoralePatch.cs" />
         <Compile Remove="battleAI\IbsSiegeLanePatch.cs" />
-        <Compile Remove="BetterArenaPrize\TournamentGamePatch.cs" />
         <Compile Remove="CombatTweaks\SandboxAgentApplyDamageModel.cs" />
         <Compile Remove="CRR\DefaultBattleRewardModelPatch.cs" />
         <Compile Remove="CRR\LootCollectorPatch.cs" />

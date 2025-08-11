@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <base>
 	<item_holsters>
 		<item_holster
@@ -323,7 +323,7 @@
 			group_name="back_polearm_1"
 			holster_skeleton="holster_skeleton_back"
 			base_set="thorax_back_near_left"
-			holster_position="-300.070, -0.180, -0.020"
+			holster_position="0.070, -0.180, -0.020"
 			holster_rotation_yaw_pitch_roll="0.790, -105.810, -177.170" />
 		<item_holster
 			id="polearm_back_2"
@@ -335,7 +335,7 @@
 			group_name="back_polearm_2"
 			holster_skeleton="holster_skeleton_back"
 			base_set="thorax_back_near_right"
-			holster_position="-300.060, -0.180, 0.020"
+			holster_position="0.060, -0.180, 0.040"
 			holster_rotation_yaw_pitch_roll="0.660, 75.470, 4.210" />
 		<item_holster
 			id="polearm_back_3"
@@ -347,7 +347,7 @@
 			group_name="back_polearm_3"
 			holster_skeleton="holster_skeleton_back"
 			base_set="thorax_back_near_left_2"
-			holster_position="-300.050, -0.180, -0.060"
+			holster_position="0.050, -0.180, -0.060"
 			holster_rotation_yaw_pitch_roll="0.320, -105.830, -175.510" />
 		<item_holster
 			id="polearm_back_4"
@@ -359,7 +359,7 @@
 			group_name="back_polearm_4"
 			holster_skeleton="holster_skeleton_back"
 			base_set="thorax_back_near_right_2"
-			holster_position="-300.050, -0.180, 0.080"
+			holster_position="0.050, -0.180, 0.080"
 			holster_rotation_yaw_pitch_roll="0.660, 75.470, 4.210" />
 		<item_holster
 			id="sword_back"
@@ -829,77 +829,5 @@
 			base_set="abdomen"
 			holster_position="0.050, -0.130, 0.200"
 			holster_rotation_yaw_pitch_roll="-53.960, 103.470, 23.090" />
-		<!-- <item_holster
-			id="left_forearm_shield"
-			equip_action="act_equip_shield"
-			equip_action_left_stance="act_equip_shield_left_stance"
-			unequip_action="act_unequip_shield"
-			unequip_action_left_stance="act_unequip_shield_left_stance"
-			show_holster_when_drawn="false"
-			group_name="left_forearm"
-			holster_skeleton="holster_skeleton"
-			holster_bone="biped_forearm1_l"
-			holster_position="0.02, 0.000, 0.05"
-			holster_rotation_yaw_pitch_roll="-17.000, 20.000, 20.000" />
-		<item_holster
-			id="passive_block_kite"
-			equip_action="act_equip_shield"
-			equip_action_left_stance="act_equip_shield_left_stance"
-			unequip_action="act_unequip_shield"
-			unequip_action_left_stance="act_unequip_shield_left_stance"
-			show_holster_when_drawn="false"
-			group_name="left_forearm"
-			holster_skeleton="holster_skeleton"
-			holster_bone="biped_forearm1_l"
-			holster_position="0.05, 0.06, 0.00"
-			holster_rotation_yaw_pitch_roll="0.000, 10.000, 40.000" />
-		<item_holster
-			id="passive_block_round"
-			equip_action="act_equip_shield"
-			equip_action_left_stance="act_equip_shield_left_stance"
-			unequip_action="act_unequip_shield"
-			unequip_action_left_stance="act_unequip_shield_left_stance"
-			show_holster_when_drawn="false"
-			group_name="left_finger"
-			holster_skeleton="holster_skeleton"
-			holster_bone="biped_item_l"
-			holster_position="0.0, 0.000, 0.0"
-			holster_rotation_yaw_pitch_roll="15.000, 90.000, 170.000" />
-		<item_holster
-			id="left_shoulder_shield"
-			equip_action="act_equip_shield"
-			equip_action_left_stance="act_equip_shield_left_stance"
-			unequip_action="act_unequip_shield"
-			unequip_action_left_stance="act_unequip_shield_left_stance"
-			show_holster_when_drawn="false"
-			group_name="left_forearm"
-			holster_skeleton="holster_skeleton"
-			holster_bone="biped_upperarm_l"
-			holster_position="0.25, 0.0, 0.1"
-			holster_rotation_yaw_pitch_roll="10, -10, -105" />
-		<item_holster
-			id="left_shoulder_targe"
-			equip_action="act_equip_shield"
-			equip_action_left_stance="act_equip_shield_left_stance"
-			unequip_action="act_unequip_shield"
-			unequip_action_left_stance="act_unequip_shield_left_stance"
-			show_holster_when_drawn="false"
-			group_name="left_forearm"
-			holster_skeleton="holster_skeleton"
-			holster_bone="biped_upperarm_l"
-			holster_position="0.20, 0.0, 0.05"
-			holster_rotation_yaw_pitch_roll="-30, 0, 0" />
-		<item_holster
-			id="pavise"
-			equip_action="act_equip_shield"
-			equip_action_left_stance="act_equip_shield_left_stance"
-			unequip_action="act_unequip_shield"
-			unequip_action_left_stance="act_unequip_shield_left_stance"
-			show_holster_when_drawn="false"
-			group_name="left_forearm"
-			holster_skeleton="holster_skeleton"
-			holster_bone="biped_upperarm_l"
-			holster_position="0.25, 0.0, 0.25"
-			holster_rotation_yaw_pitch_roll="10, 0, -105" /> -->
 	</item_holsters>
 </base>

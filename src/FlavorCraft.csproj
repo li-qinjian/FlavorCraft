@@ -32,6 +32,30 @@
 
     <ItemGroup>
         <Compile Remove="BannerBearerFix\GeneralsAndCaptainsAssignmentLogic.cs" />
+        <Compile Remove="BattleAITweak\AiModule\AgentAi.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Behaviours.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Frontline.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Posture\AgentPostures.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Posture\BattleStatsLogic.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Posture\BattleStatsVM.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Posture\Posture.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Posture\PostureLogic.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Posture\PostureVisualLogic.cs" />
+        <Compile Remove="BattleAITweak\AiModule\Posture\PostureVisualVM.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmBehaviors\RBMBehaviorArcherFlank.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmBehaviors\RBMBehaviorEmbolon.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmBehaviors\RBMBehaviorHorseArcherSkirmish.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmBehaviors\RBMBehaviorInfantryAttackFlank.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticAttackSplitArchers.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticAttackSplitInfantry.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticAttackSplitSkirmishers.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticDefendSplitArchers.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticDefendSplitInfantry.cs" />
+        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticEmbolon.cs" />
+        <Compile Remove="BattleAITweak\AiModule\SiegeArcherPoints\SiegeArcherPoints.cs" />
+        <Compile Remove="BattleAITweak\AiModule\SiegePatches.cs" />
+        <Compile Remove="BattleAITweak\AiModule\SpawningPatches.cs" />
+        <Compile Remove="BattleAITweak\RBMAIPatcher.cs" />
         <Compile Remove="battleAI\IbsMoralePatch.cs" />
         <Compile Remove="battleAI\IbsSiegeLanePatch.cs" />
         <Compile Remove="battleAI\TacticBreachWallsPatch.cs" />
@@ -83,5 +107,10 @@
         <Reference Update="System.Xml.Linq">
             <Private>False</Private>
         </Reference>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="BattleAITweak\AiModule\Posture\" />
+      <Folder Include="BattleAITweak\AiModule\SiegeArcherPoints\" />
     </ItemGroup>
 </Project>

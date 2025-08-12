@@ -49,23 +49,9 @@
                 <GameType value = "Campaign" />
                 <GameType value = "CampaignStoryMode" />
             </IncludedGameTypes>
-        </XmlNode>
-         <XmlNode>
-            <XmlName id="NPCCharacters" path="ucspecialcharacters" />
-            <IncludedGameTypes>
-                <GameType value = "Campaign" />
-                <GameType value = "CampaignStoryMode" />
-            </IncludedGameTypes>
-        </XmlNode>
-        <XmlNode>
-            <XmlName id="GameText" path="wanderer_strings" />
-            <IncludedGameTypes>
-                <GameType value = "Campaign" />
-                <GameType value = "CampaignStoryMode" />
-            </IncludedGameTypes>
-        </XmlNode>
-        <XmlNode>
-            <XmlName id="ItemModifiers" path="item_modifiers" />
         </XmlNode> -->
+        <XmlNode>
+            <XmlName id="GameText" path="RBMAI_module_strings"/>
+        </XmlNode>
     </Xmls>
 </Module>

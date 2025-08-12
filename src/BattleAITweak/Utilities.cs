@@ -1,4 +1,4 @@
-﻿using RBMConfig;
+﻿//using RBMConfig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -308,6 +308,7 @@ namespace RBMAI
             return ratio;
         }
 
+        
         public static bool IsFormationShooting(Formation formation, float desiredRatio = 0.3f, float lastAttackTimeTreshold = 10f)
         {
             float ratio = 0f;
@@ -315,11 +316,11 @@ namespace RBMAI
             if (formation != null && Mission.Current != null)
             {
                 float ratioOfCrossbowmen;
-                if (RBMConfig.RBMConfig.rbmCombatEnabled)
-                {
-                    ratioOfCrossbowmen = RatioOfCrossbowmen(formation);
-                }
-                else
+                //if (RBMConfig.RBMConfig.rbmCombatEnabled)
+                //{
+                //    ratioOfCrossbowmen = RatioOfCrossbowmen(formation);
+                //}
+                //else
                 {
                     ratioOfCrossbowmen = 0f;
                 }
@@ -344,7 +345,7 @@ namespace RBMAI
             }
             return false;
         }
-
+        
         public static bool FormationActiveSkirmishersRatio(Formation formation, float desiredRatio)
         {
             float ratio = 0f;
@@ -974,6 +975,7 @@ namespace RBMAI
             return significantAlly;
         }
 
+        /*
         public static float GetCombatAIDifficultyMultiplier()
         {
             MissionState missionState = Game.Current.GameStateManager.ActiveState as MissionState;
@@ -1030,7 +1032,7 @@ namespace RBMAI
             //float difficultyModifier = 1.0f; // v enhanced battle test je difficulty very easy
             return MBMath.ClampFloat((float)relevantSkillLevel / 250f * difficultyModifier, 0f, 1f);
         }
-
+        */
         //public static int GetMeleeSkill(Agent agent, WeaponComponentData equippedItem, WeaponComponentData secondaryItem)
         //{
         //    SkillObject skill = DefaultSkills.Athletics;
@@ -1113,22 +1115,23 @@ namespace RBMAI
             return false;
         }
 
+        
         public static bool ShouldFormationCopyShieldWall(Formation formation, float haveShieldThreshold = 0.6f)
         {
             int countAll = 0;
             int countHasShield = 0;
 
-            if (formation.Team.HasTeamAi)
-            {
-                FieldInfo field = typeof(TeamAIComponent).GetField("_currentTactic", BindingFlags.NonPublic | BindingFlags.Instance);
-                field.DeclaringType.GetField("_currentTactic");
-                TacticComponent currentTactic = (TacticComponent)field.GetValue(formation.Team.TeamAI);
+            //if (formation.Team.HasTeamAi)
+            //{
+            //    FieldInfo field = typeof(TeamAIComponent).GetField("_currentTactic", BindingFlags.NonPublic | BindingFlags.Instance);
+            //    field.DeclaringType.GetField("_currentTactic");
+            //    TacticComponent currentTactic = (TacticComponent)field.GetValue(formation.Team.TeamAI);
 
-                if (currentTactic != null && (currentTactic is RBMTacticAttackSplitInfantry || currentTactic is RBMTacticAttackSplitInfantry))
-                {
-                    return false;
-                }
-            }
+            //    if (currentTactic != null && (currentTactic is RBMTacticAttackSplitInfantry || currentTactic is RBMTacticAttackSplitInfantry))
+            //    {
+            //        return false;
+            //    }
+            //}
             formation.ApplyActionOnEachUnitViaBackupList(delegate (Agent agent)
             {
                 if (agent != null)
@@ -1150,7 +1153,7 @@ namespace RBMAI
                 return false;
             }
         }
-
+        
         public static IEnumerable<Agent> CountSoldiersInPolygon(Formation formation, Vec2[] polygon)
         {
             List<Agent> enemyAgents = new List<Agent>();
@@ -1348,6 +1351,7 @@ namespace RBMAI
             return effectiveSkillWithDR;
         }
 
+        /*
         public const float oneHandedPolearmThrustStrength = 2.5f;
         public const float twoHandedPolearmThrustStrength = 5f;
 
@@ -2248,6 +2252,6 @@ namespace RBMAI
             double num6 = 0.33 * (finalTime + finalTime2 + finalTime3);
             return (float)(3.8500000000000005 / num6);
         }
-
+        */
     }
 }

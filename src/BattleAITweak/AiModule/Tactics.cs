@@ -252,11 +252,11 @@ namespace RBMAI
                 formation.QuerySystem.Expire();
                 formation.AI.AddAiBehavior(new RBMBehaviorArcherSkirmish(formation));
                 formation.AI.AddAiBehavior(new RBMBehaviorForwardSkirmish(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
                 formation.AI.AddAiBehavior(new RBMBehaviorCavalryCharge(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
             }
         }
 
@@ -490,11 +490,11 @@ namespace RBMAI
                 formation.QuerySystem.Expire();
                 formation.AI.AddAiBehavior(new RBMBehaviorArcherSkirmish(formation));
                 formation.AI.AddAiBehavior(new RBMBehaviorForwardSkirmish(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
                 formation.AI.AddAiBehavior(new RBMBehaviorCavalryCharge(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
-                //formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
             }
         }
 

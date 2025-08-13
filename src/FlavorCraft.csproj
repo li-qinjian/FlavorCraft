@@ -31,7 +31,6 @@
   </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="BannerBearerFix\GeneralsAndCaptainsAssignmentLogic.cs" />
         <Compile Remove="BattleAITweak\AiModule\AgentAi.cs" />
         <Compile Remove="BattleAITweak\AiModule\Behaviours.cs" />
         <Compile Remove="BattleAITweak\AiModule\Frontline.cs" />
@@ -56,6 +55,7 @@
         <Compile Remove="BattleAITweak\AiModule\SiegePatches.cs" />
         <Compile Remove="BattleAITweak\AiModule\SpawningPatches.cs" />
         <Compile Remove="BattleAITweak\RBMAIPatcher.cs" />
+        <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
         <Compile Remove="battleAI\IbsMoralePatch.cs" />
         <Compile Remove="battleAI\IbsSiegeLanePatch.cs" />
         <Compile Remove="battleAI\TacticBreachWallsPatch.cs" />

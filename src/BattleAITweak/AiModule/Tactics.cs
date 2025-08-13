@@ -7,6 +7,7 @@ using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.MountAndBlade.GauntletUI.Mission.Singleplayer;
 using TaleWorlds.MountAndBlade.ViewModelCollection.HUD.FormationMarker;
+using TOR_Core.BattleMechanics.AI.TeamAI.TeamBehavior;
 using static TaleWorlds.Core.ItemObject;
 
 namespace RBMAI
@@ -241,23 +242,23 @@ namespace RBMAI
         //    }
         //}
 
-        //[HarmonyPatch(typeof(TeamAIGeneral))]
-        //private class OverrideTeamAIGeneral
-        //{
-        //    [HarmonyPostfix]
-        //    [HarmonyPatch("OnUnitAddedToFormationForTheFirstTime")]
-        //    private static void PostfixOnUnitAddedToFormationForTheFirstTime(Formation formation)
-        //    {
-        //        formation.QuerySystem.Expire();
-        //        formation.AI.AddAiBehavior(new RBMBehaviorArcherSkirmish(formation));
-        //        formation.AI.AddAiBehavior(new RBMBehaviorForwardSkirmish(formation));
-        //        formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
-        //        formation.AI.AddAiBehavior(new RBMBehaviorCavalryCharge(formation));
-        //        formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
-        //        formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
-        //        formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
-        //    }
-        //}
+        [HarmonyPatch(typeof(TeamAIGeneral))]
+        private class OverrideTeamAIGeneral
+        {
+            [HarmonyPostfix]
+            [HarmonyPatch("OnUnitAddedToFormationForTheFirstTime")]
+            private static void PostfixOnUnitAddedToFormationForTheFirstTime(Formation formation)
+            {
+                formation.QuerySystem.Expire();
+                formation.AI.AddAiBehavior(new RBMBehaviorArcherSkirmish(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorForwardSkirmish(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorCavalryCharge(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
+            }
+        }
 
         //[HarmonyPatch(typeof(MissionFormationMarkerTargetVM))]
         //[HarmonyPatch("Refresh")]
@@ -337,7 +338,7 @@ namespace RBMAI
         //            {
         //                foreach (Team team in Mission.Current.Teams.Where((Team t) => t.HasTeamAi).ToList())
         //                {
-                            
+
         //                    if (team.Side == BattleSideEnum.Attacker)
         //                    {
         //                        team.ClearTacticOptions();
@@ -415,7 +416,7 @@ namespace RBMAI
         //                    return power;
         //                });
         //            }
-                    
+
         //            defenderPower = Mission.Current.Teams.Where(team => team.IsDefender).Sum(team =>
         //            {
         //                float power = 0f;
@@ -478,6 +479,24 @@ namespace RBMAI
         //        return false;
         //    }
         //}
+
+        [HarmonyPatch(typeof(TORTeamAIGeneral))]
+        private class OverrideTORTeamAIGeneral
+        {
+            [HarmonyPostfix]
+            [HarmonyPatch("OnUnitAddedToFormationForTheFirstTime")]
+            private static void PostfixOnUnitAddedToFormationForTheFirstTime(Formation formation)
+            {
+                formation.QuerySystem.Expire();
+                formation.AI.AddAiBehavior(new RBMBehaviorArcherSkirmish(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorForwardSkirmish(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
+                formation.AI.AddAiBehavior(new RBMBehaviorCavalryCharge(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
+                //formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
+            }
+        }
 
         [HarmonyPatch(typeof(TacticFrontalCavalryCharge))]
         private class OverrideTacticFrontalCavalryCharge

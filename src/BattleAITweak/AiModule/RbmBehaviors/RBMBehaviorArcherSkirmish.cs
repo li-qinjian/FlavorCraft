@@ -9,7 +9,7 @@ namespace RBMAI
 {
     internal class RBMBehaviorArcherSkirmish : BehaviorComponent
     {
-        private int flankCooldownMax = 40;
+        //private int flankCooldownMax = 40;
 
         //public float customWidth = 110f;
         public Timer repositionTimer = null;
@@ -18,7 +18,7 @@ namespace RBMAI
         public Timer flankinTimer = null;
         public int side = MBRandom.RandomInt(2);
         public int cooldown = 0;
-        public bool nudgeFormation;
+        //public bool nudgeFormation;
 
         public bool wasShootingBefore = false;
 

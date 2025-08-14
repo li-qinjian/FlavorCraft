@@ -49,12 +49,6 @@
         <Compile Remove="BattleAITweak\AiModule\Posture\PostureVisualLogic.cs" />
         <Compile Remove="BattleAITweak\AiModule\Posture\PostureVisualVM.cs" />
         <Compile Remove="BattleAITweak\AiModule\RbmBehaviors\BehaviorChargePatch.cs" />
-        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticAttackSplitArchers.cs" />
-        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticAttackSplitInfantry.cs" />
-        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticAttackSplitSkirmishers.cs" />
-        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticDefendSplitArchers.cs" />
-        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticDefendSplitInfantry.cs" />
-        <Compile Remove="BattleAITweak\AiModule\RbmTactics\RBMTacticEmbolon.cs" />
         <Compile Remove="BattleAITweak\AiModule\SiegeArcherPoints\SiegeArcherPoints.cs" />
         <Compile Remove="BattleAITweak\AiModule\SiegePatches.cs" />
         <Compile Remove="BattleAITweak\AiModule\SpawningPatches.cs" />

@@ -56,6 +56,9 @@ namespace FlavorCraft {
         public const string Settings_AI_02 = "{=Settings_AI_02}Retreat ratio.";
         public const string Settings_AI_02_Desc = "{=Settings_AI_02_Desc}Retreat ratio [Native : 0.5].";
 
+        public const string Settings_AI_03 = "{=Settings_AI_03}BBF.";
+        public const string Settings_AI_03_Desc = "{=Settings_AI_03_Desc}Enable Banner Bearer Fix[Native : false].";
+
         //<!-- Messages -->
         public const string FC_MSG_1 = "{=FC_MSG_1}ExtraWeaponSlot already has banner, remove it first.";
         public const string FC_MSG_2 = "{=FC_MSG_2}Attacker Force Casualty Rate: {RATE}";

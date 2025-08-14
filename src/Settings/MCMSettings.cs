@@ -129,6 +129,10 @@ namespace FlavorCraft.Settings
         [SettingPropertyGroup(StringConstants.PG_AI)]
         public float TroopPanicThreshold { get; set; } = 0.5f;
 
+        [SettingPropertyBool(StringConstants.Settings_AI_03, Order = 2, RequireRestart = false, HintText = StringConstants.Settings_AI_03_Desc)]
+        [SettingPropertyGroup(StringConstants.PG_AI)]
+        public bool EnableBBF { get; set; } = false;
+
         //~ Presets
 
         #region Presets
@@ -158,6 +162,7 @@ namespace FlavorCraft.Settings
                 //UpgradingTroopsConsumingHorses = false,
                 IsAITweakEnabled = false,
                 TroopPanicThreshold = 0.5f,
+                EnableBBF = false,
                 NoNightBattle = false,
 
                 //Wanderer
@@ -177,18 +182,18 @@ namespace FlavorCraft.Settings
                 EnableUnblockableThrust = true,
                 TradingByQuartermaster = true,
 
-                ShareLoots =true,
+                ShareLoots = true,
 
                 //AI.
                 //DisableClanPartyJoinArmies = true,
                 //UpgradingTroopsConsumingHorses = true,
                 IsAITweakEnabled = true,
+                EnableBBF = true,
                 TroopPanicThreshold = 0.5f,
                 NoNightBattle = true,
 
                 //Wanderer
                 WondererLostRate = 0.1f,
-
 
                 ItemPrefix = "cla_",
                 //TroopPanicThreshold = 0.8f,

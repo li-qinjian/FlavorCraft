@@ -46,9 +46,9 @@
         <string id="Settings_AI_01_Desc" text="减少AI因士气或攻城不利无脑溃逃." />
         <string id="Settings_AI_02" text="溃逃阈值" />
         <string id="Settings_AI_02_Desc" text="战损比超过阀值后AI士兵才会溃逃[0.0~1.0, 默认0.5]." />
-        <!--<string id="Settings_AI_03" text="军团控制" />
-        <string id="Settings_AI_03_Desc" text="禁止玩家家族部队加入军团." />
-        <string id="Settings_AI_03" text="消耗马匹" />
+        <string id="Settings_AI_03" text="旗手修复" />
+        <string id="Settings_AI_03_Desc" text="禁止旗手脱离编队战斗." />
+        <!--<string id="Settings_AI_03" text="消耗马匹" />
         <string id="Settings_AI_03_Desc" text="AI升级部队消耗马匹." />-->
         
         <!-- Muse's Armory -->

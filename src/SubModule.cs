@@ -132,6 +132,14 @@ public class SubModule : MBSubModuleBase
 
         _harmony.Value.PatchAll(Assembly.GetExecutingAssembly());
 
+        if (Statics._settings != null && Statics._settings.IsAITweakEnabled)
+        {
+            _harmony.Value.Patch(
+                AccessTools.PropertySetter(typeof(Agent), "Formation"),
+                prefix: new HarmonyMethod(typeof(FlavorCraft.BannerBearerFix.BBFPatch), "Prefix")
+            );
+        }
+    
         _harmony.Value.TryPatch(
             AccessTools2.DeclaredMethod("TaleWorlds.CampaignSystem.CampaignBehaviors.PlayerVariablesBehavior:OnPlayerBattleEnd"),
             prefix: AccessTools2.DeclaredMethod(typeof(SubModule), nameof(SkipMethod)));
@@ -186,8 +194,11 @@ public class SubModule : MBSubModuleBase
             // 调用基类的任务行为初始化方法
             base.OnMissionBehaviorInitialize(mission);
 
-            // 为当前任务添加 BBFMissionBehavior 任务逻辑
-            mission.AddMissionBehavior(new BBFMissionBehavior());
+            // 仅在AI tweak开关开启时添加BBFMissionBehavior
+            if (Statics._settings != null && Statics._settings.IsAITweakEnabled)
+            {
+                mission.AddMissionBehavior(new BBFMissionBehavior());
+            }
         }
     }
 

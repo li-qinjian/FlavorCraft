@@ -1,10 +1,8 @@
-﻿using HarmonyLib;
-using TaleWorlds.MountAndBlade;
+﻿using TaleWorlds.MountAndBlade;
 
 namespace FlavorCraft.BannerBearerFix
 {
-    // 使用 Harmony 库对 Agent 类的 Formation 属性设置方法进行补丁
-    [HarmonyPatch(typeof(Agent), "Formation", MethodType.Setter)]
+    // 只保留静态前缀方法，供外部Harmony动态注册
     internal class BBFPatch
     {
         // 前置补丁方法，在设置 Agent 的编队时调用

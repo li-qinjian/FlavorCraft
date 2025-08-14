@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using FlavorCraft;
+using HarmonyLib;
 using SandBox.Missions.MissionLogics;
 using System;
 using System.Collections.Generic;
@@ -822,18 +823,26 @@ namespace RBMAI
         [HarmonyPatch("EarlyStart")]
         public class TOREarlyStartPatch
         {
-            public static void Postfix(ref IBattleCombatant ____attackerLeaderBattleCombatant, ref IBattleCombatant ____defenderLeaderBattleCombatant)
+            public static void Postfix(/*ref IBattleCombatant ____attackerLeaderBattleCombatant, ref IBattleCombatant ____defenderLeaderBattleCombatant*/)
             {
+                if (Statics._settings is null || !Statics._settings.IsAITweakEnabled)
+                    return;
+
                 if (Mission.Current.Teams.Any())
                 {
                     if (Mission.Current.MissionTeamAIType == Mission.MissionTeamAITypeEnum.FieldBattle)
                     {
                         foreach (Team team in Mission.Current.Teams.Where((Team t) => t.HasTeamAi).ToList())
                         {
-
                             if (team.Side == BattleSideEnum.Attacker)
                             {
-                                //team.ClearTacticOptions();
+                                team.AddTacticOption(new RBMTacticEmbolon(team));
+                                team.AddTacticOption(new RBMTacticAttackSplitInfantry(team));
+                                //team.AddTacticOption(new RBMTacticAttackSplitSkirmishers(team));
+                                team.AddTacticOption(new RBMTacticAttackSplitArchers(team));
+
+
+                                /*team.ClearTacticOptions();
                                 if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.BRETONNIA)
                                 {
                                     team.AddTacticOption(new RBMTacticEmbolon(team));
@@ -850,24 +859,27 @@ namespace RBMAI
                                 {
                                     team.AddTacticOption(new RBMTacticAttackSplitArchers(team));
                                 }
-                                //team.AddTacticOption(new TacticFullScaleAttack(team));
-                                //team.AddTacticOption(new TacticCoordinatedRetreat(team));
+                                team.AddTacticOption(new TacticFullScaleAttack(team));
+                                team.AddTacticOption(new TacticCoordinatedRetreat(team)); */
                             }
                             if (team.Side == BattleSideEnum.Defender)
                             {
-                                //team.ClearTacticOptions();
+                                team.AddTacticOption(new RBMTacticDefendSplitArchers(team));
+                                team.AddTacticOption(new RBMTacticDefendSplitInfantry(team));
+
+                                /* team.ClearTacticOptions();
                                 if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.ASRAI)
                                 {
                                     team.AddTacticOption(new RBMTacticDefendSplitArchers(team));
                                 }
-                                //team.AddTacticOption(new TacticDefensiveEngagement(team));
-                                //team.AddTacticOption(new TacticDefensiveLine(team));
+                                team.AddTacticOption(new TacticDefensiveEngagement(team));
+                                team.AddTacticOption(new TacticDefensiveLine(team));
                                 if (____defenderLeaderBattleCombatant?.BasicCulture?.GetCultureCode() == CultureCode.Empire)
                                 {
                                     team.AddTacticOption(new RBMTacticDefendSplitInfantry(team));
                                 }
-                                //team.AddTacticOption(new TacticFullScaleAttack(team));
-                                //team.AddTacticOption(new TacticCoordinatedRetreat(team));
+                                team.AddTacticOption(new TacticFullScaleAttack(team));
+                                team.AddTacticOption(new TacticCoordinatedRetreat(team)); */
                             }
                         }
                     }

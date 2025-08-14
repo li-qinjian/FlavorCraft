@@ -415,9 +415,9 @@ public class RBMTacticAttackSplitSkirmishers : TacticComponent
         float skirmisherCount = 0;
 
         float allyInfatryPower = 0f;
-        float allyCavalryPower = 0f;
+        //float allyCavalryPower = 0f;
         float enemyInfatryPower = 0f;
-        float enemyArcherPower = 0f;
+        //float enemyArcherPower = 0f;
         int allyInfCount = 0;
 
         foreach (Team team in Mission.Current.Teams.ToList())

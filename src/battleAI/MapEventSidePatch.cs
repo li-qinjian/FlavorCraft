@@ -19,34 +19,31 @@ namespace FlavorCraft
         {
             if (defeatedParty.LeaderHero != null && defeatedParty.LeaderHero.IsWounded && !isSurrender)
             {
-                if (Statics._settings is not null && !Statics._settings.IsAITweakEnabled)
+                if (defeatedParty.MemberRoster.TotalManCount > 50)
                 {
-                    if (defeatedParty.MemberRoster.TotalManCount > 50)
+                    int healthyCount = defeatedParty.MemberRoster.TotalHealthyCount;
+                    int totalCount = defeatedParty.MemberRoster.TotalManCount;
+                        
+                    // Calculate base escape chance from healthy ratio (0.0 to 1.0)
+                    float healthyRatio = (float)healthyCount / (float)totalCount;
+                        
+                    // Calculate healthy troops bonus (more troops = higher chance)
+                    // Bonus scales with healthy count: 10-50 troops = 0-0.2 bonus, 50+ troops = 0.2+ bonus
+                    float healthyCountBonus = Math.Min(0.4f, (float)(healthyCount - 10) / 100f);
+                        
+                    // Calculate final escape chance (base ratio + healthy count bonus)
+                    float escapeChance = Math.Min(0.85f, healthyRatio + healthyCountBonus);
+                        
+                    // Minimum requirements: at least 10 healthy troops and 15% base escape chance
+                    if (healthyCount > 10 && escapeChance > 0.15f && MBRandom.RandomFloat < escapeChance)
                     {
-                        int healthyCount = defeatedParty.MemberRoster.TotalHealthyCount;
-                        int totalCount = defeatedParty.MemberRoster.TotalManCount;
-                        
-                        // Calculate base escape chance from healthy ratio (0.0 to 1.0)
-                        float healthyRatio = (float)healthyCount / (float)totalCount;
-                        
-                        // Calculate healthy troops bonus (more troops = higher chance)
-                        // Bonus scales with healthy count: 10-50 troops = 0-0.2 bonus, 50+ troops = 0.2+ bonus
-                        float healthyCountBonus = Math.Min(0.4f, (float)(healthyCount - 10) / 100f);
-                        
-                        // Calculate final escape chance (base ratio + healthy count bonus)
-                        float escapeChance = Math.Min(0.85f, healthyRatio + healthyCountBonus);
-                        
-                        // Minimum requirements: at least 10 healthy troops and 15% base escape chance
-                        if (healthyCount > 10 && escapeChance > 0.15f && MBRandom.RandomFloat < escapeChance)
+                        defeatedParty.LeaderHero.HitPoints = 21;
+                        if (Statics._settings is not null && Statics._settings.Debug)
                         {
-                            defeatedParty.LeaderHero.HitPoints = 21;
-                            if (Statics._settings is not null && Statics._settings.Debug)
-                            {
-                                IM.WriteMessage($"{defeatedParty.LeaderHero.Name} was rescued by {healthyCount} loyal troops (escape chance: {escapeChance:P1}).", IM.MsgType.Notify);
-                            }
-
-                            return false;
+                            IM.WriteMessage($"{defeatedParty.LeaderHero.Name} was rescued by {healthyCount} loyal troops (escape chance: {escapeChance:P1}).", IM.MsgType.Notify);
                         }
+
+                        return false;
                     }
                 }
             }

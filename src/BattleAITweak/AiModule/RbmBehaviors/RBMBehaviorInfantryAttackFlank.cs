@@ -16,7 +16,7 @@ namespace RBMAI
 
         public FormationAI.BehaviorSide FlankSide = FormationAI.BehaviorSide.Middle;
 
-        private float mobilityModifier = 1.25f;
+        //private float mobilityModifier = 1.25f;
 
         private enum FlankMode
         {

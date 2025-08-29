@@ -192,7 +192,7 @@ namespace FlavorCraft
             __result = !considerSkills || // Don't consider skills
                        character.HeroObject.GetSkillValue(DefaultSkills.OneHanded) >= 100 || // One-handed weapon skill ≥ 100
                        character.HeroObject.GetSkillValue(DefaultSkills.TwoHanded) >= 100 || // Two-handed weapon skill ≥ 100
-                       (character.HeroObject.IsWanderer /* && character.Level < 24 */ && character.HeroObject.CompanionOf != null); // Wanderers who joined party
+                       (character.HeroObject.IsWanderer && character.HeroObject.CompanionOf != null && Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(character.HeroObject)); // only bookmarked wanderers who joined party
 
             // Don't run original method
             return false;

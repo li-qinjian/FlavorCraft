@@ -42,7 +42,7 @@
         
         <!-- AI -->
         <string id="PG_AI" text="AI调整" />
-        <string id="Settings_AI_01" text="减少撤退" />
+        <string id="Settings_AI_01" text="AI调整" />
         <string id="Settings_AI_01_Desc" text="减少AI因士气或攻城不利无脑溃逃." />
         <string id="Settings_AI_02" text="溃逃阈值" />
         <string id="Settings_AI_02_Desc" text="战损比超过阀值后AI士兵才会溃逃[0.0~1.0, 默认0.5]." />

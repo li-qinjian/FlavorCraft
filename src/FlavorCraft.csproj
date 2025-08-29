@@ -52,11 +52,10 @@
         <Compile Remove="BattleAITweak\AiModule\SiegeArcherPoints\SiegeArcherPoints.cs" />
         <Compile Remove="BattleAITweak\AiModule\SiegePatches.cs" />
         <Compile Remove="BattleAITweak\AiModule\SpawningPatches.cs" />
+        <Compile Remove="BattleAITweak\CommonAIComponentPatch.cs" />
+        <Compile Remove="BattleAITweak\GeneralsAndCaptainsAssignmentLogicPatch.cs" />
         <Compile Remove="BattleAITweak\RBMAIPatcher.cs" />
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
-        <Compile Remove="battleAI\IbsMoralePatch.cs" />
-        <Compile Remove="battleAI\IbsSiegeLanePatch.cs" />
-        <Compile Remove="battleAI\TacticBreachWallsPatch.cs" />
         <Compile Remove="CombatTweaks\SandboxAgentApplyDamageModel.cs" />
         <Compile Remove="CRR\DefaultBattleRewardModelPatch.cs" />
         <Compile Remove="CRR\LootCollectorPatch.cs" />

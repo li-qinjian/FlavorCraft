@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using TaleWorlds.MountAndBlade;
-using TaleWorlds.Library;
+using FlavorCraft.Utils;
 using System.Reflection;
 
 namespace FlavorCraft.BattleAI
@@ -8,7 +8,7 @@ namespace FlavorCraft.BattleAI
     [HarmonyPatch(typeof(TeamAIComponent), "MakeDecision")]
     public class TeamAIComponent_MakeDecision_Patch
     {
-        static TacticComponent __oldTactic;
+        static TacticComponent? __oldTactic;
 
         static void Prefix(TeamAIComponent __instance)
         {
@@ -27,14 +27,10 @@ namespace FlavorCraft.BattleAI
 
             if (__oldTactic != newTactic)
             {
-                string oldName = __oldTactic != null ? __oldTactic.GetType().Name : "null";
-                string newName = newTactic != null ? newTactic.GetType().Name : "null";
-                string teamInfo = team != null
-                    ? $"Team: Side={team.Side}, IsPlayerTeam={team.IsPlayerTeam}, General={team.GeneralAgent?.Name ?? "null"}"
-                    : "Team: null";
-                InformationManager.DisplayMessage(new InformationMessage(
-                    $"[Harmony] Tactic changed: {oldName} -> {newName} | {teamInfo}"
-                ));
+                if (newTactic != null && team != null && team.GeneralAgent != null)
+                {
+                    IM.WriteMessage($"{team.GeneralAgent.Name} 采取战术： {newTactic?.GetType().Name}", IM.MsgType.Notify);
+                }
             }
         }
     }

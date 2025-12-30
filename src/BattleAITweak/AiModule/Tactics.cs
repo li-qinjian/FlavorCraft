@@ -8,9 +8,9 @@ using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 using TaleWorlds.MountAndBlade.GauntletUI.Mission.Singleplayer;
 using TaleWorlds.MountAndBlade.ViewModelCollection.HUD.FormationMarker;
-using TOR_Core.BattleMechanics.AI.TeamAI;
-using TOR_Core.BattleMechanics.AI.TeamAI.TeamBehavior;
-using TOR_Core.Utilities;
+//using TOR_Core.BattleMechanics.AI.TeamAI;
+//using TOR_Core.BattleMechanics.AI.TeamAI.TeamBehavior;
+//using TOR_Core.Utilities;
 using static TaleWorlds.Core.ItemObject;
 
 namespace RBMAI
@@ -801,90 +801,90 @@ namespace RBMAI
         }
 
         //TOR Patches.
-        [HarmonyPatch(typeof(TORTeamAIGeneral))]
-        private class OverrideTORTeamAIGeneral
-        {
-            [HarmonyPostfix]
-            [HarmonyPatch("OnUnitAddedToFormationForTheFirstTime")]
-            private static void PostfixOnUnitAddedToFormationForTheFirstTime(Formation formation)
-            {
-                formation.QuerySystem.Expire();
-                formation.AI.AddAiBehavior(new RBMBehaviorArcherSkirmish(formation));
-                formation.AI.AddAiBehavior(new RBMBehaviorForwardSkirmish(formation));
-                formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
-                formation.AI.AddAiBehavior(new RBMBehaviorCavalryCharge(formation));
-                formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
-                formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
-                formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
-            }
-        }
+        //[HarmonyPatch(typeof(TORTeamAIGeneral))]
+        //private class OverrideTORTeamAIGeneral
+        //{
+        //    [HarmonyPostfix]
+        //    [HarmonyPatch("OnUnitAddedToFormationForTheFirstTime")]
+        //    private static void PostfixOnUnitAddedToFormationForTheFirstTime(Formation formation)
+        //    {
+        //        formation.QuerySystem.Expire();
+        //        formation.AI.AddAiBehavior(new RBMBehaviorArcherSkirmish(formation));
+        //        formation.AI.AddAiBehavior(new RBMBehaviorForwardSkirmish(formation));
+        //        formation.AI.AddAiBehavior(new RBMBehaviorInfantryAttackFlank(formation));
+        //        formation.AI.AddAiBehavior(new RBMBehaviorCavalryCharge(formation));
+        //        formation.AI.AddAiBehavior(new RBMBehaviorEmbolon(formation));
+        //        formation.AI.AddAiBehavior(new RBMBehaviorArcherFlank(formation));
+        //        formation.AI.AddAiBehavior(new RBMBehaviorHorseArcherSkirmish(formation));
+        //    }
+        //}
 
-        [HarmonyPatch(typeof(TORMissionCombatantsLogic))]
-        [HarmonyPatch("EarlyStart")]
-        public class TOREarlyStartPatch
-        {
-            public static void Postfix(/*ref IBattleCombatant ____attackerLeaderBattleCombatant, ref IBattleCombatant ____defenderLeaderBattleCombatant*/)
-            {
-                if (Statics._settings is null || !Statics._settings.IsAITweakEnabled)
-                    return;
+        //[HarmonyPatch(typeof(TORMissionCombatantsLogic))]
+        //[HarmonyPatch("EarlyStart")]
+        //public class TOREarlyStartPatch
+        //{
+        //    public static void Postfix(/*ref IBattleCombatant ____attackerLeaderBattleCombatant, ref IBattleCombatant ____defenderLeaderBattleCombatant*/)
+        //    {
+        //        if (Statics._settings is null || !Statics._settings.IsAITweakEnabled)
+        //            return;
 
-                if (Mission.Current.Teams.Any())
-                {
-                    if (Mission.Current.MissionTeamAIType == Mission.MissionTeamAITypeEnum.FieldBattle)
-                    {
-                        foreach (Team team in Mission.Current.Teams.Where((Team t) => t.HasTeamAi).ToList())
-                        {
-                            if (team.Side == BattleSideEnum.Attacker)
-                            {
-                                team.AddTacticOption(new RBMTacticEmbolon(team));
-                                team.AddTacticOption(new RBMTacticAttackSplitInfantry(team));
-                                //team.AddTacticOption(new RBMTacticAttackSplitSkirmishers(team));
-                                team.AddTacticOption(new RBMTacticAttackSplitArchers(team));
+        //        if (Mission.Current.Teams.Any())
+        //        {
+        //            if (Mission.Current.MissionTeamAIType == Mission.MissionTeamAITypeEnum.FieldBattle)
+        //            {
+        //                foreach (Team team in Mission.Current.Teams.Where((Team t) => t.HasTeamAi).ToList())
+        //                {
+        //                    if (team.Side == BattleSideEnum.Attacker)
+        //                    {
+        //                        team.AddTacticOption(new RBMTacticEmbolon(team));
+        //                        team.AddTacticOption(new RBMTacticAttackSplitInfantry(team));
+        //                        //team.AddTacticOption(new RBMTacticAttackSplitSkirmishers(team));
+        //                        team.AddTacticOption(new RBMTacticAttackSplitArchers(team));
 
 
-                                /*team.ClearTacticOptions();
-                                if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.BRETONNIA)
-                                {
-                                    team.AddTacticOption(new RBMTacticEmbolon(team));
-                                }
-                                if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.EONIR)
-                                {
-                                    team.AddTacticOption(new RBMTacticAttackSplitSkirmishers(team));
-                                }
-                                if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.EMPIRE)
-                                {
-                                    team.AddTacticOption(new RBMTacticAttackSplitInfantry(team));
-                                }
-                                if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.ASRAI)
-                                {
-                                    team.AddTacticOption(new RBMTacticAttackSplitArchers(team));
-                                }
-                                team.AddTacticOption(new TacticFullScaleAttack(team));
-                                team.AddTacticOption(new TacticCoordinatedRetreat(team)); */
-                            }
-                            if (team.Side == BattleSideEnum.Defender)
-                            {
-                                team.AddTacticOption(new RBMTacticDefendSplitArchers(team));
-                                team.AddTacticOption(new RBMTacticDefendSplitInfantry(team));
+        //                        /*team.ClearTacticOptions();
+        //                        if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.BRETONNIA)
+        //                        {
+        //                            team.AddTacticOption(new RBMTacticEmbolon(team));
+        //                        }
+        //                        if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.EONIR)
+        //                        {
+        //                            team.AddTacticOption(new RBMTacticAttackSplitSkirmishers(team));
+        //                        }
+        //                        if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.EMPIRE)
+        //                        {
+        //                            team.AddTacticOption(new RBMTacticAttackSplitInfantry(team));
+        //                        }
+        //                        if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.ASRAI)
+        //                        {
+        //                            team.AddTacticOption(new RBMTacticAttackSplitArchers(team));
+        //                        }
+        //                        team.AddTacticOption(new TacticFullScaleAttack(team));
+        //                        team.AddTacticOption(new TacticCoordinatedRetreat(team)); */
+        //                    }
+        //                    if (team.Side == BattleSideEnum.Defender)
+        //                    {
+        //                        team.AddTacticOption(new RBMTacticDefendSplitArchers(team));
+        //                        team.AddTacticOption(new RBMTacticDefendSplitInfantry(team));
 
-                                /* team.ClearTacticOptions();
-                                if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.ASRAI)
-                                {
-                                    team.AddTacticOption(new RBMTacticDefendSplitArchers(team));
-                                }
-                                team.AddTacticOption(new TacticDefensiveEngagement(team));
-                                team.AddTacticOption(new TacticDefensiveLine(team));
-                                if (____defenderLeaderBattleCombatant?.BasicCulture?.GetCultureCode() == CultureCode.Empire)
-                                {
-                                    team.AddTacticOption(new RBMTacticDefendSplitInfantry(team));
-                                }
-                                team.AddTacticOption(new TacticFullScaleAttack(team));
-                                team.AddTacticOption(new TacticCoordinatedRetreat(team)); */
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //                        /* team.ClearTacticOptions();
+        //                        if (____attackerLeaderBattleCombatant?.BasicCulture?.StringId == TORConstants.Cultures.ASRAI)
+        //                        {
+        //                            team.AddTacticOption(new RBMTacticDefendSplitArchers(team));
+        //                        }
+        //                        team.AddTacticOption(new TacticDefensiveEngagement(team));
+        //                        team.AddTacticOption(new TacticDefensiveLine(team));
+        //                        if (____defenderLeaderBattleCombatant?.BasicCulture?.GetCultureCode() == CultureCode.Empire)
+        //                        {
+        //                            team.AddTacticOption(new RBMTacticDefendSplitInfantry(team));
+        //                        }
+        //                        team.AddTacticOption(new TacticFullScaleAttack(team));
+        //                        team.AddTacticOption(new TacticCoordinatedRetreat(team)); */
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

@@ -30,12 +30,12 @@
     <PackageReference Include="Harmony.Extensions" Version="3.1.0.61" PrivateAssets="all" IncludeAssets="contentfiles" />
     </ItemGroup>
 
-    <ItemGroup>
+    <!--<ItemGroup>
         <Reference Include="$(GameFolder)\Modules\TOR_Core\bin\Win64_Shipping_Client\TOR_Core.dll">
             <HintPath>%(Identity)</HintPath>
             <Private>False</Private>
         </Reference>
-    </ItemGroup>
+    </ItemGroup>-->
     
     <ItemGroup>
         <Compile Remove="BattleAITweak\AiModule\AgentAi.cs" />

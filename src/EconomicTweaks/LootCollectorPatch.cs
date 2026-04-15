@@ -109,7 +109,7 @@ namespace FlavorCraft
                 int lootTimes = MBRandom.RoundRandomized(lootFactor);
                 for (int i = 0; i < lootTimes; i++)
                 {
-                    float expectedLootValue = Campaign.Current.Models.BattleRewardModel.GetExpectedLootedItemValue(troopRosterElement.Character);
+                    float expectedLootValue = Campaign.Current.Models.BattleRewardModel.GetExpectedLootedItemValueFromCasualty(Hero.MainHero, troopRosterElement.Character);
                     expectedLootValue *= MBRandom.RandomFloatRanged(0.75f, 1.25f);
                     EquipmentElement lootedItem = Campaign.Current.Models.BattleRewardModel.GetLootedItemFromTroop(troopRosterElement.Character, expectedLootValue);
                     if (lootedItem.Item != null && !lootedItem.Item.NotMerchandise && list.Count((EquipmentElement x) => x.Item.Type == lootedItem.Item.Type) == 0)

@@ -18,9 +18,9 @@ using TaleWorlds.CampaignSystem.GameState;
 using TaleWorlds.Library;
 using TaleWorlds.ScreenSystem;
 using HarmonyLib.BUTR.Extensions;
-using FlavorCraft.BannerBearerFix;
-using TaleWorlds.Localization;
-using FlavorCraft.NPCsUpgradeEquipment;
+//using FlavorCraft.BannerBearerFix;
+//using TaleWorlds.Localization;
+//using FlavorCraft.NPCsUpgradeEquipment;
 
 namespace FlavorCraft;
 
@@ -132,13 +132,13 @@ public class SubModule : MBSubModuleBase
 
         _harmony.Value.PatchAll(Assembly.GetExecutingAssembly());
 
-        if (Statics._settings != null && Statics._settings.IsAITweakEnabled)
-        {
-            _harmony.Value.Patch(
-                AccessTools.PropertySetter(typeof(Agent), "Formation"),
-                prefix: new HarmonyMethod(typeof(FlavorCraft.BannerBearerFix.BBFPatch), "Prefix")
-            );
-        }
+        //if (Statics._settings != null && Statics._settings.IsAITweakEnabled)
+        //{
+        //    _harmony.Value.Patch(
+        //        AccessTools.PropertySetter(typeof(Agent), "Formation"),
+        //        prefix: new HarmonyMethod(typeof(FlavorCraft.BannerBearerFix.BBFPatch), "Prefix")
+        //    );
+        //}
     
         _harmony.Value.TryPatch(
             AccessTools2.DeclaredMethod("TaleWorlds.CampaignSystem.CampaignBehaviors.PlayerVariablesBehavior:OnPlayerBattleEnd"),
@@ -195,10 +195,10 @@ public class SubModule : MBSubModuleBase
             base.OnMissionBehaviorInitialize(mission);
 
             // 仅在AI tweak开关开启时添加BBFMissionBehavior
-            if (Statics._settings != null && Statics._settings.IsAITweakEnabled)
-            {
-                mission.AddMissionBehavior(new BBFMissionBehavior());
-            }
+            //if (Statics._settings != null && Statics._settings.IsAITweakEnabled)
+            //{
+            //    mission.AddMissionBehavior(new BBFMissionBehavior());
+            //}
         }
     }
 

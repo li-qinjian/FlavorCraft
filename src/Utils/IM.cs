@@ -77,7 +77,7 @@ namespace FlavorCraft.Utils
 
         private static void logMessage(string message)
         {
-            Logging.Lm(message + "; GameVersion: " + Statics.GameVersion + "; ModVersion: " + Statics.ModVersion);
+            Logging.Lm(message + "; ModVersion: " + Statics.ModVersion);
         }
 
         //From Modlib---
@@ -90,7 +90,7 @@ namespace FlavorCraft.Utils
             message += "\n\n" + exception?.ToStringFull();
             if (ShowVersionsInfo)
             {
-                message += "\n\nGameVersion: " + Statics.GameVersion + "\nModVersion: " + Statics.ModVersion;
+                message += "\n\nModVersion: " + Statics.ModVersion;
             }
             logMessage(title + "\n" + message);
             MessageBox.Show(message, title);

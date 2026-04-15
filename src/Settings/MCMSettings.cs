@@ -1,5 +1,4 @@
-﻿using Bannerlord.BUTR.Shared.Helpers;
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
 using System.Collections.Generic;
@@ -16,15 +15,7 @@ namespace FlavorCraft.Settings
 
         public override string Id => Statics.InstanceID;
 
-#pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
-        private string modName = Statics.DisplayName;
-
-        public override string DisplayName => TextObjectHelper.Create(StringConstants.FlavorCraftModDisplayName + modName + " {VERSION}", new Dictionary<string, TextObject>()
-        {
-            { "VERSION", TextObjectHelper.Create(typeof(MCMSettings).Assembly.GetName().Version?.ToString(3) ?? "")! }
-        })!.ToString();
-
-#pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
+        public override string DisplayName => "FlavorCraft";
 
         public override string FolderName => Statics.ModuleFolder;
         public override string FormatType => Statics.FormatType;

@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Inventory;
 using TaleWorlds.Localization;
 using FlavorCraft.Utils;
+using Helpers;
 
 
 namespace FlavorCraft
@@ -51,8 +52,8 @@ namespace FlavorCraft
                 if (transferCommand.ToEquipmentIndex != EquipmentIndex.ExtraWeaponSlot)
                     return;
 
-                var inventoryItemTypeOfItem = InventoryManager.GetInventoryItemTypeOfItem(transferCommand.ElementToTransfer.EquipmentElement.Item);
-                if (inventoryItemTypeOfItem == InventoryItemType.Weapon || inventoryItemTypeOfItem == InventoryItemType.Shield)
+                var inventoryItemTypeOfItem = InventoryScreenHelper.GetInventoryItemTypeOfItem(transferCommand.ElementToTransfer.EquipmentElement.Item);
+                if (inventoryItemTypeOfItem == InventoryScreenHelper.InventoryItemType.Weapon || inventoryItemTypeOfItem == InventoryScreenHelper.InventoryItemType.Shield)
                     __result = true;
             }
             catch (Exception e)

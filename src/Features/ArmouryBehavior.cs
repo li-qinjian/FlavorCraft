@@ -8,7 +8,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.Inventory;
-using TaleWorlds.CampaignSystem.Overlay;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
@@ -48,7 +47,7 @@ namespace FlavorCraft
 
                         HashSet<SkillObject> relevantSkills = new HashSet<SkillObject>();
                         // 获取所有战斗装备（排除民用装备）
-                        List<Equipment> battleEquipments = (from x in characterObject.AllEquipments where !x.IsCivilian select x).ToList();
+                        List<Equipment> battleEquipments = characterObject.BattleEquipments.ToList();
                         foreach (Equipment eupipment in battleEquipments)
                         {
                             for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumEquipmentSetSlots; equipmentIndex++)
@@ -117,7 +116,7 @@ namespace FlavorCraft
             }, false, 1, false, null);
 
             //增加二级菜单
-            campaignGameStarter.AddGameMenu("swf_armoury", "{DESCRIPTION}", new OnInitDelegate(this.swf_armoury_on_init), GameOverlays.MenuOverlayType.SettlementWithCharacters, GameMenu.MenuFlags.None, null);
+            campaignGameStarter.AddGameMenu("swf_armoury", "{DESCRIPTION}", new OnInitDelegate(this.swf_armoury_on_init), GameMenu.MenuOverlayType.SettlementWithCharacters, GameMenu.MenuFlags.None, null);
 
             //增加菜单选项
             campaignGameStarter.AddGameMenuOption("swf_armoury", "swf_armoury_buy_superior", StringConstants.swf_armoury_buy_faction, delegate (MenuCallbackArgs args)
@@ -218,7 +217,7 @@ namespace FlavorCraft
                 //}
             }
 
-            InventoryManager.OpenScreenAsTrade(itemRoster, Settlement.CurrentSettlement.Town, InventoryManager.InventoryCategoryType.None, null);
+            InventoryScreenHelper.OpenScreenAsTrade(itemRoster, Settlement.CurrentSettlement.Town, InventoryScreenHelper.InventoryCategoryType.None, null);
         }
 
         public override void SyncData(IDataStore dataStore)

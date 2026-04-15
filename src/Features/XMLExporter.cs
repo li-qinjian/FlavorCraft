@@ -279,12 +279,8 @@ namespace FlavorCraft
                 s += "\t\t</upgrade_targets>\n";
             }
             s += "\t\t<Equipments>\n";
-            List<Equipment> list = (from x in character.AllEquipments
-                                    where !x.IsCivilian
-                                    select x).ToList<Equipment>();
-            List<Equipment> list2 = (from x in character.AllEquipments
-                                     where x.IsCivilian
-                                     select x).ToList<Equipment>();
+            List<Equipment> list = character.BattleEquipments.ToList();
+            List<Equipment> list2 = character.CivilianEquipments.ToList();
             foreach (Equipment equip in list)
             {
                 this.exportEquipmentRoaster(equip, ref s, false);

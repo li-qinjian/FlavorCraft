@@ -24,7 +24,7 @@ namespace FlavorCraft
             if (tradeProfit > 0)
             {
                 float skillXp = (float)tradeProfit * 0.5f;
-                Hero effectiveRoleHolder = party.MobileParty.GetEffectiveRoleHolder(SkillEffect.PerkRole.Quartermaster);
+                Hero effectiveRoleHolder = party.MobileParty.GetEffectiveRoleHolder(PartyRole.Quartermaster);
                 if (effectiveRoleHolder != null)
                 {
                     effectiveRoleHolder.AddSkillXp(DefaultSkills.Trade, skillXp);
@@ -44,11 +44,11 @@ namespace FlavorCraft
             if (Statics._settings is not null && !Statics._settings.TradingByQuartermaster)
                 return;
 
-            if (____tradeAppraiser != null && ____tradeAppraiser.PrimaryRole == SkillEffect.PerkRole.PartyLeader)
-                typeof(PerkObject).GetProperty("PrimaryRole").SetValue(____tradeAppraiser, SkillEffect.PerkRole.Quartermaster);
+            if (____tradeAppraiser != null && ____tradeAppraiser.PrimaryRole == PartyRole.PartyLeader)
+                typeof(PerkObject).GetProperty("PrimaryRole").SetValue(____tradeAppraiser, PartyRole.Quartermaster);
 
-            if (____tradeWholeSeller != null && ____tradeWholeSeller.PrimaryRole == SkillEffect.PerkRole.PartyLeader)
-                typeof(PerkObject).GetProperty("PrimaryRole").SetValue(____tradeWholeSeller, SkillEffect.PerkRole.Quartermaster);
+            if (____tradeWholeSeller != null && ____tradeWholeSeller.PrimaryRole == PartyRole.PartyLeader)
+                typeof(PerkObject).GetProperty("PrimaryRole").SetValue(____tradeWholeSeller, PartyRole.Quartermaster);
         }
     }
 

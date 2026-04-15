@@ -15,113 +15,113 @@ using TaleWorlds.CampaignSystem.Party;
 
 namespace FlavorCraft
 {
-    [HarmonyPatch]
-    public class CompanionsCampaignBehavior_Patch
-    {
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(TaleWorlds.CampaignSystem.CampaignBehaviors.CompanionsCampaignBehavior), "TryKillCompanion")]
-        public static bool TryKillCompanion_Prefix(ref HashSet<CharacterObject> ____aliveCompanionTemplates)
-        {
-            float KillChance = 0.1f;
-            if (Statics._settings is not null)
-                KillChance = Statics._settings.WondererLostRate;
+    //[HarmonyPatch]
+    //public class CompanionsCampaignBehavior_Patch
+    //{
+    //    [HarmonyPrefix]
+    //    [HarmonyPatch(typeof(TaleWorlds.CampaignSystem.CampaignBehaviors.CompanionsCampaignBehavior), "TryKillCompanion")]
+    //    public static bool TryKillCompanion_Prefix(ref HashSet<CharacterObject> ____aliveCompanionTemplates)
+    //    {
+    //        float KillChance = 0.1f;
+    //        if (Statics._settings is not null)
+    //            KillChance = Statics._settings.WondererLostRate;
 
-            if (MBRandom.RandomFloat <= KillChance && ____aliveCompanionTemplates.Count > 0)
-            {
-                CharacterObject randomElementInefficiently = ____aliveCompanionTemplates.GetRandomElementInefficiently<CharacterObject>();
-                Hero? hero = null;
-                foreach (Hero hero2 in Hero.AllAliveHeroes)
-                {
-                    if (hero2.Template == randomElementInefficiently && hero2.IsWanderer)
-                    {
-                        hero = hero2;
-                        break;
-                    }
-                }
+    //        if (MBRandom.RandomFloat <= KillChance && ____aliveCompanionTemplates.Count > 0)
+    //        {
+    //            CharacterObject randomElementInefficiently = ____aliveCompanionTemplates.GetRandomElementInefficiently<CharacterObject>();
+    //            Hero? hero = null;
+    //            foreach (Hero hero2 in Hero.AllAliveHeroes)
+    //            {
+    //                if (hero2.Template == randomElementInefficiently && hero2.IsWanderer)
+    //                {
+    //                    hero = hero2;
+    //                    break;
+    //                }
+    //            }
 
-                if (hero != null && hero.CompanionOf == null && !Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(hero) && (hero.CurrentSettlement == null || hero.CurrentSettlement != Hero.MainHero.CurrentSettlement))
-                {
-                    KillCharacterAction.ApplyByRemove(hero, false, true);
-                    if (Statics._settings is not null && Statics._settings.Debug)
-                        IM.WriteMessage(hero.Name + "离开了卡拉迪亚大陆", IM.MsgType.Notify);
-                }
-            }
+    //            if (hero != null && hero.CompanionOf == null && !Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(hero) && (hero.CurrentSettlement == null || hero.CurrentSettlement != Hero.MainHero.CurrentSettlement))
+    //            {
+    //                KillCharacterAction.ApplyByRemove(hero, false, true);
+    //                if (Statics._settings is not null && Statics._settings.Debug)
+    //                    IM.WriteMessage(hero.Name + "离开了卡拉迪亚大陆", IM.MsgType.Notify);
+    //            }
+    //        }
 
-            //don't run original
-            return false;
-        }
+    //        //don't run original
+    //        return false;
+    //    }
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(TaleWorlds.CampaignSystem.CampaignBehaviors.CompanionsCampaignBehavior), "SwapCompanions")]
-        public static bool SwapCompanions_Prefix(ref HashSet<CharacterObject> ____aliveCompanionTemplates)
-        {
-            if (Clan.PlayerClan.Companions.Count == Clan.PlayerClan.CompanionLimit)
-                return true;
+    //    [HarmonyPrefix]
+    //    [HarmonyPatch(typeof(TaleWorlds.CampaignSystem.CampaignBehaviors.CompanionsCampaignBehavior), "SwapCompanions")]
+    //    public static bool SwapCompanions_Prefix(ref HashSet<CharacterObject> ____aliveCompanionTemplates)
+    //    {
+    //        if (Clan.PlayerClan.Companions.Count == Clan.PlayerClan.CompanionLimit)
+    //            return true;
 
-            var playerSettlement = MobileParty.MainParty.CurrentSettlement;
-            if (playerSettlement != null && playerSettlement.IsTown)
-            {
-                //Kill the wanderer and spawn a new one.
-                Hero? hero = null;
-                for (int i = 0; i < playerSettlement.HeroesWithoutParty.Count; i++)
-                {
-                    var wanderer = playerSettlement.HeroesWithoutParty[i];
-                    if (wanderer != null && wanderer.Occupation == Occupation.Wanderer && wanderer.CompanionOf == null)
-                    {
-                        hero = wanderer;
-                        break;
-                    }
-                }
+    //        var playerSettlement = MobileParty.MainParty.CurrentSettlement;
+    //        if (playerSettlement != null && playerSettlement.IsTown)
+    //        {
+    //            //Kill the wanderer and spawn a new one.
+    //            Hero? hero = null;
+    //            for (int i = 0; i < playerSettlement.HeroesWithoutParty.Count; i++)
+    //            {
+    //                var wanderer = playerSettlement.HeroesWithoutParty[i];
+    //                if (wanderer != null && wanderer.Occupation == Occupation.Wanderer && wanderer.CompanionOf == null)
+    //                {
+    //                    hero = wanderer;
+    //                    break;
+    //                }
+    //            }
 
-                if (hero != null && hero.HasMet && Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(hero))
-                {
-                    CharacterObject companionTemplate = hero.Template;
-                    Settlement bornSettlement = hero.BornSettlement;
+    //            if (hero != null && hero.HasMet && Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(hero))
+    //            {
+    //                CharacterObject companionTemplate = hero.Template;
+    //                Settlement bornSettlement = hero.BornSettlement;
 
-                    KillCharacterAction.ApplyByRemove(hero, false, true);
-                    //LeaveSettlementAction.ApplyForCharacterOnly(hero);
-                    //hero.ChangeState(Hero.CharacterStates.NotSpawned);
+    //                KillCharacterAction.ApplyByRemove(hero, false, true);
+    //                //LeaveSettlementAction.ApplyForCharacterOnly(hero);
+    //                //hero.ChangeState(Hero.CharacterStates.NotSpawned);
 
-                    Hero newWanderer = HeroCreator.CreateSpecialHero(companionTemplate, bornSettlement, null, null, Campaign.Current.Models.AgeModel.HeroComesOfAge + MBRandom.RandomInt(10));
-                    AdjustEquipmentImp(newWanderer.BattleEquipment);
-                    AdjustEquipmentImp(newWanderer.CivilianEquipment);
-                    newWanderer.ChangeState(Hero.CharacterStates.Active);
-                    EnterSettlementAction.ApplyForCharacterOnly(newWanderer, Hero.MainHero.CurrentSettlement);
-                    if (Statics._settings is not null && Statics._settings.Debug)
-                        IM.WriteMessage(hero.Name + " 重新生成了.", IM.MsgType.Notify);
-                }
-            }
+    //                Hero newWanderer = HeroCreator.CreateSpecialHero(companionTemplate, bornSettlement, null, null, Campaign.Current.Models.AgeModel.HeroComesOfAge + MBRandom.RandomInt(10));
+    //                AdjustEquipmentImp(newWanderer.BattleEquipment);
+    //                AdjustEquipmentImp(newWanderer.CivilianEquipment);
+    //                newWanderer.ChangeState(Hero.CharacterStates.Active);
+    //                EnterSettlementAction.ApplyForCharacterOnly(newWanderer, Hero.MainHero.CurrentSettlement);
+    //                if (Statics._settings is not null && Statics._settings.Debug)
+    //                    IM.WriteMessage(hero.Name + " 重新生成了.", IM.MsgType.Notify);
+    //            }
+    //        }
 
-            //don't run original
-            return false;
-        }
+    //        //don't run original
+    //        return false;
+    //    }
 
-        private static void AdjustEquipmentImp(Equipment equipment)
-        {
-            ItemModifier @object = MBObjectManager.Instance.GetObject<ItemModifier>("companion_armor");
-            ItemModifier object2 = MBObjectManager.Instance.GetObject<ItemModifier>("companion_weapon");
-            ItemModifier object3 = MBObjectManager.Instance.GetObject<ItemModifier>("companion_horse");
-            for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumEquipmentSetSlots; equipmentIndex++)
-            {
-                EquipmentElement equipmentElement = equipment[equipmentIndex];
-                if (equipmentElement.Item != null)
-                {
-                    if (equipmentElement.Item.ArmorComponent != null)
-                    {
-                        equipment[equipmentIndex] = new EquipmentElement(equipmentElement.Item, @object, null, false);
-                    }
-                    else if (equipmentElement.Item.HorseComponent != null)
-                    {
-                        equipment[equipmentIndex] = new EquipmentElement(equipmentElement.Item, object3, null, false);
-                    }
-                    else if (equipmentElement.Item.WeaponComponent != null)
-                    {
-                        equipment[equipmentIndex] = new EquipmentElement(equipmentElement.Item, object2, null, false);
-                    }
-                }
-            }
-        }
-    }
+    //    private static void AdjustEquipmentImp(Equipment equipment)
+    //    {
+    //        ItemModifier @object = MBObjectManager.Instance.GetObject<ItemModifier>("companion_armor");
+    //        ItemModifier object2 = MBObjectManager.Instance.GetObject<ItemModifier>("companion_weapon");
+    //        ItemModifier object3 = MBObjectManager.Instance.GetObject<ItemModifier>("companion_horse");
+    //        for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumEquipmentSetSlots; equipmentIndex++)
+    //        {
+    //            EquipmentElement equipmentElement = equipment[equipmentIndex];
+    //            if (equipmentElement.Item != null)
+    //            {
+    //                if (equipmentElement.Item.ArmorComponent != null)
+    //                {
+    //                    equipment[equipmentIndex] = new EquipmentElement(equipmentElement.Item, @object, null, false);
+    //                }
+    //                else if (equipmentElement.Item.HorseComponent != null)
+    //                {
+    //                    equipment[equipmentIndex] = new EquipmentElement(equipmentElement.Item, object3, null, false);
+    //                }
+    //                else if (equipmentElement.Item.WeaponComponent != null)
+    //                {
+    //                    equipment[equipmentIndex] = new EquipmentElement(equipmentElement.Item, object2, null, false);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     [HarmonyPatch]
     public class PerkResetCampaignBehavior_Patch

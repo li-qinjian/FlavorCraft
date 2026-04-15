@@ -1,6 +1,4 @@
-﻿using Bannerlord.BUTR.Shared.Helpers;
-using FlavorCraft.Utils;
-using System.IO;
+﻿using FlavorCraft.Utils;
 using System.Linq;
 using TaleWorlds.Engine;
 
@@ -28,7 +26,6 @@ namespace FlavorCraft.Settings
         private static void BuildVariables()
         {
             IsMCMLoaded();
-            CheckMcmConfig();
         }
 
         private static void ChechMCMProvider()
@@ -57,21 +54,6 @@ namespace FlavorCraft.Settings
             {
                 Statics.MCMModuleLoaded = true;
                 //IM.MessageDebug("MCM Module is loaded");
-            }
-        }
-        private static void CheckMcmConfig()
-        {
-            string RootFolder = System.IO.Path.Combine(FSIOHelper.GetConfigPath(), "ModSettings/Global/" + Statics.ModuleFolder);
-            if (Directory.Exists(RootFolder))
-            {
-                Statics.MCMConfigFolder = RootFolder;
-                string fileLoc = System.IO.Path.Combine(RootFolder, Statics.ModuleFolder + ".json");
-                if (File.Exists(fileLoc))
-                {
-                    Statics.MCMConfigFileExists = true;
-                    Statics.MCMConfigFile = fileLoc;
-                    //IM.MessageDebug("MCM Module Config file found");
-                }
             }
         }
     }

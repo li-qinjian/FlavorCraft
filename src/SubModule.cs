@@ -140,9 +140,9 @@ public class SubModule : MBSubModuleBase
         //    );
         //}
     
-        _harmony.Value.TryPatch(
-            AccessTools2.DeclaredMethod("TaleWorlds.CampaignSystem.CampaignBehaviors.PlayerVariablesBehavior:OnPlayerBattleEnd"),
-            prefix: AccessTools2.DeclaredMethod(typeof(SubModule), nameof(SkipMethod)));
+        //_harmony.Value.TryPatch(
+        //    AccessTools2.DeclaredMethod("TaleWorlds.CampaignSystem.CampaignBehaviors.PlayerVariablesBehavior:OnPlayerBattleEnd"),
+        //    prefix: AccessTools2.DeclaredMethod(typeof(SubModule), nameof(SkipMethod)));
     }
 
     //(Second) Starts when the first loading screen is done.Called just before the main menu first appears, helpful if your mod depends on other things being set up during the initial load

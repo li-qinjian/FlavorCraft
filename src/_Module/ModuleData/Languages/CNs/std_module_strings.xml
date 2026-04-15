@@ -86,6 +86,10 @@
         <string id="RBM_STR_012" text="[*]我们打算利用散兵诱敌，形成局部优势局面从而逐步蚕食他们。" />
         <string id="RBM_STR_013" text="[*]我们打算让射手在侧翼构筑防线。" />
         <string id="RBM_STR_014" text="[*]我们打算率领骑兵正面冲锋，冲散敌方阵型。" />
+
+        <string id="RBM_STR_AS" text="[*]{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{?}{\?}{TROOP_NAMES_END}正在游击。"/>
+        <string id="RBM_STR_CC" text="[*]{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{?}{\?}{TROOP_NAMES_END}正在向{?IS_PLURAL}多支敌军编队{?}一支敌军编队{\?}发起冲锋。"/>
+        <string id="RBM_STR_IAF" text="[*]{?IS_GENERAL_SIDE}侧{?}{SIDE_STRING}{\?}翼包抄"/>
         
         <!-- Vanilla CNS -->
         <!--<string id="DI9P2HDG" text="堆叠锥头箭"/>

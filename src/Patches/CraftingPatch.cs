@@ -77,26 +77,26 @@ namespace FlavorCraft
             return false;
         }
 
-        [HarmonyPatch("AddItemToHistory")]
-        [HarmonyPrefix]
-        private static bool AddItemToHistory_Prefix(WeaponDesign design, List<WeaponDesign> ____craftingHistory)
-        {
-            if (____craftingHistory.Contains(design))
-            {
-                if (Statics._settings is not null && !Statics._settings.Debug)
-                    IM.WriteMessage("design 已经存在", IM.MsgType.Notify);
+        //[HarmonyPatch("AddItemToHistory")]
+        //[HarmonyPrefix]
+        //private static bool AddItemToHistory_Prefix(WeaponDesign design, List<WeaponDesign> ____craftingHistory)
+        //{
+        //    if (____craftingHistory.Contains(design))
+        //    {
+        //        if (Statics._settings is not null && !Statics._settings.Debug)
+        //            IM.WriteMessage("design 已经存在", IM.MsgType.Notify);
 
-                return false;
-            }
+        //        return false;
+        //    }
 
-            int rangeToBeRemoved = ____craftingHistory.Count - 10;
-            if (rangeToBeRemoved > 0)
-            {
-                ____craftingHistory.RemoveRange(0, rangeToBeRemoved + 1);
-            }
-            ____craftingHistory.Add(design);
-            return false;
-        }
+        //    int rangeToBeRemoved = ____craftingHistory.Count - 10;
+        //    if (rangeToBeRemoved > 0)
+        //    {
+        //        ____craftingHistory.RemoveRange(0, rangeToBeRemoved + 1);
+        //    }
+        //    ____craftingHistory.Add(design);
+        //    return false;
+        //}
 
         //[HarmonyPatch("CreateCraftedWeaponInCraftingOrderMode")]
         //[HarmonyPrefix]

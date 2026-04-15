@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <strings>
-	<string id="str_formation_ai_behavior_text.RBMBehaviorArcherSkirmish" text="{=7cnb2iEb}{TROOP_NAMES_BEGIN}{?IS_PLURAL} and {?}{\?}{TROOP_NAMES_END} are skirmishing." />
+	<string id="str_formation_ai_behavior_text.RBMBehaviorArcherSkirmish" text="{=RBM_STR_AS}{TROOP_NAMES_BEGIN}{?IS_PLURAL} and {?}{\?}{TROOP_NAMES_END} are skirmishing." />
 	<string id="str_formation_ai_behavior_text.RBMBehaviorForwardSkirmish" text="{=RBM_STR_001}{?IS_RIGHT}Right {TROOP_NAMES_BEGIN}{?IS_PLURAL} and {?}{\?}{TROOP_NAMES_END} is doing hit and run.{?}{\?}{?IS_LEFT}Left {TROOP_NAMES_BEGIN}{?IS_PLURAL} and {?}{\?}{TROOP_NAMES_END} is doing hit and run.{?}{\?}" />
 	<string id="str_formation_ai_behavior_text.RBMBehaviorInfantryAttackFlank" text="{=RBM_STR_002}Infantry is flanking." />
-	<string id="str_formation_ai_behavior_text.RBMBehaviorCavalryCharge" text="{=dyY3hkH1}{TROOP_NAMES_BEGIN}{?IS_PLURAL} and {?}{\?}{TROOP_NAMES_END} are charging at {?IS_PLURAL}different enemy formations{?}an enemy formation{\?}." />
+	<string id="str_formation_ai_behavior_text.RBMBehaviorCavalryCharge" text="{=RBM_STR_CC}{TROOP_NAMES_BEGIN}{?IS_PLURAL} and {?}{\?}{TROOP_NAMES_END} are charging at {?IS_PLURAL}different enemy formations{?}an enemy formation{\?}." />
 	<string id="str_formation_ai_behavior_text.RBMBehaviorArcherFlank" text="{=RBM_STR_003}Archers are skirmishing from flanks." />
 	<string id="str_formation_ai_behavior_text.RBMBehaviorEmbolon" text="{=RBM_STR_004}Cavalry is forming a flying wedge in front of infantry." />
 	<string id="str_formation_ai_sergeant_instruction_behavior_text.RBMBehaviorArcherSkirmish" text="{=RBM_STR_005}Skirmish" />
 	<string id="str_formation_ai_sergeant_instruction_behavior_text.RBMBehaviorForwardSkirmish" text="{=RBM_STR_006}Do hit and run on enemy." />
-	<string id="str_formation_ai_sergeant_instruction_behavior_text.RBMBehaviorInfantryAttackFlank" text="{=8UFjXbbW}Flank{?IS_GENERAL_SIDE}{?} from {SIDE_STRING} side{\?}" />
+	<string id="str_formation_ai_sergeant_instruction_behavior_text.RBMBehaviorInfantryAttackFlank" text="{=RBM_STR_IAF}Flank{?IS_GENERAL_SIDE}{?} from {SIDE_STRING} side{\?}" />
 	<string id="str_formation_ai_sergeant_instruction_behavior_text.RBMBehaviorCavalryCharge" text="{=RBM_STR_007}Charge at enemy" />
 	<string id="str_formation_ai_sergeant_instruction_behavior_text.RBMBehaviorArcherFlank" text="{=RBM_STR_008}Skirmish from {SIDE_STRING} flank" />
 	<string id="str_formation_ai_sergeant_instruction_behavior_text.RBMBehaviorEmbolon" text="{=RBM_STR_009}Form flying wedge in front of infantry"/>

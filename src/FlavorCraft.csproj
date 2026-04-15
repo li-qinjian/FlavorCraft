@@ -16,20 +16,25 @@
     <Compile Remove="BattleAITweak\**" />
     <Compile Remove="CombatTweaks\**" />
     <Compile Remove="CRR\**" />
+    <Compile Remove="EconomicTweaks\**" />
     <Compile Remove="NeatedNPCsupgradeEquipment\**" />
     <Compile Remove="showTraitExp\**" />
     <Compile Remove="TournamentTweak\**" />
     <EmbeddedResource Remove="BannerBearerFix\**" />
     <EmbeddedResource Remove="BattleAITweak\**" />
+    <EmbeddedResource Remove="butterCheat\**" />
     <EmbeddedResource Remove="CombatTweaks\**" />
     <EmbeddedResource Remove="CRR\**" />
+    <EmbeddedResource Remove="EconomicTweaks\**" />
     <EmbeddedResource Remove="NeatedNPCsupgradeEquipment\**" />
     <EmbeddedResource Remove="showTraitExp\**" />
     <EmbeddedResource Remove="TournamentTweak\**" />
     <None Remove="BannerBearerFix\**" />
     <None Remove="BattleAITweak\**" />
+    <None Remove="butterCheat\**" />
     <None Remove="CombatTweaks\**" />
     <None Remove="CRR\**" />
+    <None Remove="EconomicTweaks\**" />
     <None Remove="NeatedNPCsupgradeEquipment\**" />
     <None Remove="showTraitExp\**" />
     <None Remove="TournamentTweak\**" />
@@ -39,12 +44,12 @@
     <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="all" IncludeAssets="contentfiles" />
     <PackageReference Include="Bannerlord.BuildResources" Version="1.1.0.104" PrivateAssets="all" />
     <PackageReference Include="Bannerlord.ReferenceAssemblies" Version="1.3.15.110062" />
-    <PackageReference Include="Lib.Harmony" Version="2.2.2" IncludeAssets="compile" />
+    <PackageReference Include="Lib.Harmony" Version="2.4.2" IncludeAssets="compile" />
     <!-- <PackageReference Include="Bannerlord.BUTR.Shared" Version="3.0.0.142">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference> -->
-    <PackageReference Include="Bannerlord.MCM" Version="5.0.4" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.MCM" Version="5.11.3" IncludeAssets="compile" />
     <PackageReference Include="Harmony.Extensions" Version="3.1.0.61" PrivateAssets="all" IncludeAssets="contentfiles" />
     </ItemGroup>
 
@@ -57,11 +62,9 @@
     
     <ItemGroup>
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
-        <Compile Remove="EconomicTweaks\DefaultItemValueModelPatch.cs" />
-        <Compile Remove="EconomicTweaks\DefaultPrisonerRecruitmentCalculationModel_Patch.cs" />
-        <Compile Remove="EconomicTweaks\ItemModifier_Patch.cs" />
         <Compile Remove="Features\ArmouryItem.cs" />
         <Compile Remove="Features\LoadCAConstantsBehavior.cs" />
+        <Compile Remove="Features\XMLExporter.cs" />
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
         <Compile Remove="Patches\EquipmentElementPatch.cs" />
         <Compile Remove="Patches\PartySpeedCalculatingPatch.cs" />

@@ -17,7 +17,7 @@ using SandBox.View.Map;
 using TaleWorlds.CampaignSystem.GameState;
 using TaleWorlds.Library;
 using TaleWorlds.ScreenSystem;
-using HarmonyLib.BUTR.Extensions;
+//using HarmonyLib.BUTR.Extensions;
 //using FlavorCraft.BannerBearerFix;
 //using TaleWorlds.Localization;
 //using FlavorCraft.NPCsUpgradeEquipment;

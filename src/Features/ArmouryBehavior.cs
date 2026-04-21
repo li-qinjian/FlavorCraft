@@ -30,70 +30,70 @@ namespace FlavorCraft
 
             return flag;
         }
-        private void OnGameLoadFinished()
-        {
-            //if (Statics._settings is not null && !Statics._settings.Debug)
-            //    return;
+        //private void OnGameLoadFinished()
+        //{
+        //    //if (Statics._settings is not null && !Statics._settings.Debug)
+        //    //    return;
 
-            foreach (CharacterObject characterObject in Campaign.Current.Characters)
-            {
-                if (isRegularTroop(characterObject) && characterObject.StringId.StartsWith("tor_"))
-                {
-                    CharacterObject tor_troop = Game.Current.ObjectManager.GetObject<CharacterObject>(characterObject.StringId);
-                    if (tor_troop != null && Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(tor_troop))
-                    {
-                        string name = characterObject.Name.ToString();
-                        int tier = characterObject.Tier;
+        //    foreach (CharacterObject characterObject in Campaign.Current.Characters)
+        //    {
+        //        if (isRegularTroop(characterObject) && characterObject.StringId.StartsWith("tor_"))
+        //        {
+        //            CharacterObject tor_troop = Game.Current.ObjectManager.GetObject<CharacterObject>(characterObject.StringId);
+        //            if (tor_troop != null && Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(tor_troop))
+        //            {
+        //                string name = characterObject.Name.ToString();
+        //                int tier = characterObject.Tier;
 
-                        HashSet<SkillObject> relevantSkills = new HashSet<SkillObject>();
-                        // 获取所有战斗装备（排除民用装备）
-                        List<Equipment> battleEquipments = characterObject.BattleEquipments.ToList();
-                        foreach (Equipment eupipment in battleEquipments)
-                        {
-                            for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumEquipmentSetSlots; equipmentIndex++)
-                            {
-                                EquipmentElement itemRosterElement = eupipment[equipmentIndex];
-                                if (itemRosterElement.Item != null)
-                                {
-                                    SkillObject skill = itemRosterElement.Item.RelevantSkill;
-                                    if (skill != null)
-                                        relevantSkills.Add(skill);
-                                }
-                            }
-                        }
+        //                HashSet<SkillObject> relevantSkills = new HashSet<SkillObject>();
+        //                // 获取所有战斗装备（排除民用装备）
+        //                List<Equipment> battleEquipments = characterObject.BattleEquipments.ToList();
+        //                foreach (Equipment eupipment in battleEquipments)
+        //                {
+        //                    for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumEquipmentSetSlots; equipmentIndex++)
+        //                    {
+        //                        EquipmentElement itemRosterElement = eupipment[equipmentIndex];
+        //                        if (itemRosterElement.Item != null)
+        //                        {
+        //                            SkillObject skill = itemRosterElement.Item.RelevantSkill;
+        //                            if (skill != null)
+        //                                relevantSkills.Add(skill);
+        //                        }
+        //                    }
+        //                }
 
-                        IM.WriteMessage("update skills of :" + name, IM.MsgType.Notify);
+        //                IM.WriteMessage("update skills of :" + name, IM.MsgType.Notify);
 
-                        HashSet<SkillObject> wholeSkills = new HashSet<SkillObject>();
-                        wholeSkills.Add(DefaultSkills.OneHanded);
-                        wholeSkills.Add(DefaultSkills.TwoHanded);
-                        wholeSkills.Add(DefaultSkills.Polearm);
-                        wholeSkills.Add(DefaultSkills.Bow);
-                        wholeSkills.Add(DefaultSkills.Crossbow);
-                        wholeSkills.Add(DefaultSkills.Throwing);
-                        wholeSkills.Add(DefaultSkills.Riding);
-                        wholeSkills.Add(DefaultSkills.Athletics);
+        //                HashSet<SkillObject> wholeSkills = new HashSet<SkillObject>();
+        //                wholeSkills.Add(DefaultSkills.OneHanded);
+        //                wholeSkills.Add(DefaultSkills.TwoHanded);
+        //                wholeSkills.Add(DefaultSkills.Polearm);
+        //                wholeSkills.Add(DefaultSkills.Bow);
+        //                wholeSkills.Add(DefaultSkills.Crossbow);
+        //                wholeSkills.Add(DefaultSkills.Throwing);
+        //                wholeSkills.Add(DefaultSkills.Riding);
+        //                wholeSkills.Add(DefaultSkills.Athletics);
 
-                        MBCharacterSkills mbSkills = MBObjectManager.Instance.CreateObject<MBCharacterSkills>(characterObject.StringId);
-                        foreach (SkillObject skill in wholeSkills)
-                        {
-                            mbSkills.Skills.SetPropertyValue(skill, tier * 10);
-                        }
-                        foreach (SkillObject skill in relevantSkills)
-                        {
-                            mbSkills.Skills.SetPropertyValue(skill, tier * 30);
-                        }
+        //                MBCharacterSkills mbSkills = MBObjectManager.Instance.CreateObject<MBCharacterSkills>(characterObject.StringId);
+        //                foreach (SkillObject skill in wholeSkills)
+        //                {
+        //                    mbSkills.Skills.SetPropertyValue(skill, tier * 10);
+        //                }
+        //                foreach (SkillObject skill in relevantSkills)
+        //                {
+        //                    mbSkills.Skills.SetPropertyValue(skill, tier * 30);
+        //                }
 
-                        FieldInfo fieldSkills = characterObject.GetType().GetField("DefaultCharacterSkills", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                        if (fieldSkills != null)
-                        {
-                            fieldSkills.SetValue(characterObject, mbSkills);
-                        }
-                    }
+        //                FieldInfo fieldSkills = characterObject.GetType().GetField("DefaultCharacterSkills", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        //                if (fieldSkills != null)
+        //                {
+        //                    fieldSkills.SetValue(characterObject, mbSkills);
+        //                }
+        //            }
                     
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         private bool game_menu_browse_armory_on_condition(MenuCallbackArgs args)
         {

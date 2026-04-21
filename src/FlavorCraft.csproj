@@ -22,7 +22,6 @@
     <Compile Remove="TournamentTweak\**" />
     <EmbeddedResource Remove="BannerBearerFix\**" />
     <EmbeddedResource Remove="BattleAITweak\**" />
-    <EmbeddedResource Remove="butterCheat\**" />
     <EmbeddedResource Remove="CombatTweaks\**" />
     <EmbeddedResource Remove="CRR\**" />
     <EmbeddedResource Remove="EconomicTweaks\**" />
@@ -31,7 +30,6 @@
     <EmbeddedResource Remove="TournamentTweak\**" />
     <None Remove="BannerBearerFix\**" />
     <None Remove="BattleAITweak\**" />
-    <None Remove="butterCheat\**" />
     <None Remove="CombatTweaks\**" />
     <None Remove="CRR\**" />
     <None Remove="EconomicTweaks\**" />
@@ -66,9 +64,11 @@
         <Compile Remove="Features\LoadCAConstantsBehavior.cs" />
         <Compile Remove="Features\XMLExporter.cs" />
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
+        <Compile Remove="Patches\DefaultSkillLevelingManager.cs" />
         <Compile Remove="Patches\EquipmentElementPatch.cs" />
         <Compile Remove="Patches\PartySpeedCalculatingPatch.cs" />
         <Compile Remove="Patches\PartyUpgraderPatch.cs" />
+        <Compile Remove="Patches\XMLParserAddons.cs" />
         <Compile Remove="Utils\AgentCountCheck.cs" />
         <Compile Remove="Utils\IbsBattleCheck.cs" />
     </ItemGroup>

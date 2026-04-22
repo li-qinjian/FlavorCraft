@@ -4,20 +4,35 @@ using System;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
-using FlavorCraft.Helpers;
+//using FlavorCraft.Helpers;
 using FlavorCraft.Utils;
 using TaleWorlds.CampaignSystem.CraftingSystem;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.Smelting;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 //using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.GameComponents;
+using System.Collections.Generic;
+using System.Linq;
 //using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign.Order;
-using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
+//using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
 
 namespace FlavorCraft
 {
+    class SmeltingHelper
+    {
+        public static IEnumerable<CraftingPiece> GetNewPartsFromSmelting(ItemObject item)
+        {
+            if (item == null)
+            {
+                IM.WriteMessage("Error in Bannerlord Tweaks SmeltingHelper. Did not find" + item!.Name, IM.MsgType.Warning);
+            }
+
+            return item.WeaponDesign.UsedPieces.Select(x => x.CraftingPiece).Where(x => x != null && x.IsValid && !Campaign.Current.GetCampaignBehavior<CraftingCampaignBehavior>().IsOpened(x, item.WeaponDesign.Template));
+        }
+    }
+
     [HarmonyPatch(typeof(CraftingCampaignBehavior))]
     internal class CraftingCampaignBehavior_Patch
     {
@@ -147,86 +162,86 @@ namespace FlavorCraft
             NumCraftingMats
         } */
 
-        public static int GetMetalMax(WeaponClass weaponClass) => weaponClass switch
-        {
-            WeaponClass.Dagger => 1,
-            WeaponClass.ThrowingAxe => 1,
-            WeaponClass.ThrowingKnife => 1,
-            WeaponClass.Javelin => 1,
-            WeaponClass.Crossbow => 1,
-            WeaponClass.SmallShield => 1,
+        //public static int GetMetalMax(WeaponClass weaponClass) => weaponClass switch
+        //{
+        //    WeaponClass.Dagger => 1,
+        //    WeaponClass.ThrowingAxe => 1,
+        //    WeaponClass.ThrowingKnife => 1,
+        //    WeaponClass.Javelin => 1,
+        //    WeaponClass.Crossbow => 1,
+        //    WeaponClass.SmallShield => 1,
 
-            WeaponClass.OneHandedSword => 2,
-            WeaponClass.LowGripPolearm => 2,
-            WeaponClass.OneHandedPolearm => 2,
-            WeaponClass.TwoHandedPolearm => 2,
-            WeaponClass.OneHandedAxe => 2,
-            WeaponClass.Mace => 2,
-            WeaponClass.LargeShield => 2,
-            WeaponClass.Pick => 2,
+        //    WeaponClass.OneHandedSword => 2,
+        //    WeaponClass.LowGripPolearm => 2,
+        //    WeaponClass.OneHandedPolearm => 2,
+        //    WeaponClass.TwoHandedPolearm => 2,
+        //    WeaponClass.OneHandedAxe => 2,
+        //    WeaponClass.Mace => 2,
+        //    WeaponClass.LargeShield => 2,
+        //    WeaponClass.Pick => 2,
 
-            WeaponClass.TwoHandedAxe => 3,
-            WeaponClass.TwoHandedMace => 3,
-            WeaponClass.TwoHandedSword => 3,
-            _ => -1
-        };
+        //    WeaponClass.TwoHandedAxe => 3,
+        //    WeaponClass.TwoHandedMace => 3,
+        //    WeaponClass.TwoHandedSword => 3,
+        //    _ => -1
+        //};
 
-        [HarmonyPostfix]
-        [HarmonyPatch("GetSmeltingOutputForItem")]
-        public static void GetSmeltingOutputForItem_Postfix(ItemObject item, ref int[] __result)
-        {
-            if (Statics._settings is not null && !Statics._settings.ReduceSmeltingOutput)
-                return;
+        //[HarmonyPostfix]
+        //[HarmonyPatch("GetSmeltingOutputForItem")]
+        //public static void GetSmeltingOutputForItem_Postfix(ItemObject item, ref int[] __result)
+        //{
+        //    if (Statics._settings is not null && !Statics._settings.ReduceSmeltingOutput)
+        //        return;
 
-            if (item.IsCraftedByPlayer)
-                return;
+        //    if (item.IsCraftedByPlayer)
+        //        return;
 
-            // 计算熔炼产出中的金属材料总数（Iron2到Iron6）
-            var metalCount = 0;
-            for (var i = 0; i < __result.Length; i++)
-            {
-                if (i is >= 2 and <= 6)   //CraftingMaterials.Iron2 -> CraftingMaterials.Iron6
-                {
-                    metalCount += __result[i];
-                }
-            }
+        //    // 计算熔炼产出中的金属材料总数（Iron2到Iron6）
+        //    var metalCount = 0;
+        //    for (var i = 0; i < __result.Length; i++)
+        //    {
+        //        if (i is >= 2 and <= 6)   //CraftingMaterials.Iron2 -> CraftingMaterials.Iron6
+        //        {
+        //            metalCount += __result[i];
+        //        }
+        //    }
 
-            // 处理有效物品的熔炼产出
-            if (item != null)
-            {
-                // 获取当前武器类型允许的最大金属材料数量
-                var metalCap = GetMetalMax(item.WeaponComponent.PrimaryWeapon.WeaponClass);
+        //    // 处理有效物品的熔炼产出
+        //    if (item != null)
+        //    {
+        //        // 获取当前武器类型允许的最大金属材料数量
+        //        var metalCap = GetMetalMax(item.WeaponComponent.PrimaryWeapon.WeaponClass);
 
-                // 若金属材料超过上限，按顺序减少金属 CraftingMaterials.Iron2 -> CraftingMaterials.Iron6
-                if (metalCount > metalCap && metalCap > 0)
-                {
-                    int excess = metalCount - metalCap; // 需要减少的总量
-                    for (int i = 2; i <= 6 && excess > 0; i++)
-                    {
-                        int reduction = Math.Min(__result[i], excess); // 本次可减少的最大量
-                        __result[i] -= reduction;
-                        excess -= reduction;
-                    }
-                }
+        //        // 若金属材料超过上限，按顺序减少金属 CraftingMaterials.Iron2 -> CraftingMaterials.Iron6
+        //        if (metalCount > metalCap && metalCap > 0)
+        //        {
+        //            int excess = metalCount - metalCap; // 需要减少的总量
+        //            for (int i = 2; i <= 6 && excess > 0; i++)
+        //            {
+        //                int reduction = Math.Min(__result[i], excess); // 本次可减少的最大量
+        //                __result[i] -= reduction;
+        //                excess -= reduction;
+        //            }
+        //        }
 
-                if (item.WeaponComponent.PrimaryWeapon.WeaponClass != WeaponClass.TwoHandedPolearm)
-                {
-                    // 非双手长柄武器熔炼时不产出木材
-                    __result[(int)CraftingMaterials.Wood] = 0;
-                }
-                else if (__result[(int)CraftingMaterials.Wood] > 1)
-                {
-                    // 双手长柄武器熔炼时至多产出1单位木材
-                    __result[(int)CraftingMaterials.Wood] = 1;
-                }
+        //        if (item.WeaponComponent.PrimaryWeapon.WeaponClass != WeaponClass.TwoHandedPolearm)
+        //        {
+        //            // 非双手长柄武器熔炼时不产出木材
+        //            __result[(int)CraftingMaterials.Wood] = 0;
+        //        }
+        //        else if (__result[(int)CraftingMaterials.Wood] > 1)
+        //        {
+        //            // 双手长柄武器熔炼时至多产出1单位木材
+        //            __result[(int)CraftingMaterials.Wood] = 1;
+        //        }
 
-                //确保熔炼产出至少包含1个Iron1（基础金属）
-                if (__result[(int)CraftingMaterials.Iron1] == 0 && metalCap > 0)
-                {
-                    __result[(int)CraftingMaterials.Iron1]++;
-                }
-            }
-        }
+        //        //确保熔炼产出至少包含1个Iron1（基础金属）
+        //        if (__result[(int)CraftingMaterials.Iron1] == 0 && metalCap > 0)
+        //        {
+        //            __result[(int)CraftingMaterials.Iron1]++;
+        //        }
+        //    }
+        //}
 
         [HarmonyPostfix]
         [HarmonyPatch("GetSkillXpForRefining")]

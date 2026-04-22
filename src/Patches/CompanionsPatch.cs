@@ -130,7 +130,7 @@ namespace FlavorCraft
         [HarmonyPatch(typeof(TaleWorlds.CampaignSystem.CampaignBehaviors.PerkResetCampaignBehavior), "conversation_arena_skill_not_developed_enough_on_consequence")]
         public static void revokeWastedFocus_Postfix(ref Hero ____heroForPerkReset, SkillObject ____selectedSkillForReset)
         {
-            if (____heroForPerkReset != Hero.MainHero && ____selectedSkillForReset != null)
+            if (/*____heroForPerkReset != Hero.MainHero &&*/ ____selectedSkillForReset != null)
             {
                 int numSkills = ____heroForPerkReset.GetSkillValue(____selectedSkillForReset);
                 int numFocus = ____heroForPerkReset.HeroDeveloper.GetFocus(____selectedSkillForReset);

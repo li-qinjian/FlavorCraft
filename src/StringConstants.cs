@@ -17,52 +17,52 @@ namespace FlavorCraft {
         public const string Settings_Crafting_03 = "{=Settings_Crafting_03}Smithing Xp Multipliers";
         public const string Settings_Crafting_03_Desc = "{=Settings_Crafting_03_Desc}Enables xp multipliers to increase or decrease the xp gained per action.";
 
-        public const string Settings_Crafting_04 = "{=Settings_Crafting_04}Hot Keys";
-        public const string Settings_Crafting_04_Desc = "{=Settings_Crafting_04_Desc}Enables Hot Keys in weapon cafting process.";
+        //public const string Settings_Crafting_04 = "{=Settings_Crafting_04}Hot Keys";
+        //public const string Settings_Crafting_04_Desc = "{=Settings_Crafting_04_Desc}Enables Hot Keys in weapon cafting process.";
 
-        public const string Settings_Crafting_05 = "{=Settings_Crafting_05}SmeltingOutput";
-        public const string Settings_Crafting_05_Desc = "{=Settings_Crafting_05_Desc}Reduce SmeltingOutput of non-palyer crafting weapon.";
+        //public const string Settings_Crafting_05 = "{=Settings_Crafting_05}SmeltingOutput";
+        //public const string Settings_Crafting_05_Desc = "{=Settings_Crafting_05_Desc}Reduce SmeltingOutput of non-palyer crafting weapon.";
 
         //<!-- Sundry -->
         public const string PG_Sundry = "{=PG_Sundry}Sundry";
-        public const string Settings_Sundry_01 = "{=Settings_Sundry_01}Quartermaster do trading.";
-        public const string Settings_Sundry_01_Desc = "{=Settings_Sundry_01_Desc}Quartermaster do business and obtain experiance [Native : false].";
+        //public const string Settings_Sundry_01 = "{=Settings_Sundry_01}Quartermaster do trading.";
+        //public const string Settings_Sundry_01_Desc = "{=Settings_Sundry_01_Desc}Quartermaster do business and obtain experiance [Native : false].";
 
-        public const string Settings_Sundry_02 = "{=Settings_Sundry_02}UnblockableThrust";
-        public const string Settings_Sundry_02_Desc = "{=Settings_Sundry_02_Desc} Make thrust attack can only be blocked by shield, parrying, or chamber blocking. Normal block will cause the attack to crush through enemy.  [Native : false].";
+        //public const string Settings_Sundry_02 = "{=Settings_Sundry_02}UnblockableThrust";
+        //public const string Settings_Sundry_02_Desc = "{=Settings_Sundry_02_Desc} Make thrust attack can only be blocked by shield, parrying, or chamber blocking. Normal block will cause the attack to crush through enemy.  [Native : false].";
 
         public const string Settings_Sundry_03 = "{=Settings_Sundry_03}No night battle.";
         public const string Settings_Sundry_03_Desc = "{=Settings_Sundry_03_Desc}No night battle [Native : false].";
 
-        public const string Settings_Sundry_04 = "{=Settings_Sundry_04}Wanderer lost rate";
-        public const string Settings_Sundry_04_Desc = "{=Settings_Sundry_04_Desc}Wanderer lost rate[Native: 0.1].";
+        //public const string Settings_Sundry_04 = "{=Settings_Sundry_04}Wanderer lost rate";
+        //public const string Settings_Sundry_04_Desc = "{=Settings_Sundry_04_Desc}Wanderer lost rate[Native: 0.1].";
 
-        public const string Settings_Sundry_05 = "{=Settings_Sundry_05}Extra Companion";
-        public const string Settings_Sundry_05_Desc = "{=Settings_Sundry_05_Desc}Extra Companion from tire[Native: 0].";
+        //public const string Settings_Sundry_05 = "{=Settings_Sundry_05}Extra Companion";
+        //public const string Settings_Sundry_05_Desc = "{=Settings_Sundry_05_Desc}Extra Companion from tire[Native: 0].";
 
         public const string Settings_Sundry_06 = "{=Settings_Sundry_06}Browse Armory";
         public const string Settings_Sundry_06_Desc = "{=Settings_Sundry_06_Desc}Item prefix.";
 
-        public const string Settings_Sundry_07 = "{=Settings_Sundry_07}CRR.";
-        public const string Settings_Sundry_07_Desc = "{=Settings_Sundry_07_Desc}CRR_Desc [Native : false].";
+        //public const string Settings_Sundry_07 = "{=Settings_Sundry_07}CRR.";
+        //public const string Settings_Sundry_07_Desc = "{=Settings_Sundry_07_Desc}CRR_Desc [Native : false].";
 
         //<!-- Messages -->
-        public const string CRR_MSG_1 = "{=CRR_MSG_1}MGS_1.";
+        //public const string CRR_MSG_1 = "{=CRR_MSG_1}MGS_1.";
 
         //<!-- AI -->
-        public const string PG_AI = "{=PG_AI}AI";
-        public const string Settings_AI_01 = "{=Settings_AI_01}Seige AI.";
-        public const string Settings_AI_01_Desc = "{=Settings_AI_01_Desc}Modify Seige AI [Native : false].";
-        public const string Settings_AI_02 = "{=Settings_AI_02}Retreat ratio.";
-        public const string Settings_AI_02_Desc = "{=Settings_AI_02_Desc}Retreat ratio [Native : 0.5].";
+        //public const string PG_AI = "{=PG_AI}AI";
+        //public const string Settings_AI_01 = "{=Settings_AI_01}Seige AI.";
+        //public const string Settings_AI_01_Desc = "{=Settings_AI_01_Desc}Modify Seige AI [Native : false].";
+        //public const string Settings_AI_02 = "{=Settings_AI_02}Retreat ratio.";
+        //public const string Settings_AI_02_Desc = "{=Settings_AI_02_Desc}Retreat ratio [Native : 0.5].";
 
-        public const string Settings_AI_03 = "{=Settings_AI_03}BBF.";
-        public const string Settings_AI_03_Desc = "{=Settings_AI_03_Desc}Enable Banner Bearer Fix[Native : false].";
+        //public const string Settings_AI_03 = "{=Settings_AI_03}BBF.";
+        //public const string Settings_AI_03_Desc = "{=Settings_AI_03_Desc}Enable Banner Bearer Fix[Native : false].";
 
         //<!-- Messages -->
         public const string FC_MSG_1 = "{=FC_MSG_1}ExtraWeaponSlot already has banner, remove it first.";
-        public const string FC_MSG_2 = "{=FC_MSG_2}Attacker Force Casualty Rate: {RATE}";
-        public const string FC_MSG_3 = "{=FC_MSG_3}The attacking soldiers have suffered too many.";
+        //public const string FC_MSG_2 = "{=FC_MSG_2}Attacker Force Casualty Rate: {RATE}";
+        //public const string FC_MSG_3 = "{=FC_MSG_3}The attacking soldiers have suffered too many.";
 
         //<!-- Muse's Armory -->
         public const string swf_armoury_enter = "{=swf_armoury_enter}Visit the Smithing Guild";
@@ -71,38 +71,38 @@ namespace FlavorCraft {
         public const string swf_armoury_buy_faction = "{=swf_armoury_buy_faction}Browse the faction armory";
         public const string swf_armoury_leave = "{=swf_armoury_leave}Return to town";
 
-        public const string RBM_TOU_003 = "{=RBM_TOU_003}Congratulations, you successfully rolled for {Name} item modifier, rolled:{Roll} needed: {Need}";
-        public const string RBM_TOU_004 = "{=RBM_TOU_004}You missed roll for {Name} item modifier, rolled:{Roll} needed: {Need}";
+        //public const string RBM_TOU_003 = "{=RBM_TOU_003}Congratulations, you successfully rolled for {Name} item modifier, rolled:{Roll} needed: {Need}";
+        //public const string RBM_TOU_004 = "{=RBM_TOU_004}You missed roll for {Name} item modifier, rolled:{Roll} needed: {Need}";
 
         //Crafting Hotkeys
-        public const string ConfigDefaultHotkey = "F";
+        //public const string ConfigDefaultHotkey = "F";
 
-        public const string ConfigDefaultPreviousCharacterHotkey = "A";
+        //public const string ConfigDefaultPreviousCharacterHotkey = "A";
 
-        public const string ConfigDefaultNextCharacterHotkey = "D";
+        //public const string ConfigDefaultNextCharacterHotkey = "D";
 
-        public const string ConfigSmithingSmelt = "SmithingSmelt";
+        //public const string ConfigSmithingSmelt = "SmithingSmelt";
 
-        public const string ConfigSmithingSmeltx5 = "SmithingSmeltx5";
+        //public const string ConfigSmithingSmeltx5 = "SmithingSmeltx5";
 
-        public const string ConfigSmithingSmeltxInfinity = "SmithingSmeltxInfinity";
+        //public const string ConfigSmithingSmeltxInfinity = "SmithingSmeltxInfinity";
 
-        public const string ConfigSmithingForge = "SmithingForge";
+        //public const string ConfigSmithingForge = "SmithingForge";
 
-        public const string ConfigSmithingForgex5 = "SmithingForgex5";
+        //public const string ConfigSmithingForgex5 = "SmithingForgex5";
 
-        public const string ConfigSmithingForgexInfinity = "SmithingForgexInfinity";
+        //public const string ConfigSmithingForgexInfinity = "SmithingForgexInfinity";
 
-        public const string ConfigSmithingForgeSkipWeaponNamingAttribute = "skipWeaponNaming";
+        //public const string ConfigSmithingForgeSkipWeaponNamingAttribute = "skipWeaponNaming";
 
-        public const string ConfigSmithingRefine = "SmithingRefine";
+        //public const string ConfigSmithingRefine = "SmithingRefine";
 
-        public const string ConfigSmithingRefinex5 = "SmithingRefinex5";
+        //public const string ConfigSmithingRefinex5 = "SmithingRefinex5";
 
-        public const string ConfigSmithingRefinexInfinity = "SmithingRefinexInfinity";
+        //public const string ConfigSmithingRefinexInfinity = "SmithingRefinexInfinity";
 
-        public const string ConfigSmithingPreviousCharacter = "SmithingPreviousCharacter";
+        //public const string ConfigSmithingPreviousCharacter = "SmithingPreviousCharacter";
 
-        public const string ConfigSmithingNextCharacter = "SmithingNextCharacter";
+        //public const string ConfigSmithingNextCharacter = "SmithingNextCharacter";
     }
 }

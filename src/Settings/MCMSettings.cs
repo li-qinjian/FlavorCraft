@@ -68,61 +68,61 @@ namespace FlavorCraft.Settings
         [SettingPropertyGroup(StringConstants.PG_Crafting)]
         public bool SmithingXpModifiers { get; set; } = false;
 
-        [SettingPropertyBool(StringConstants.Settings_Crafting_04, IsToggle = false, Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Crafting_04_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Crafting)]
-        public bool EnableCraftingHotKeys { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_Crafting_04, IsToggle = false, Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Crafting_04_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_Crafting)]
+        //public bool EnableCraftingHotKeys { get; set; } = false;
 
-        [SettingPropertyBool(StringConstants.Settings_Crafting_05, IsToggle = false, Order = 4, RequireRestart = false, HintText = StringConstants.Settings_Crafting_05_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Crafting)]
-        public bool ReduceSmeltingOutput { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_Crafting_05, IsToggle = false, Order = 4, RequireRestart = false, HintText = StringConstants.Settings_Crafting_05_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_Crafting)]
+        //public bool ReduceSmeltingOutput { get; set; } = false;
 
         #endregion Crafting
 
         //~ Sundry Options
         #region Sundry Options
 
-        [SettingPropertyBool(StringConstants.Settings_Sundry_01, Order = 0, RequireRestart = false, HintText = StringConstants.Settings_Sundry_01_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Sundry)]
-        public bool TradingByQuartermaster { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_Sundry_01, Order = 0, RequireRestart = false, HintText = StringConstants.Settings_Sundry_01_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_Sundry)]
+        //public bool TradingByQuartermaster { get; set; } = false;
 
-        [SettingPropertyBool(StringConstants.Settings_Sundry_02, Order = 1, RequireRestart = false, HintText = StringConstants.Settings_Sundry_02_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Sundry)]
-        public bool EnableUnblockableThrust { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_Sundry_02, Order = 1, RequireRestart = false, HintText = StringConstants.Settings_Sundry_02_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_Sundry)]
+        //public bool EnableUnblockableThrust { get; set; } = false;
 
         [SettingPropertyBool(StringConstants.Settings_Sundry_03, Order = 2, RequireRestart = false, HintText = StringConstants.Settings_Sundry_03_Desc)]
         [SettingPropertyGroup(StringConstants.PG_Sundry)]
         public bool NoNightBattle { get; set; } = false;
 
-        [SettingPropertyFloatingInteger(StringConstants.Settings_Sundry_04, 0.1f, 1.0f, "0.00", Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Sundry_04_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Sundry)]
-        public float WondererLostRate { get; set; } = 0.1f;
+        //[SettingPropertyFloatingInteger(StringConstants.Settings_Sundry_04, 0.1f, 1.0f, "0.00", Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Sundry_04_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_Sundry)]
+        //public float WondererLostRate { get; set; } = 0.1f;
 
-        [SettingPropertyBool(StringConstants.Settings_Sundry_05, Order = 4, RequireRestart = false, HintText = StringConstants.Settings_Sundry_05_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Sundry)]
-        public bool ShareLoots { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_Sundry_05, Order = 4, RequireRestart = false, HintText = StringConstants.Settings_Sundry_05_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_Sundry)]
+        //public bool ShareLoots { get; set; } = false;
 
         [SettingProperty(StringConstants.Settings_Sundry_06, Order = 5, RequireRestart = false, HintText = StringConstants.Settings_Sundry_06_Desc)]
         [SettingPropertyGroup(StringConstants.PG_Sundry)]
         public string ItemPrefix { get; set; } = "cla_";
 
-        [SettingPropertyBool(StringConstants.Settings_Sundry_07, Order = 6, RequireRestart = false, HintText = StringConstants.Settings_Sundry_07_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Sundry)]
-        public bool EnableCRR { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_Sundry_07, Order = 6, RequireRestart = false, HintText = StringConstants.Settings_Sundry_07_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_Sundry)]
+        //public bool EnableCRR { get; set; } = false;
 
         #endregion Sundry Options
 
         //~ AI behaviours
-        [SettingPropertyBool(StringConstants.Settings_AI_01, Order = 0, RequireRestart = false, HintText = StringConstants.Settings_AI_01_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_AI)]
-        public bool IsAITweakEnabled { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_AI_01, Order = 0, RequireRestart = false, HintText = StringConstants.Settings_AI_01_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_AI)]
+        //public bool IsAITweakEnabled { get; set; } = false;
 
-        [SettingPropertyFloatingInteger(StringConstants.Settings_AI_02, 0.1f, 1.0f, "0.00", Order = 1, RequireRestart = false, HintText = StringConstants.Settings_AI_02_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_AI)]
-        public float TroopPanicThreshold { get; set; } = 0.5f;
+        //[SettingPropertyFloatingInteger(StringConstants.Settings_AI_02, 0.1f, 1.0f, "0.00", Order = 1, RequireRestart = false, HintText = StringConstants.Settings_AI_02_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_AI)]
+        //public float TroopPanicThreshold { get; set; } = 0.5f;
 
-        [SettingPropertyBool(StringConstants.Settings_AI_03, Order = 2, RequireRestart = false, HintText = StringConstants.Settings_AI_03_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_AI)]
-        public bool EnableBBF { get; set; } = false;
+        //[SettingPropertyBool(StringConstants.Settings_AI_03, Order = 2, RequireRestart = false, HintText = StringConstants.Settings_AI_03_Desc)]
+        //[SettingPropertyGroup(StringConstants.PG_AI)]
+        //public bool EnableBBF { get; set; } = false;
 
         //~ Presets
 
@@ -140,24 +140,24 @@ namespace FlavorCraft.Settings
                 HideLockedWeaponsWhenSmelting = false,
                 AutoLearnSmeltedParts = false,
                 SmithingXpModifiers = false,
-                EnableCraftingHotKeys = false,
-                ReduceSmeltingOutput = false,
+                //EnableCraftingHotKeys = false,
+                //ReduceSmeltingOutput = false,
 
-                EnableUnblockableThrust = false,
-                TradingByQuartermaster = false,
+                //EnableUnblockableThrust = false,
+                //TradingByQuartermaster = false,
 
-                ShareLoots = false,
+                //ShareLoots = false,
 
                 //AI.
                 //DisableClanPartyJoinArmies = false,
                 //UpgradingTroopsConsumingHorses = false,
-                IsAITweakEnabled = false,
-                TroopPanicThreshold = 0.5f,
-                EnableBBF = false,
+                //IsAITweakEnabled = false,
+                //TroopPanicThreshold = 0.5f,
+                //EnableBBF = false,
                 NoNightBattle = false,
 
                 //Wanderer
-                WondererLostRate = 0.1f,
+                //WondererLostRate = 0.1f,
 
                 ItemPrefix = "cla_",
             }); ;
@@ -167,24 +167,24 @@ namespace FlavorCraft.Settings
                 HideLockedWeaponsWhenSmelting = true,
                 AutoLearnSmeltedParts = true,
                 SmithingXpModifiers = true,
-                EnableCraftingHotKeys = true,
-                ReduceSmeltingOutput = true,
+                //EnableCraftingHotKeys = true,
+                //ReduceSmeltingOutput = true,
 
-                EnableUnblockableThrust = true,
-                TradingByQuartermaster = true,
+                //EnableUnblockableThrust = true,
+                //TradingByQuartermaster = true,
 
-                ShareLoots = true,
+                //ShareLoots = true,
 
                 //AI.
                 //DisableClanPartyJoinArmies = true,
                 //UpgradingTroopsConsumingHorses = true,
-                IsAITweakEnabled = true,
-                EnableBBF = true,
-                TroopPanicThreshold = 0.5f,
+                //IsAITweakEnabled = true,
+                //EnableBBF = true,
+                //TroopPanicThreshold = 0.5f,
                 NoNightBattle = true,
 
                 //Wanderer
-                WondererLostRate = 0.1f,
+                //WondererLostRate = 0.1f,
 
                 ItemPrefix = "cla_",
                 //TroopPanicThreshold = 0.8f,

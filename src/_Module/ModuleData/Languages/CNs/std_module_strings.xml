@@ -68,11 +68,11 @@
         <string id="OKUTPdaa" text="等级." />-->
 
         <!-- Tournament Module Strings -->
-        <string id="RBM_TOU_003" text="恭喜你，奖品前缀[{Name}]获取成功！掷骰:{Roll} 需求:{Need}" />
-        <string id="RBM_TOU_004" text="很遗憾，奖品前缀[{Name}]获取失败。掷骰:{Roll} 需求:{Need}" />
+        <!--<string id="RBM_TOU_003" text="恭喜你，奖品前缀[{Name}]获取成功！掷骰:{Roll} 需求:{Need}" />
+        <string id="RBM_TOU_004" text="很遗憾，奖品前缀[{Name}]获取失败。掷骰:{Roll} 需求:{Need}" />-->
 
         <!-- module_strings.xml Strings -->
-        <string id="RBM_STR_001" text="[*]{?IS_RIGHT}右翼{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{TROOP_NAMES_END}{?}{\?}正在执行风筝战术。{?}{\?}{?IS_LEFT}左翼{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{TROOP_NAMES_END}{?}{\?}正在执行风筝战术。{?}{\?}" />
+        <!--<string id="RBM_STR_001" text="[*]{?IS_RIGHT}右翼{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{TROOP_NAMES_END}{?}{\?}正在执行风筝战术。{?}{\?}{?IS_LEFT}左翼{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{TROOP_NAMES_END}{?}{\?}正在执行风筝战术。{?}{\?}" />
         <string id="RBM_STR_002" text="[*]步兵正在夹击。" />
         <string id="RBM_STR_003" text="[*]射手正在从侧翼发起游击。" />
         <string id="RBM_STR_004" text="[*]骑兵正于步兵前方构建楔形阵。" />
@@ -85,7 +85,7 @@
         <string id="RBM_STR_011" text="[*]我们打算分割步兵阵线，对其进行多点进攻。" />
         <string id="RBM_STR_012" text="[*]我们打算利用散兵诱敌，形成局部优势局面从而逐步蚕食他们。" />
         <string id="RBM_STR_013" text="[*]我们打算让射手在侧翼构筑防线。" />
-        <string id="RBM_STR_014" text="[*]我们打算率领骑兵正面冲锋，冲散敌方阵型。" />
+        <string id="RBM_STR_014" text="[*]我们打算率领骑兵正面冲锋，冲散敌方阵型。" />-->
 
         <string id="RBM_STR_AS" text="[*]{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{?}{\?}{TROOP_NAMES_END}正在游击。"/>
         <string id="RBM_STR_CC" text="[*]{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{?}{\?}{TROOP_NAMES_END}正在向{?IS_PLURAL}多支敌军编队{?}一支敌军编队{\?}发起冲锋。"/>

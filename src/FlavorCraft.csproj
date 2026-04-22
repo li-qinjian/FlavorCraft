@@ -13,7 +13,7 @@
 
     <ItemGroup>
     <Compile Remove="BannerBearerFix\**" />
-    <Compile Remove="BattleAITweak\**" />
+    <Compile Remove="BattleAITweak\AiModule\**" />
     <Compile Remove="CombatTweaks\**" />
     <Compile Remove="CraftingHotKeys\**" />
     <Compile Remove="CRR\**" />
@@ -23,7 +23,7 @@
     <Compile Remove="showTraitExp\**" />
     <Compile Remove="TournamentTweak\**" />
     <EmbeddedResource Remove="BannerBearerFix\**" />
-    <EmbeddedResource Remove="BattleAITweak\**" />
+    <EmbeddedResource Remove="BattleAITweak\AiModule\**" />
     <EmbeddedResource Remove="CombatTweaks\**" />
     <EmbeddedResource Remove="CraftingHotKeys\**" />
     <EmbeddedResource Remove="CRR\**" />
@@ -33,7 +33,7 @@
     <EmbeddedResource Remove="showTraitExp\**" />
     <EmbeddedResource Remove="TournamentTweak\**" />
     <None Remove="BannerBearerFix\**" />
-    <None Remove="BattleAITweak\**" />
+    <None Remove="BattleAITweak\AiModule\**" />
     <None Remove="CombatTweaks\**" />
     <None Remove="CraftingHotKeys\**" />
     <None Remove="CRR\**" />
@@ -65,6 +65,12 @@
     </ItemGroup>-->
     
     <ItemGroup>
+        <Compile Remove="BattleAITweak\CommonAIComponentPatch.cs" />
+        <Compile Remove="BattleAITweak\GeneralsAndCaptainsAssignmentLogicPatch.cs" />
+        <Compile Remove="BattleAITweak\MapEventSidePatch.cs" />
+        <Compile Remove="BattleAITweak\RBMAIPatcher.cs" />
+        <Compile Remove="BattleAITweak\TacticBreachWallsPatch.cs" />
+        <Compile Remove="BattleAITweak\Utilities.cs" />
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
         <Compile Remove="Features\ArmouryItem.cs" />
         <Compile Remove="Features\LoadCAConstantsBehavior.cs" />

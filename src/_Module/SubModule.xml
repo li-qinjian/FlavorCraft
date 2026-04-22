@@ -50,8 +50,15 @@
                 <GameType value = "CampaignStoryMode" />
             </IncludedGameTypes>
         </XmlNode> -->
-        <XmlNode>
+        <!-- <XmlNode>
             <XmlName id="GameText" path="RBMAI_module_strings"/>
+        </XmlNode> -->
+        <XmlNode>
+            <XmlName id="NPCCharacters" path="tor_charactertemplates" />
+            <IncludedGameTypes>
+                <GameType value="Campaign" />
+                <GameType value="CampaignStoryMode" />
+            </IncludedGameTypes>
         </XmlNode>
     </Xmls>
 </Module>

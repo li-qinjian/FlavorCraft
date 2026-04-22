@@ -34,8 +34,8 @@ namespace FlavorCraft {
         public const string Settings_Sundry_03 = "{=Settings_Sundry_03}No night battle.";
         public const string Settings_Sundry_03_Desc = "{=Settings_Sundry_03_Desc}No night battle [Native : false].";
 
-        //public const string Settings_Sundry_04 = "{=Settings_Sundry_04}Wanderer lost rate";
-        //public const string Settings_Sundry_04_Desc = "{=Settings_Sundry_04_Desc}Wanderer lost rate[Native: 0.1].";
+        public const string Settings_Sundry_04 = "{=Settings_Sundry_04}Wanderer lost rate";
+        public const string Settings_Sundry_04_Desc = "{=Settings_Sundry_04_Desc}Wanderer lost rate[Native: 0.1].";
 
         //public const string Settings_Sundry_05 = "{=Settings_Sundry_05}Extra Companion";
         //public const string Settings_Sundry_05_Desc = "{=Settings_Sundry_05_Desc}Extra Companion from tire[Native: 0].";

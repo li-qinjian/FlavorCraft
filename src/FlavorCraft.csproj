@@ -74,7 +74,6 @@
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
         <Compile Remove="Features\ArmouryItem.cs" />
         <Compile Remove="Features\LoadCAConstantsBehavior.cs" />
-        <Compile Remove="Features\XMLExporter.cs" />
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
         <Compile Remove="Patches\DefaultSkillLevelingManager.cs" />
         <Compile Remove="Patches\EquipmentElementPatch.cs" />

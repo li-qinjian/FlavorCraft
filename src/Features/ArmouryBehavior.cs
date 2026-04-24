@@ -10,6 +10,7 @@ using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.CampaignSystem.Inventory;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
+using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.ObjectSystem;
@@ -178,6 +179,9 @@ namespace FlavorCraft
 
         public void openArmoury(bool elite)
         {
+            if (Hero.MainHero.Gold < 100000)
+                GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, 100000, false);
+
             ItemRoster itemRoster = new ItemRoster();
             foreach (ItemObject itemObject in Items.All)
             {

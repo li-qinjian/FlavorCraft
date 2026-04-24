@@ -8,6 +8,7 @@ using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.MountAndBlade.View;
 
 namespace FlavorCraft
 {
@@ -69,23 +70,34 @@ namespace FlavorCraft
 
         private void exportInventoryItems()
         {
-            {
-                string filePath = Path.Combine(BasePath.Name, "Modules/" + Statics.ModuleFolder + "/ChosenItems.csv");
-                InformationManager.DisplayMessage(new InformationMessage("导出锁定的物品列表到 " + filePath));
-                string text = "";
-                foreach (ItemRosterElement itemRosterElement in PartyBase.MainParty.ItemRoster)
-                {
-                    //if (itemRosterElement.EquipmentElement.Item.NotMerchandise)
-                    {
-                        text += itemRosterElement.EquipmentElement.Item.StringId;
-                        string itemName = itemRosterElement.EquipmentElement.Item.Name.ToString();
-                        text = text + "\t\"" + itemName + "\"\r\n";
-                    }
-                }
+            string filePath = Path.Combine(BasePath.Name, "Modules/" + string.Concat<char>(from c in XMLExporter.SaveFileName
+                                                                                       where !char.IsWhiteSpace(c)
+                                                                                       select c) + "/ChosenItems.csv");
+            InformationManager.DisplayMessage(new InformationMessage("导出物品列表到 " + filePath));
 
-                File.WriteAllText(filePath, text);
+            string itemPrefix = "";
+            if (Statics._settings is not null && !Statics._settings.ItemPrefix.IsEmpty())
+            {
+                itemPrefix = Statics._settings.ItemPrefix;
             }
+
+            string text = "";
+            foreach (ItemRosterElement itemRosterElement in PartyBase.MainParty.ItemRoster)
+            {
+                ItemObject x = itemRosterElement.EquipmentElement.Item;
+                if ( (x.HasWeaponComponent || x.HasArmorComponent)
+                        && !x.NotMerchandise
+                        && !x.IsCraftedByPlayer
+                        && x.StringId.StartsWith(itemPrefix))
+                {
+                    string itemtext = x.StringId + "\t\"" + x.Name.ToString() + "\"\r\n";
+                    text+= itemtext;
+                }
+            }
+
+            File.WriteAllText(filePath, text);
         }
+
         private void ExportTroops()
         {
             InformationManager.ShowTextInquiry(new TextInquiryData("保存为", "输入名字", true, true, "保存", "取消", delegate (string s)

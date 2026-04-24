@@ -9,14 +9,14 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 //using FlavorCraft.CraftingHotKeys;
-using System.Collections.Generic;
-using System.IO;
-using TaleWorlds.InputSystem;
-using SandBox.GauntletUI;
-using SandBox.View.Map;
-using TaleWorlds.CampaignSystem.GameState;
-using TaleWorlds.Library;
-using TaleWorlds.ScreenSystem;
+//using System.Collections.Generic;
+//using System.IO;
+//using TaleWorlds.InputSystem;
+//using SandBox.GauntletUI;
+//using SandBox.View.Map;
+//using TaleWorlds.CampaignSystem.GameState;
+//using TaleWorlds.Library;
+//using TaleWorlds.ScreenSystem;
 //using HarmonyLib.BUTR.Extensions;
 //using FlavorCraft.BannerBearerFix;
 //using TaleWorlds.Localization;
@@ -169,7 +169,7 @@ public class SubModule : MBSubModuleBase
         if (game.GameType is Campaign && gameStarter is CampaignGameStarter campaignGameStarter)
         {
             campaignGameStarter.AddBehavior(new ArmouryBehavior());
-            //campaignGameStarter.AddBehavior(new XMLExporter());
+            campaignGameStarter.AddBehavior(new XMLExporter());
             //campaignGameStarter.AddBehavior(new NewUpgradeEquipmentCampaignBehaivor());
         }
 

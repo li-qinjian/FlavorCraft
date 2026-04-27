@@ -71,8 +71,8 @@ namespace FlavorCraft {
         public const string swf_armoury_buy_faction = "{=swf_armoury_buy_faction}Browse the faction armory";
         public const string swf_armoury_leave = "{=swf_armoury_leave}Return to town";
 
-        //public const string RBM_TOU_003 = "{=RBM_TOU_003}Congratulations, you successfully rolled for {Name} item modifier, rolled:{Roll} needed: {Need}";
-        //public const string RBM_TOU_004 = "{=RBM_TOU_004}You missed roll for {Name} item modifier, rolled:{Roll} needed: {Need}";
+        public const string RBM_TOU_003 = "{=RBM_TOU_003}Congratulations, you successfully rolled for {Name} item modifier, rolled:{Roll} needed: {Need}";
+        public const string RBM_TOU_004 = "{=RBM_TOU_004}You missed roll for {Name} item modifier, rolled:{Roll} needed: {Need}";
 
         //Crafting Hotkeys
         public const string ConfigDefaultHotkey = "F";

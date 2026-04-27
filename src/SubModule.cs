@@ -8,15 +8,15 @@ using TaleWorlds.CampaignSystem;
 //using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
-//using FlavorCraft.CraftingHotKeys;
-//using System.Collections.Generic;
-//using System.IO;
-//using TaleWorlds.InputSystem;
-//using SandBox.GauntletUI;
-//using SandBox.View.Map;
-//using TaleWorlds.CampaignSystem.GameState;
-//using TaleWorlds.Library;
-//using TaleWorlds.ScreenSystem;
+using FlavorCraft.CraftingHotKeys;
+using System.Collections.Generic;
+using System.IO;
+using TaleWorlds.InputSystem;
+using SandBox.GauntletUI;
+using SandBox.View.Map;
+using TaleWorlds.CampaignSystem.GameState;
+using TaleWorlds.Library;
+using TaleWorlds.ScreenSystem;
 //using HarmonyLib.BUTR.Extensions;
 //using FlavorCraft.BannerBearerFix;
 //using TaleWorlds.Localization;
@@ -30,77 +30,77 @@ public class SubModule : MBSubModuleBase
 
     private readonly Lazy<Harmony> _harmony = new(() => new Harmony(HarmonyId));
 
-    //private void RegisterHotkey(string name, string defaultHotkey, bool ctrl = false, bool shift = false, bool alt = false, List<Tuple<string, bool>> ?optionals = null)
-    //{
-    //    InputKey hotkey;
-    //    if (!Enum.TryParse<InputKey>(defaultHotkey, out hotkey))
-    //    {
-    //        throw new InvalidDataException("Unable to parse default hotkey value!");
-    //    }
-    //    HotKeysData.Inputs[name] = new HotKeysDataInput
-    //    {
-    //        Hotkey = hotkey,
-    //        useCtrlModifier = ctrl,
-    //        useShiftModifier = shift,
-    //        useAltModifier = alt
-    //    };
-    //    if (optionals != null)
-    //    {
-    //        foreach (Tuple<string, bool> tuple in optionals)
-    //        {
-    //            HotKeysData.Inputs[name].Optionals[tuple.Item1] = tuple.Item2;
-    //        }
-    //    }
-    //}
+    private void RegisterHotkey(string name, string defaultHotkey, bool ctrl = false, bool shift = false, bool alt = false, List<Tuple<string, bool>>? optionals = null)
+    {
+        InputKey hotkey;
+        if (!Enum.TryParse<InputKey>(defaultHotkey, out hotkey))
+        {
+            throw new InvalidDataException("Unable to parse default hotkey value!");
+        }
+        HotKeysData.Inputs[name] = new HotKeysDataInput
+        {
+            Hotkey = hotkey,
+            useCtrlModifier = ctrl,
+            useShiftModifier = shift,
+            useAltModifier = alt
+        };
+        if (optionals != null)
+        {
+            foreach (Tuple<string, bool> tuple in optionals)
+            {
+                HotKeysData.Inputs[name].Optionals[tuple.Item1] = tuple.Item2;
+            }
+        }
+    }
 
-    //private void RegisterHotKeys()
-    //{
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingSmelt, StringConstants.ConfigDefaultHotkey, false, false, false);
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingSmeltx5, StringConstants.ConfigDefaultHotkey, false, true, false);
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingSmeltxInfinity, StringConstants.ConfigDefaultHotkey, true, true, false);
+    private void RegisterHotKeys()
+    {
+        this.RegisterHotkey(StringConstants.ConfigSmithingSmelt, StringConstants.ConfigDefaultHotkey, false, false, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingSmeltx5, StringConstants.ConfigDefaultHotkey, false, true, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingSmeltxInfinity, StringConstants.ConfigDefaultHotkey, true, true, false);
 
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingForge, StringConstants.ConfigDefaultHotkey, false, false, false, new List<Tuple<string, bool>>
-    //        {
-    //            new Tuple<string, bool>(StringConstants.ConfigSmithingForgeSkipWeaponNamingAttribute, true)
-    //        });
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingForgex5, StringConstants.ConfigDefaultHotkey, false, true, false);
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingForgexInfinity, StringConstants.ConfigDefaultHotkey, true, true, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingForge, StringConstants.ConfigDefaultHotkey, false, false, false, new List<Tuple<string, bool>>
+            {
+                new Tuple<string, bool>(StringConstants.ConfigSmithingForgeSkipWeaponNamingAttribute, true)
+            });
+        this.RegisterHotkey(StringConstants.ConfigSmithingForgex5, StringConstants.ConfigDefaultHotkey, false, true, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingForgexInfinity, StringConstants.ConfigDefaultHotkey, true, true, false);
 
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingRefine, StringConstants.ConfigDefaultHotkey, false, false, false);
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingRefinex5, StringConstants.ConfigDefaultHotkey, false, true, false);
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingRefinexInfinity, StringConstants.ConfigDefaultHotkey, true, true, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingRefine, StringConstants.ConfigDefaultHotkey, false, false, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingRefinex5, StringConstants.ConfigDefaultHotkey, false, true, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingRefinexInfinity, StringConstants.ConfigDefaultHotkey, true, true, false);
 
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingPreviousCharacter, StringConstants.ConfigDefaultPreviousCharacterHotkey, false, false, false);
-    //    this.RegisterHotkey(StringConstants.ConfigSmithingNextCharacter, StringConstants.ConfigDefaultNextCharacterHotkey, false, false, false);
-    //}
+        this.RegisterHotkey(StringConstants.ConfigSmithingPreviousCharacter, StringConstants.ConfigDefaultPreviousCharacterHotkey, false, false, false);
+        this.RegisterHotkey(StringConstants.ConfigSmithingNextCharacter, StringConstants.ConfigDefaultNextCharacterHotkey, false, false, false);
+    }
 
-    //protected override void OnApplicationTick(float dt)
-    //{
-    //    if (Statics._settings is not null && !Statics._settings.EnableCraftingHotKeys)
-    //        return; 
+    protected override void OnApplicationTick(float dt)
+    {
+        if (Statics._settings is not null && !Statics._settings.EnableCraftingHotKeys)
+            return;
 
-    //    if (Game.Current != null && Game.Current.GameStateManager != null)
-    //    {
-    //        if (ScreenManager.TopScreen != null && ScreenManager.TopScreen is GauntletCraftingScreen)
-    //        {
-    //            bool bIsEscapeMenuOpened = MapScreen.Instance != null && MapScreen.Instance.IsEscapeMenuOpened;
-    //            if (!bIsEscapeMenuOpened)
-    //            {
-    //                bool bIsPaused = Mission.Current != null && MBCommon.IsPaused;
-    //                if (!bIsPaused)
-    //                {
-    //                    if (!InformationManager.IsAnyInquiryActive())
-    //                    {
-    //                        if (Game.Current.GameStateManager.ActiveState is CraftingState)
-    //                            HotKeysData.HandleInputCrafting();
+        if (Game.Current != null && Game.Current.GameStateManager != null)
+        {
+            if (ScreenManager.TopScreen != null && ScreenManager.TopScreen is GauntletCraftingScreen)
+            {
+                bool bIsEscapeMenuOpened = MapScreen.Instance != null && MapScreen.Instance.IsEscapeMenuOpened;
+                if (!bIsEscapeMenuOpened)
+                {
+                    bool bIsPaused = Mission.Current != null && MBCommon.IsPaused;
+                    if (!bIsPaused)
+                    {
+                        if (!InformationManager.IsAnyInquiryActive())
+                        {
+                            if (Game.Current.GameStateManager.ActiveState is CraftingState)
+                                HotKeysData.HandleInputCrafting();
 
-    //                        base.OnApplicationTick(dt);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+                            base.OnApplicationTick(dt);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     //(First) Starts as soon as the mod is loaded. Called during the first loading screen of the game, always the first override to be called, this is where you should be doing the bulk of your initial setup
     protected override void OnSubModuleLoad()
@@ -152,7 +152,7 @@ public class SubModule : MBSubModuleBase
         try
         {
             ConfigLoader.LoadConfig();
-            //this.RegisterHotKeys();
+            this.RegisterHotKeys();
         }
         catch (Exception ex)
         {

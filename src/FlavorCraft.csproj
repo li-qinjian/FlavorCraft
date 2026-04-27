@@ -15,9 +15,7 @@
     <Compile Remove="BannerBearerFix\**" />
     <Compile Remove="BattleAITweak\AiModule\**" />
     <Compile Remove="CombatTweaks\**" />
-    <Compile Remove="CraftingHotKeys\**" />
     <Compile Remove="CRR\**" />
-    <Compile Remove="EconomicTweaks\**" />
     <Compile Remove="Helpers\**" />
     <Compile Remove="NeatedNPCsupgradeEquipment\**" />
     <Compile Remove="showTraitExp\**" />
@@ -25,9 +23,7 @@
     <EmbeddedResource Remove="BannerBearerFix\**" />
     <EmbeddedResource Remove="BattleAITweak\AiModule\**" />
     <EmbeddedResource Remove="CombatTweaks\**" />
-    <EmbeddedResource Remove="CraftingHotKeys\**" />
     <EmbeddedResource Remove="CRR\**" />
-    <EmbeddedResource Remove="EconomicTweaks\**" />
     <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="NeatedNPCsupgradeEquipment\**" />
     <EmbeddedResource Remove="showTraitExp\**" />
@@ -35,9 +31,7 @@
     <None Remove="BannerBearerFix\**" />
     <None Remove="BattleAITweak\AiModule\**" />
     <None Remove="CombatTweaks\**" />
-    <None Remove="CraftingHotKeys\**" />
     <None Remove="CRR\**" />
-    <None Remove="EconomicTweaks\**" />
     <None Remove="Helpers\**" />
     <None Remove="NeatedNPCsupgradeEquipment\**" />
     <None Remove="showTraitExp\**" />
@@ -72,6 +66,12 @@
         <Compile Remove="BattleAITweak\TacticBreachWallsPatch.cs" />
         <Compile Remove="BattleAITweak\Utilities.cs" />
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
+        <Compile Remove="EconomicTweaks\DefaultItemValueModelPatch.cs" />
+        <Compile Remove="EconomicTweaks\DefaultPrisonerRecruitmentCalculationModel_Patch.cs" />
+        <Compile Remove="EconomicTweaks\DefaultTradeItemPriceFactorModelPatch.cs" />
+        <Compile Remove="EconomicTweaks\ItemModifier_Patch.cs" />
+        <Compile Remove="EconomicTweaks\LootCollectorPatch.cs" />
+        <Compile Remove="EconomicTweaks\MapEventPatch.cs" />
         <Compile Remove="Features\ArmouryItem.cs" />
         <Compile Remove="Features\LoadCAConstantsBehavior.cs" />
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />

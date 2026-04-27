@@ -17,8 +17,8 @@ namespace FlavorCraft {
         public const string Settings_Crafting_03 = "{=Settings_Crafting_03}Smithing Xp Multipliers";
         public const string Settings_Crafting_03_Desc = "{=Settings_Crafting_03_Desc}Enables xp multipliers to increase or decrease the xp gained per action.";
 
-        //public const string Settings_Crafting_04 = "{=Settings_Crafting_04}Hot Keys";
-        //public const string Settings_Crafting_04_Desc = "{=Settings_Crafting_04_Desc}Enables Hot Keys in weapon cafting process.";
+        public const string Settings_Crafting_04 = "{=Settings_Crafting_04}Hot Keys";
+        public const string Settings_Crafting_04_Desc = "{=Settings_Crafting_04_Desc}Enables Hot Keys in weapon cafting process.";
 
         //public const string Settings_Crafting_05 = "{=Settings_Crafting_05}SmeltingOutput";
         //public const string Settings_Crafting_05_Desc = "{=Settings_Crafting_05_Desc}Reduce SmeltingOutput of non-palyer crafting weapon.";
@@ -75,34 +75,34 @@ namespace FlavorCraft {
         //public const string RBM_TOU_004 = "{=RBM_TOU_004}You missed roll for {Name} item modifier, rolled:{Roll} needed: {Need}";
 
         //Crafting Hotkeys
-        //public const string ConfigDefaultHotkey = "F";
+        public const string ConfigDefaultHotkey = "F";
 
-        //public const string ConfigDefaultPreviousCharacterHotkey = "A";
+        public const string ConfigDefaultPreviousCharacterHotkey = "A";
 
-        //public const string ConfigDefaultNextCharacterHotkey = "D";
+        public const string ConfigDefaultNextCharacterHotkey = "D";
 
-        //public const string ConfigSmithingSmelt = "SmithingSmelt";
+        public const string ConfigSmithingSmelt = "SmithingSmelt";
 
-        //public const string ConfigSmithingSmeltx5 = "SmithingSmeltx5";
+        public const string ConfigSmithingSmeltx5 = "SmithingSmeltx5";
 
-        //public const string ConfigSmithingSmeltxInfinity = "SmithingSmeltxInfinity";
+        public const string ConfigSmithingSmeltxInfinity = "SmithingSmeltxInfinity";
 
-        //public const string ConfigSmithingForge = "SmithingForge";
+        public const string ConfigSmithingForge = "SmithingForge";
 
-        //public const string ConfigSmithingForgex5 = "SmithingForgex5";
+        public const string ConfigSmithingForgex5 = "SmithingForgex5";
 
-        //public const string ConfigSmithingForgexInfinity = "SmithingForgexInfinity";
+        public const string ConfigSmithingForgexInfinity = "SmithingForgexInfinity";
 
-        //public const string ConfigSmithingForgeSkipWeaponNamingAttribute = "skipWeaponNaming";
+        public const string ConfigSmithingForgeSkipWeaponNamingAttribute = "skipWeaponNaming";
 
-        //public const string ConfigSmithingRefine = "SmithingRefine";
+        public const string ConfigSmithingRefine = "SmithingRefine";
 
-        //public const string ConfigSmithingRefinex5 = "SmithingRefinex5";
+        public const string ConfigSmithingRefinex5 = "SmithingRefinex5";
 
-        //public const string ConfigSmithingRefinexInfinity = "SmithingRefinexInfinity";
+        public const string ConfigSmithingRefinexInfinity = "SmithingRefinexInfinity";
 
-        //public const string ConfigSmithingPreviousCharacter = "SmithingPreviousCharacter";
+        public const string ConfigSmithingPreviousCharacter = "SmithingPreviousCharacter";
 
-        //public const string ConfigSmithingNextCharacter = "SmithingNextCharacter";
+        public const string ConfigSmithingNextCharacter = "SmithingNextCharacter";
     }
 }

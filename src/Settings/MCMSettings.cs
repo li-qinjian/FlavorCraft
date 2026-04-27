@@ -68,9 +68,9 @@ namespace FlavorCraft.Settings
         [SettingPropertyGroup(StringConstants.PG_Crafting)]
         public bool SmithingXpModifiers { get; set; } = false;
 
-        //[SettingPropertyBool(StringConstants.Settings_Crafting_04, IsToggle = false, Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Crafting_04_Desc)]
-        //[SettingPropertyGroup(StringConstants.PG_Crafting)]
-        //public bool EnableCraftingHotKeys { get; set; } = false;
+        [SettingPropertyBool(StringConstants.Settings_Crafting_04, IsToggle = false, Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Crafting_04_Desc)]
+        [SettingPropertyGroup(StringConstants.PG_Crafting)]
+        public bool EnableCraftingHotKeys { get; set; } = false;
 
         //[SettingPropertyBool(StringConstants.Settings_Crafting_05, IsToggle = false, Order = 4, RequireRestart = false, HintText = StringConstants.Settings_Crafting_05_Desc)]
         //[SettingPropertyGroup(StringConstants.PG_Crafting)]
@@ -140,7 +140,7 @@ namespace FlavorCraft.Settings
                 HideLockedWeaponsWhenSmelting = false,
                 AutoLearnSmeltedParts = false,
                 SmithingXpModifiers = false,
-                //EnableCraftingHotKeys = false,
+                EnableCraftingHotKeys = false,
                 //ReduceSmeltingOutput = false,
 
                 //EnableUnblockableThrust = false,
@@ -167,7 +167,7 @@ namespace FlavorCraft.Settings
                 HideLockedWeaponsWhenSmelting = true,
                 AutoLearnSmeltedParts = true,
                 SmithingXpModifiers = true,
-                //EnableCraftingHotKeys = true,
+                EnableCraftingHotKeys = true,
                 //ReduceSmeltingOutput = true,
 
                 //EnableUnblockableThrust = true,

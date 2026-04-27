@@ -14,7 +14,7 @@
 
     <!-- 替换特定ID的NPCCharacter节点 -->
     <xsl:template match="NPCCharacter[@id='tor_wanderer_empire_5']">
-        <NPCCharacter id="tor_wanderer_empire_5" default_group="cavalry" occupation="Wanderer" culture="Culture.empire" voice="curt" age="28" is_template="true" is_hero="false">
+        <NPCCharacter id="tor_wanderer_empire_5" default_group="ranged" occupation="Wanderer" culture="Culture.empire" voice="curt" age="28" is_template="true" is_hero="false">
             <xsl:attribute name="name">
                 <xsl:text>{=str_tor_wanderer_empire_5}{FIRSTNAME} the Engineer</xsl:text>
             </xsl:attribute>
@@ -45,7 +45,7 @@
     </xsl:template>
     
     <xsl:template match="NPCCharacter[@id='tor_wanderer_empire_6']">
-        <NPCCharacter id="tor_wanderer_empire_6" default_group="cavalry" occupation="Wanderer" culture="Culture.empire" voice="curt" age="21" is_female="true" is_template="true" is_hero="false">
+        <NPCCharacter id="tor_wanderer_empire_6" default_group="ranged" occupation="Wanderer" culture="Culture.empire" voice="curt" age="21" is_female="true" is_template="true" is_hero="false">
             <xsl:attribute name="name">
                 <xsl:text>{=str_tor_wanderer_empire_6}{FIRSTNAME} the Priestess of Shallya</xsl:text>
             </xsl:attribute>
@@ -72,6 +72,29 @@
         </NPCCharacter>
     </xsl:template>
     
+    <xsl:template match="NPCCharacter[@id='tor_wanderer_empire_12']">
+        <NPCCharacter id="tor_wanderer_empire_12" default_group="cavalry" occupation="Wanderer" culture="Culture.empire" voice="curt" age="35" is_template="true" is_hero="false">
+            <xsl:attribute name="name">
+                <xsl:text>{=str_tor_wanderer_empire_12}{FIRSTNAME} the Empire Captain</xsl:text>
+            </xsl:attribute>
+            <face>
+                <face_key_template value="BodyProperty.empire_captain" />
+            </face>
+            <Traits>
+                <Trait id="KnightFightingSkills" value="8" />
+                <Trait id="Mercy" value="-1" />
+                <Trait id="Valor" value="1" />
+                <Trait id="Honor" value="1" />
+                <Trait id="Genorosity" value="1" />
+                <Trait id="Calculating" value="-1" />
+            </Traits>
+            <Equipments>
+                <EquipmentSet id="tor_empire_captain_template" />
+                <EquipmentSet id="tor_empire_captain_template" civilian="true" />
+            </Equipments>
+        </NPCCharacter>
+    </xsl:template>
+
     <xsl:template match="NPCCharacter[@id='tor_wanderer_bretonnia_0']">
         <NPCCharacter id="tor_wanderer_bretonnia_0" default_group="cavalry" occupation="Wanderer" culture="Culture.vlandia" voice="curt" age="30" is_template="true" is_hero="false">
             <xsl:attribute name="name">
@@ -101,7 +124,7 @@
     </xsl:template>
 
     <xsl:template match="NPCCharacter[@id='tor_wanderer_bretonnia_1']">
-        <NPCCharacter id="tor_wanderer_bretonnia_1" default_group="cavalry" occupation="Wanderer" culture="Culture.vlandia" voice="curt" age="20" is_female="true" is_template="true" is_hero="false">
+        <NPCCharacter id="tor_wanderer_bretonnia_1" default_group="ranged" occupation="Wanderer" culture="Culture.vlandia" voice="curt" age="20" is_female="true" is_template="true" is_hero="false">
             <xsl:attribute name="name">
                 <xsl:text>{=str_tor_wanderer_bretonnia_1}{FIRSTNAME} the Damsel of the Lady</xsl:text>
             </xsl:attribute>
@@ -125,7 +148,7 @@
                 <Trait id="Calculating" value="3" />
                 <Trait id="Mercy" value="1" />
                 <Trait id="Valor" value="1" />
-                <Trait id="SpellCasterSkills" value="3" />
+                <Trait id="SpellCasterSkills" value="1" />
             </Traits>
             <Equipments>
                 <EquipmentSet id="tor_prophetess_template" />
@@ -134,13 +157,16 @@
         </NPCCharacter>
     </xsl:template>
 
-    <xsl:template match="NPCCharacter[@id='tor_wanderer_eonir_0']">
-        <NPCCharacter id="tor_wanderer_eonir_0" default_group="cavalry" occupation="Wanderer" culture="Culture.eonir" voice="curt" age="22" race="elf" is_template="true" is_hero="false">
+    <xsl:template match="NPCCharacter[@id='tor_wanderer_bretonnia_3']">
+        <NPCCharacter id="tor_wanderer_bretonnia_3" default_group="ranged" occupation="Wanderer" culture="Culture.vlandia" voice="ironic" age="33" is_template="true" is_hero="false">
             <xsl:attribute name="name">
-                <xsl:text>{=str_tor_wanderer_eonir_0}{FIRSTNAME} the Ghost Strider</xsl:text>
+                <xsl:text>{=str_tor_wanderer_bretonnia_3}{FIRSTNAME} the Herrimault</xsl:text>
             </xsl:attribute>
             <face>
-                <face_key_template value="BodyProperty.male_wood_elf" />
+                <face_key_template value="BodyProperty.fighter_vlandia" />
+                <beard_tags>
+                    <beard_tag name="Mustache_and_patch" />
+                </beard_tags>
             </face>
             <skills>
                 <skill
@@ -148,15 +174,18 @@
                     value="75" />
             </skills>
             <Traits>
-                <Trait id="Calculating" value="5" />
+                <Trait id="Mercy" value="0" />
                 <Trait id="Valor" value="-1" />
-                <Trait id="RogueSkills" value="-1" />
-                <Trait id="ScoutSkills" value="15" />
+                <Trait id="Honor" value="0" />
+                <Trait id="Genorosity" value="0" />
+                <Trait id="Calculating" value="-1" />
+                <Trait id="RogueSkills" value="1" />
+                <Trait id="ScoutSkills" value="12" />
                 <Trait id="ArcherFIghtingSkills" value="3" />
             </Traits>
             <Equipments>
-                <EquipmentSet id="tor_eo_ghoststrider_template" />
-                <EquipmentSet id="tor_eo_ghoststrider_template" civilian="true" />
+                <EquipmentSet id="tor_herrimault_template" />
+                <EquipmentSet id="tor_herrimault_template" civilian="true" />
             </Equipments>
         </NPCCharacter>
     </xsl:template>

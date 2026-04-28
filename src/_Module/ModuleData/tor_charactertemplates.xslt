@@ -27,15 +27,17 @@
                     <beard_tag name="LongScragglyBeard" />
                 </beard_tags>
             </face>
+            <skills>
+                <skill id="OneHanded" value="50" />
+                <skill id="Gunpowder" value="100" />
+                <skill id="Engineering" value="100" />
+            </skills>
             <Traits>
-                <Trait id="HopliteFightingSkills" value="2" />
-                <!-- <Trait id="Manager" value="6" /> -->
-                <Trait id="EngineerSkills" value="12" />
-                <Trait id="Blacksmith" value="1" />
-                <Trait id="Calculating" value="1" />
-                <Trait id="Mercy" value="1" />
-                <Trait id="Valor" value="1" />
-                <Trait id="Gunner" value="5" />
+                <Trait id="Mercy" value="0" />
+                <Trait id="Valor" value="0" />
+                <Trait id="Honor" value="0" />
+                <Trait id="Genorosity" value="2" />
+                <Trait id="Calculating" value="2" />
             </Traits>
             <Equipments>
                 <EquipmentSet id="tor_engineer_companion_template" />
@@ -53,17 +55,17 @@
                 <BodyProperties version="4" age="22.24" weight="0.2002" build="0.1082"  key="0000EC03521430047E8994576364769494E588557BB77E117E774CB6879A116701B236130B47521000000000000000000000000000000000000000007F7C4003"  />
             </face>
             <skills>
-                <skill
-                    id="OneHanded"
-                    value="50" />
+                <skill id="OneHanded" value="50" />
+                <skill id="Medicine" value="130" />
+                <skill id="Steward" value="50" />
+                <skill id="Faith" value="50" />
             </skills>
             <Traits>
-                <Trait id="ArcherFIghtingSkills" value="2" />
-                <Trait id="Surgeon" value="12" />
-                <Trait id="Calculating" value="1" />
-                <Trait id="Mercy" value="5" />
-                <Trait id="Valor" value="7" />
-                <Trait id="ShallyaDevoted" value="1" />
+                <Trait id="Mercy" value="0" />
+                <Trait id="Valor" value="0" />
+                <Trait id="Honor" value="2" />
+                <Trait id="Genorosity" value="1" />
+                <Trait id="Calculating" value="0" />
             </Traits>
             <Equipments>
                 <EquipmentSet id="tor_priestess_of_shallya_template" />
@@ -80,8 +82,13 @@
             <face>
                 <face_key_template value="BodyProperty.empire_captain" />
             </face>
+            <skills>
+                <skill id="Athletics" value="50" />
+                <skill id="OneHanded" value="75" />
+                <skill id="TwoHanded" value="50" />
+                <skill id="Polearm" value="50" />
+            </skills>
             <Traits>
-                <Trait id="KnightFightingSkills" value="8" />
                 <Trait id="Mercy" value="-1" />
                 <Trait id="Valor" value="1" />
                 <Trait id="Honor" value="1" />
@@ -109,12 +116,25 @@
                     <beard_tag name="Cleanshaven" />
                 </beard_tags>
             </face>
+            <skills>
+                <skill id="Athletics" value="50" />
+                <skill id="Riding" value="125" />
+                <skill id="OneHanded" value="100" />
+                <skill id="TwoHanded" value="100" />
+                <skill id="Polearm" value="100" />
+                <skill id="Medicine" value="25" />
+                <skill id="Steward" value="15" />
+                <skill id="Tactics" value="50" />
+                <skill id="Scouting" value="20" />
+                <skill id="Charm" value="15" />
+                <skill id="Leadership" value="50" />
+            </skills>
             <Traits>
-                <Trait id="KnightFightingSkills" value="8" />
-                <Trait id="Commander" value="5" />
-                <Trait id="Calculating" value="5" />
-                <Trait id="Mercy" value="1" />
-                <Trait id="Valor" value="1" />
+                <Trait id="Mercy" value="0" />
+                <Trait id="Valor" value="2" />
+                <Trait id="Honor" value="2" />
+                <Trait id="Genorosity" value="1" />
+                <Trait id="Calculating" value="0" />
             </Traits>
             <Equipments>
                 <EquipmentSet id="tor_bretonnian_knight_template" />
@@ -132,23 +152,18 @@
                 <BodyProperties version="4" age="22.42" weight="0.0262" build="0.0386" key="00006807104410036436583353C5743893B76C7627786754569AB47979575AE801E776130E7A225F00000000000000000000000000000000000000001DDC1083" />
             </face>
             <skills>
-                <skill
-                    id="OneHanded"
-                    value="75" />
-                <skill
-                    id="Trade"
-                    value="25" />
-                <skill
-                    id="Steward"
-                    value="125" />
+                <skill id="OneHanded" value="75" />
+                <skill id="Bow" value="25" />
+                <skill id="Trade" value="25" />
+                <skill id="Steward" value="125" />
+                <skill id="Spellcraft" value="100" />
             </skills>
             <Traits>
-                <Trait id="ArcherFIghtingSkills" value="2" />
-                <Trait id="Surgeon" value="1" />
-                <Trait id="Calculating" value="3" />
-                <Trait id="Mercy" value="1" />
-                <Trait id="Valor" value="1" />
-                <Trait id="SpellCasterSkills" value="1" />
+                <Trait id="Mercy" value="0" />
+                <Trait id="Valor" value="0" />
+                <Trait id="Honor" value="0" />
+                <Trait id="Genorosity" value="2" />
+                <Trait id="Calculating" value="2" />
             </Traits>
             <Equipments>
                 <EquipmentSet id="tor_prophetess_template" />
@@ -169,9 +184,12 @@
                 </beard_tags>
             </face>
             <skills>
-                <skill
-                    id="TwoHanded"
-                    value="75" />
+                <skill id="Athletics" value="75" />
+                <skill id="TwoHanded" value="100" />
+                <skill id="Bow" value="125" />
+                <skill id="Medicine" value="25" />
+                <skill id="Scouting" value="150" />
+                <skill id="Roguery" value="75" />
             </skills>
             <Traits>
                 <Trait id="Mercy" value="0" />
@@ -179,9 +197,6 @@
                 <Trait id="Honor" value="0" />
                 <Trait id="Genorosity" value="0" />
                 <Trait id="Calculating" value="-1" />
-                <Trait id="RogueSkills" value="1" />
-                <Trait id="ScoutSkills" value="12" />
-                <Trait id="ArcherFIghtingSkills" value="3" />
             </Traits>
             <Equipments>
                 <EquipmentSet id="tor_herrimault_template" />
@@ -198,13 +213,20 @@
             <face>
                 <BodyProperties version="4" age="22" weight="0.0185" build="0.1576"  key="0015500A4458300866885396977479B85B26577487A3463A886475B28A788B170001060307A4364C2006747465F75C1100000000000000070000000028EC4003"  />
             </face>
+            <skills>
+                <skill id="Athletics" value="50" />
+                <skill id="Riding" value="100" />
+                <skill id="OneHanded" value="100" />
+                <skill id="Steward" value="100" />
+                <skill id="Tactics" value="50" />
+                <skill id="Leadership" value="50" />
+            </skills>
             <Traits>
-                <Trait id="HorseArcherFightingSkills" value="3" />
-                <Trait id="Surgeon" value="1" />
-                <Trait id="Calculating" value="3" />
-                <Trait id="Mercy" value="1" />
+                <Trait id="Mercy" value="0" />
                 <Trait id="Valor" value="1" />
-                <Trait id="SpellCasterSkills" value="7" />
+                <Trait id="Honor" value="2" />
+                <Trait id="Genorosity" value="2" />
+                <Trait id="Calculating" value="2" />
             </Traits>
             <Equipments>
                 <EquipmentSet id="tor_we_spellsinger_template" />
@@ -213,4 +235,32 @@
         </NPCCharacter>
     </xsl:template>
 
+    <xsl:template match="NPCCharacter[@id='tor_wanderer_dawi_2']">
+        <NPCCharacter id="tor_wanderer_dawi_2" default_group="infantry" occupation="Wanderer" culture="Culture.sturgia" voice="ironic" age="30" race="dwarf" is_template="true" is_hero="false">
+            <xsl:attribute name="name">
+                <xsl:text>{=str_tor_wanderer_dawi_2}{FIRSTNAME} the Dwarf Engineer</xsl:text>
+            </xsl:attribute>
+            <face>
+                <face_key_template value="BodyProperty.dwarf_high_tier" />
+            </face>
+            <skills>
+                <skill id="Athletics" value="50" />
+                <skill id="OneHanded" value="100" />
+                <skill id="Steward" value="25" />
+                <skill id="Engineering" value="200" />
+                <skill id="Gunpowder" value="100" />
+            </skills>
+            <Traits>
+                <Trait id="Mercy" value="0" />
+                <Trait id="Valor" value="0" />
+                <Trait id="Honor" value="0" />
+                <Trait id="Genorosity" value="1" />
+                <Trait id="Calculating" value="2" />
+            </Traits>
+            <Equipments>
+                <EquipmentSet id="tor_cc_dw_engineer_3" />
+                <EquipmentSet id="tor_cc_dw_engineer_3" civilian="true" />
+            </Equipments>
+        </NPCCharacter>
+    </xsl:template>
 </xsl:stylesheet>

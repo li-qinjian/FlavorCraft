@@ -55,7 +55,6 @@ namespace FlavorCraft
                                 Description.SetTextVariable("Roll", roll);
                                 Description.SetTextVariable("Need", rollNeeded);
 
-                                
                                 IM.WriteMessage(Description.ToString(), IM.MsgType.Notify);
 
                                 eePrize.SetModifier(im);

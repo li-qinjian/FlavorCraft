@@ -86,11 +86,10 @@ namespace FlavorCraft
             {
                 ItemObject x = itemRosterElement.EquipmentElement.Item;
                 if ( (x.HasWeaponComponent || x.HasArmorComponent)
-                        && !x.NotMerchandise
                         && !x.IsCraftedByPlayer
                         && x.StringId.StartsWith(itemPrefix))
                 {
-                    string itemtext = x.StringId + "\t\"" + x.Name.ToString() + "\"\r\n";
+                    string itemtext = x.StringId + "\t" + x.Name.GetID() + "\t\"" + x.Name.ToString() + "\"\r\n";
                     text+= itemtext;
                 }
             }

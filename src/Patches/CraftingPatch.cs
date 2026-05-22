@@ -1,20 +1,21 @@
-﻿using HarmonyLib;
-using System.Reflection;
-using System;
-using TaleWorlds.CampaignSystem.CampaignBehaviors;
-using TaleWorlds.Core;
-using TaleWorlds.ObjectSystem;
-//using FlavorCraft.Helpers;
+﻿//using FlavorCraft.Helpers;
 using FlavorCraft.Utils;
-using TaleWorlds.CampaignSystem.CraftingSystem;
-using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using HarmonyLib;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.Smelting;
+using TaleWorlds.CampaignSystem.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
+using TaleWorlds.CampaignSystem.CraftingSystem;
 //using System.Collections.Generic;
 //using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.GameComponents;
-using System.Collections.Generic;
-using System.Linq;
+using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.Smelting;
+using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
+using TaleWorlds.Core;
+using TaleWorlds.ObjectSystem;
 //using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign.Order;
 //using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
 
@@ -92,39 +93,20 @@ namespace FlavorCraft
             return false;
         }
 
-        //[HarmonyPatch("AddItemToHistory")]
-        //[HarmonyPrefix]
-        //private static bool AddItemToHistory_Prefix(WeaponDesign design, List<WeaponDesign> ____craftingHistory)
-        //{
-        //    if (____craftingHistory.Contains(design))
-        //    {
-        //        if (Statics._settings is not null && !Statics._settings.Debug)
-        //            IM.WriteMessage("design 已经存在", IM.MsgType.Notify);
+        [HarmonyPatch("AddItemToHistory")]
+        [HarmonyPrefix]
+        private static bool AddItemToHistory_Prefix(ItemObject craftedObject, List<ItemObject> ____cratingItemsHistory)
+        {
+            if (____cratingItemsHistory.Contains(craftedObject))
+            {
+                if (Statics._settings is not null && !Statics._settings.Debug)
+                    IM.WriteMessage("该设计已经存在", IM.MsgType.Notify);
 
-        //        return false;
-        //    }
+                return false;
+            }
 
-        //    int rangeToBeRemoved = ____craftingHistory.Count - 10;
-        //    if (rangeToBeRemoved > 0)
-        //    {
-        //        ____craftingHistory.RemoveRange(0, rangeToBeRemoved + 1);
-        //    }
-        //    ____craftingHistory.Add(design);
-        //    return false;
-        //}
-
-        //[HarmonyPatch("CreateCraftedWeaponInCraftingOrderMode")]
-        //[HarmonyPrefix]
-        //private static bool StoreCraftedOrderWeapon(Hero crafterHero, CraftingOrder craftingOrder, WeaponDesign weaponDesign, CraftingCampaignBehavior __instance)
-        //{
-        //    string newName = string.Format("{0}'s Order", craftingOrder.OrderOwner.Name);
-        //    weaponDesign.SetWeaponName(new TextObject(newName, null));
-        //    AccessTools.Method(typeof(CraftingCampaignBehavior), "AddItemToHistory", null, null).Invoke(__instance, new object[]
-        //    {
-        //        weaponDesign
-        //    });
-        //    return true;
-        //}
+            return true;
+        }
 
         [HarmonyPatch("AddResearchPoints")]
         [HarmonyPrefix]
@@ -148,101 +130,6 @@ namespace FlavorCraft
     [HarmonyPatch(typeof(DefaultSmithingModel))]
     internal class DefaultSmithingModel_Patch
     {
-        /* public enum CraftingMaterials
-        {
-            IronOre,
-            Iron1,
-            Iron2,
-            Iron3,
-            Iron4,
-            Iron5,
-            Iron6,
-            Wood,
-            Charcoal,
-            NumCraftingMats
-        } */
-
-        //public static int GetMetalMax(WeaponClass weaponClass) => weaponClass switch
-        //{
-        //    WeaponClass.Dagger => 1,
-        //    WeaponClass.ThrowingAxe => 1,
-        //    WeaponClass.ThrowingKnife => 1,
-        //    WeaponClass.Javelin => 1,
-        //    WeaponClass.Crossbow => 1,
-        //    WeaponClass.SmallShield => 1,
-
-        //    WeaponClass.OneHandedSword => 2,
-        //    WeaponClass.LowGripPolearm => 2,
-        //    WeaponClass.OneHandedPolearm => 2,
-        //    WeaponClass.TwoHandedPolearm => 2,
-        //    WeaponClass.OneHandedAxe => 2,
-        //    WeaponClass.Mace => 2,
-        //    WeaponClass.LargeShield => 2,
-        //    WeaponClass.Pick => 2,
-
-        //    WeaponClass.TwoHandedAxe => 3,
-        //    WeaponClass.TwoHandedMace => 3,
-        //    WeaponClass.TwoHandedSword => 3,
-        //    _ => -1
-        //};
-
-        //[HarmonyPostfix]
-        //[HarmonyPatch("GetSmeltingOutputForItem")]
-        //public static void GetSmeltingOutputForItem_Postfix(ItemObject item, ref int[] __result)
-        //{
-        //    if (Statics._settings is not null && !Statics._settings.ReduceSmeltingOutput)
-        //        return;
-
-        //    if (item.IsCraftedByPlayer)
-        //        return;
-
-        //    // 计算熔炼产出中的金属材料总数（Iron2到Iron6）
-        //    var metalCount = 0;
-        //    for (var i = 0; i < __result.Length; i++)
-        //    {
-        //        if (i is >= 2 and <= 6)   //CraftingMaterials.Iron2 -> CraftingMaterials.Iron6
-        //        {
-        //            metalCount += __result[i];
-        //        }
-        //    }
-
-        //    // 处理有效物品的熔炼产出
-        //    if (item != null)
-        //    {
-        //        // 获取当前武器类型允许的最大金属材料数量
-        //        var metalCap = GetMetalMax(item.WeaponComponent.PrimaryWeapon.WeaponClass);
-
-        //        // 若金属材料超过上限，按顺序减少金属 CraftingMaterials.Iron2 -> CraftingMaterials.Iron6
-        //        if (metalCount > metalCap && metalCap > 0)
-        //        {
-        //            int excess = metalCount - metalCap; // 需要减少的总量
-        //            for (int i = 2; i <= 6 && excess > 0; i++)
-        //            {
-        //                int reduction = Math.Min(__result[i], excess); // 本次可减少的最大量
-        //                __result[i] -= reduction;
-        //                excess -= reduction;
-        //            }
-        //        }
-
-        //        if (item.WeaponComponent.PrimaryWeapon.WeaponClass != WeaponClass.TwoHandedPolearm)
-        //        {
-        //            // 非双手长柄武器熔炼时不产出木材
-        //            __result[(int)CraftingMaterials.Wood] = 0;
-        //        }
-        //        else if (__result[(int)CraftingMaterials.Wood] > 1)
-        //        {
-        //            // 双手长柄武器熔炼时至多产出1单位木材
-        //            __result[(int)CraftingMaterials.Wood] = 1;
-        //        }
-
-        //        //确保熔炼产出至少包含1个Iron1（基础金属）
-        //        if (__result[(int)CraftingMaterials.Iron1] == 0 && metalCap > 0)
-        //        {
-        //            __result[(int)CraftingMaterials.Iron1]++;
-        //        }
-        //    }
-        //}
-
         [HarmonyPostfix]
         [HarmonyPatch("GetSkillXpForRefining")]
         public static void GetSkillXpForRefining_Postfix(ref int __result)
@@ -372,8 +259,8 @@ namespace FlavorCraft
                         index++;
                     }
                 }
-                bool flag2 = __instance.SmeltableItemList.Count == 0;
-                if (flag2)
+                
+                if ( __instance.SmeltableItemList.Count == 0)
                 {
                     __instance.CurrentSelectedItem = null;
                 }
@@ -398,4 +285,57 @@ namespace FlavorCraft
             }
         }
     }
+
+    [HarmonyPatch(typeof(WeaponClassSelectionPopupVM))]
+    [HarmonyPatch(MethodType.Constructor)]
+    [HarmonyPatch(new Type[]
+    {
+            typeof(ICraftingCampaignBehavior),
+            typeof(List<CraftingTemplate>),
+            typeof(Action<int>),
+            typeof(Func<CraftingTemplate, int>)
+    })]
+    public static class WeaponClassSelectionPopupVM_Ctor_Patch
+    {
+        public static void Prefix(List<CraftingTemplate> templatesList)
+        {
+            if (templatesList == null || templatesList.Count == 0)
+            {
+                return;
+            }
+
+            string excludePrefix = (Statics._settings?.ItemPrefix ?? string.Empty).Trim();
+            if (excludePrefix.Length == 0)
+            {
+                excludePrefix = "tor_";
+            }
+
+            templatesList.RemoveAll(t =>
+                t == null ||
+                string.IsNullOrEmpty(t.StringId) ||
+                t.StringId.StartsWith(excludePrefix, StringComparison.OrdinalIgnoreCase));
+        }
+    }
+
+    // [HarmonyPatch(typeof(WeaponDesignVM), "SelectPrimaryWeaponClass")]
+    // public static class Patch_BlockTorTemplateSwitch
+    // {
+    //     // return false = 跳过原方法
+    //     public static bool Prefix(CraftingTemplate template)
+    //     {
+    //         if (template == null) return true;
+
+    //         string excludePrefix = "tor_";
+    //         if (Statics._settings is not null && !Statics._settings.ItemPrefix.IsEmpty())
+    //             excludePrefix = Statics._settings.ItemPrefix;
+
+    //         if (!string.IsNullOrEmpty(template.StringId) &&
+    //             template.StringId.StartsWith(excludePrefix, StringComparison.OrdinalIgnoreCase))
+    //         {
+    //             return false;
+    //         }
+
+    //         return true;
+    //     }
+    // }
 }

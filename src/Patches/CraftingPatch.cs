@@ -304,16 +304,10 @@ namespace FlavorCraft
                 return;
             }
 
-            string excludePrefix = (Statics._settings?.ItemPrefix ?? string.Empty).Trim();
-            if (excludePrefix.Length == 0)
-            {
-                excludePrefix = "tor_";
-            }
-
             templatesList.RemoveAll(t =>
                 t == null ||
-                string.IsNullOrEmpty(t.StringId) ||
-                t.StringId.StartsWith(excludePrefix, StringComparison.OrdinalIgnoreCase));
+                t.Pieces == null ||
+                t.Pieces.Count < 10);
         }
     }
 

@@ -5,29 +5,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.CraftingSystem;
-//using System.Collections.Generic;
-//using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem.GameComponents;
 using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.Smelting;
 using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
 using TaleWorlds.Core;
 using TaleWorlds.ObjectSystem;
-//using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign.Order;
-//using TaleWorlds.CampaignSystem.ViewModelCollection.WeaponCrafting.WeaponDesign;
 
 namespace FlavorCraft
 {
-    class SmeltingHelper
+    internal static class CraftingTemplateFilter
+    {
+        public static bool IsAllowedTemplate(CraftingTemplate template) =>
+            template != null
+            && !string.IsNullOrEmpty(template.StringId)
+            && !template.StringId.Contains("_");
+    }
+
+    internal static class SmeltingHelper
     {
         public static IEnumerable<CraftingPiece> GetNewPartsFromSmelting(ItemObject item)
         {
             if (item == null)
             {
-                IM.WriteMessage("Error in Bannerlord Tweaks SmeltingHelper. Did not find" + item!.Name, IM.MsgType.Warning);
+                IM.WriteMessage("Error in Bannerlord Tweaks SmeltingHelper. Item was null.", IM.MsgType.Warning);
+                return Enumerable.Empty<CraftingPiece>();
             }
 
             return item.WeaponDesign.UsedPieces.Select(x => x.CraftingPiece).Where(x => x != null && x.IsValid && !Campaign.Current.GetCampaignBehavior<CraftingCampaignBehavior>().IsOpened(x, item.WeaponDesign.Template));
@@ -43,27 +49,29 @@ namespace FlavorCraft
         [HarmonyPostfix]
         static void DoSmelting_Postfix(CraftingCampaignBehavior __instance, EquipmentElement equipmentElement)
         {
+            var settings = Statics._settings;
             ItemObject item = equipmentElement.Item;
             if (item == null) return;
+
             if (item.IsCraftedByPlayer)
             {
                 MBObjectManager.Instance.UnregisterObject(item);
-                if (Statics._settings is not null && !Statics._settings.Debug)
+                if (settings is not null && !settings.Debug)
                     IM.WriteMessage(item!.Name + "被销毁了!", IM.MsgType.Notify);
 
                 return;   //非玩家锻造武器
             }
 
             if (__instance == null) throw new ArgumentNullException(nameof(__instance), $"Tried to run postfix for {nameof(CraftingCampaignBehavior)}.DoSmelting but the instance was null.");
+            if (settings?.AutoLearnSmeltedParts != true) return;
 
-            if (Statics._settings is not null && Statics._settings.AutoLearnSmeltedParts)
+            if (openPartMethodInfo == null) GetMethodInfo();
+            if (openPartMethodInfo == null) return;
+
+            foreach (CraftingPiece piece in SmeltingHelper.GetNewPartsFromSmelting(item))
             {
-                if (openPartMethodInfo == null) GetMethodInfo();
-                foreach (CraftingPiece piece in SmeltingHelper.GetNewPartsFromSmelting(item))
-                {
-                    if (piece != null && piece.Name != null && openPartMethodInfo != null)
-                        openPartMethodInfo.Invoke(__instance, new object[] { piece, item.WeaponDesign.Template, true });
-                }
+                if (piece?.Name != null)
+                    openPartMethodInfo.Invoke(__instance, new object[] { piece, item.WeaponDesign.Template, true });
             }
         }
 
@@ -97,9 +105,19 @@ namespace FlavorCraft
         [HarmonyPrefix]
         private static bool AddItemToHistory_Prefix(ItemObject craftedObject, List<ItemObject> ____cratingItemsHistory)
         {
-            if (____cratingItemsHistory.Contains(craftedObject))
+            if (craftedObject?.WeaponDesign == null)
             {
-                if (Statics._settings is not null && !Statics._settings.Debug)
+                return true;
+            }
+
+            bool hasSameWeaponDesign = ____cratingItemsHistory.Any(historyItem =>
+                historyItem?.WeaponDesign != null
+                && historyItem.WeaponDesign == craftedObject.WeaponDesign);
+
+            if (hasSameWeaponDesign)
+            {
+                var settings = Statics._settings;
+                if (settings?.Debug != true)
                     IM.WriteMessage("该设计已经存在", IM.MsgType.Notify);
 
                 return false;
@@ -112,18 +130,71 @@ namespace FlavorCraft
         [HarmonyPrefix]
         private static bool AddResearchPoints(CraftingTemplate craftingTemplate, int researchPoints)
         {
-            if (Statics._settings is not null && !Statics._settings.AutoLearnSmeltedParts)
+            if (Statics._settings?.AutoLearnSmeltedParts != true)
                 return true;
 
-            if (craftingTemplate.StringId.StartsWith("tor_"))
+            if (craftingTemplate?.StringId?.StartsWith("tor_") == true)
             {
-                if (Statics._settings is not null && !Statics._settings.Debug)
+                if (Statics._settings?.Debug != true)
                     IM.WriteMessage(craftingTemplate.TemplateName.ToString(), IM.MsgType.Notify);
 
                 return false;
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Filters out crafting categories for npc-specific weapons when generating smithing orders on the daily tick.
+        /// </summary>
+        [HarmonyPatch((typeof(CraftingCampaignBehavior)), "CreateTownOrder")]
+        [HarmonyTranspiler]
+        public static IEnumerable<CodeInstruction> CreateTownOrderPatch(IEnumerable<CodeInstruction> instructions, ILGenerator ilGenerator)
+        {
+            var codes = new List<CodeInstruction>(instructions);
+            int replaceIndex = -1;
+
+            for (var i = 0; i < codes.Count; i++)
+            {
+                /* div
+                 * stloc (the target piece tier)
+                 * call (get crafting templates)
+                 * call (get random)
+                 * stloc (the selected crafting template)
+                */
+                if (codes[i].opcode == OpCodes.Div)
+                {
+                    replaceIndex = i + 2;
+                    break;
+                }
+            }
+
+            if (replaceIndex < 0)
+                throw new ArgumentException("Didn't find CreateTownOrder division instruction for removing problematic crafting orders.");
+
+            //remove the CraftingTemplate.All and GetRandom calls
+            codes.RemoveRange(replaceIndex, 2);
+            //call ValidTemplate() to pick a random template whose StringId does not contain "_"
+            codes.Insert(replaceIndex, new CodeInstruction(OpCodes.Call,
+                AccessTools.Method(typeof(CraftingCampaignBehavior_Patch), nameof(CraftingCampaignBehavior_Patch.ValidTemplate), Type.EmptyTypes)));
+
+            return codes.AsEnumerable();
+        }
+
+        /// <summary>
+        /// Picks a random crafting template while excluding templates whose StringId contains "_".
+        /// </summary>
+        /// <returns>A random crafting template whose StringId does not contain "_"</returns>
+        public static CraftingTemplate ValidTemplate()
+        {
+            List<CraftingTemplate> templatesList = CraftingTemplate.All.Where(CraftingTemplateFilter.IsAllowedTemplate).ToList();
+
+            if (templatesList.Count == 0)
+            {
+                throw new InvalidOperationException("No crafting template left after filtering forbidden StringId values.");
+            }
+
+            return templatesList.GetRandomElement();
         }
     }
 
@@ -134,7 +205,8 @@ namespace FlavorCraft
         [HarmonyPatch("GetSkillXpForRefining")]
         public static void GetSkillXpForRefining_Postfix(ref int __result)
         {
-            if (Statics._settings is not null && Statics._settings.SmithingXpModifiers)
+            var settings = Statics._settings;
+            if (settings?.SmithingXpModifiers == true)
                 __result *= 5;
         }
 
@@ -142,7 +214,8 @@ namespace FlavorCraft
         [HarmonyPatch("GetSkillXpForSmelting")]
         public static void GetSkillXpForSmelting_Postfix(ref int __result)
         {
-            if (Statics._settings is not null && Statics._settings.SmithingXpModifiers)
+            var settings = Statics._settings;
+            if (settings?.SmithingXpModifiers == true)
                 __result *= 5;
         }
 
@@ -150,7 +223,8 @@ namespace FlavorCraft
         [HarmonyPatch("GetSkillXpForSmithingInFreeBuildMode")]
         public static void GetSkillXpForSmithingInFreeBuildMode_Postfix(ref int __result)
         {
-            if (Statics._settings is not null && Statics._settings.SmithingXpModifiers)
+            var settings = Statics._settings;
+            if (settings?.SmithingXpModifiers == true)
                 __result *= 5;
         }
 
@@ -158,7 +232,8 @@ namespace FlavorCraft
         [HarmonyPatch("GetPartResearchGainForSmeltingItem")]
         public static void GetPartResearchGainForSmeltingItem_Postfix(ItemObject item, ref int __result)
         {
-            if (!item.IsCraftedByPlayer && item.Tierf > 1.0f)
+            var settings = Statics._settings;
+            if (settings?.SmithingXpModifiers == true && !item.IsCraftedByPlayer && item.Tierf > 1.0f)
                 __result *= (int)item.Tierf;
         }
 
@@ -216,25 +291,6 @@ namespace FlavorCraft
         //}
     }
 
-    //[HarmonyPatch(typeof(WeaponDesignVM))]
-    //internal class WeaponDesignVM_Patch
-    //{
-    //    [HarmonyPatch("InitializeDefaultFromLogic")]
-    //    [HarmonyPostfix]
-    //    private static void InitializeDefaultFromLogic_Postfix(WeaponDesignVM __instance)
-    //    {
-    //        CraftingOrderItemVM activeCraftingOrder = __instance.ActiveCraftingOrder;
-    //        if (activeCraftingOrder != null && activeCraftingOrder.IsEnabled)
-    //        {
-    //            __instance.ItemName = __instance.ActiveCraftingOrder.OrderOwnerData.NameText + "'s Order";
-    //            return;
-    //        }
-    //        if (__instance.CraftingHistory.SelectedDesign != null)
-    //        {
-    //            __instance.ItemName = __instance.CraftingHistory.SelectedDesign.Name;
-    //        }
-    //    }
-    //}
 
     [HarmonyPatch(typeof(SmeltingVM))]
     internal class SmeltingVM_Patch
@@ -243,34 +299,35 @@ namespace FlavorCraft
         [HarmonyPostfix]
         public static void Postfix(SmeltingVM __instance)
         {
-            if (Statics._settings is not null && Statics._settings.HideLockedWeaponsWhenSmelting)
+            if (Statics._settings?.HideLockedWeaponsWhenSmelting != true)
             {
-                int index = 0;
-                while (index < __instance.SmeltableItemList.Count)
+                return;
+            }
+
+            int index = 0;
+            while (index < __instance.SmeltableItemList.Count)
+            {
+                SmeltingItemVM smeltableItem = __instance.SmeltableItemList[index];
+                if (smeltableItem.IsLocked)
                 {
-                    SmeltingItemVM smeltableItem = __instance.SmeltableItemList[index];
-                    bool isLocked = smeltableItem.IsLocked;
-                    if (isLocked)
-                    {
-                        __instance.SmeltableItemList.RemoveAt(index);
-                    }
-                    else
-                    {
-                        index++;
-                    }
-                }
-                
-                if ( __instance.SmeltableItemList.Count == 0)
-                {
-                    __instance.CurrentSelectedItem = null;
+                    __instance.SmeltableItemList.RemoveAt(index);
                 }
                 else
                 {
-                    __instance.ExecuteCommand("OnItemSelection", new object[]
-                    {
-                        __instance.SmeltableItemList[0]
-                    });
+                    index++;
                 }
+            }
+
+            if (__instance.SmeltableItemList.Count == 0)
+            {
+                __instance.CurrentSelectedItem = null;
+            }
+            else
+            {
+                __instance.ExecuteCommand("OnItemSelection", new object[]
+                {
+                    __instance.SmeltableItemList[0]
+                });
             }
         }
 
@@ -279,7 +336,7 @@ namespace FlavorCraft
         public static void Postfix(SmeltingVM __instance, SmeltingItemVM item, bool isLocked)
         {
             //bool flag = !isLocked || !HotKeysData.HideLockedWeaponsWhenSmelting;
-            if (isLocked && Statics._settings is not null && Statics._settings.HideLockedWeaponsWhenSmelting)
+            if (isLocked && Statics._settings?.HideLockedWeaponsWhenSmelting == true)
             {
                 __instance.SmeltableItemList.Remove(item);
             }
@@ -304,32 +361,7 @@ namespace FlavorCraft
                 return;
             }
 
-            templatesList.RemoveAll(t =>
-                t == null ||
-                t.Pieces == null ||
-                t.Pieces.Count < 10);
+            templatesList.RemoveAll(t => !CraftingTemplateFilter.IsAllowedTemplate(t));
         }
     }
-
-    // [HarmonyPatch(typeof(WeaponDesignVM), "SelectPrimaryWeaponClass")]
-    // public static class Patch_BlockTorTemplateSwitch
-    // {
-    //     // return false = 跳过原方法
-    //     public static bool Prefix(CraftingTemplate template)
-    //     {
-    //         if (template == null) return true;
-
-    //         string excludePrefix = "tor_";
-    //         if (Statics._settings is not null && !Statics._settings.ItemPrefix.IsEmpty())
-    //             excludePrefix = Statics._settings.ItemPrefix;
-
-    //         if (!string.IsNullOrEmpty(template.StringId) &&
-    //             template.StringId.StartsWith(excludePrefix, StringComparison.OrdinalIgnoreCase))
-    //         {
-    //             return false;
-    //         }
-
-    //         return true;
-    //     }
-    // }
 }

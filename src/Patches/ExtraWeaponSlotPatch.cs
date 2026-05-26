@@ -20,10 +20,7 @@ namespace FlavorCraft
         {
             try
             {
-                if (__result == true)
-                    return;
-
-                if (__instance.TargetEquipmentType == EquipmentIndex.ExtraWeaponSlot && ____currentCharacter.IsHero /*&& ____currentCharacter.HeroObject == Hero.MainHero*/)
+                if (!__result && __instance.TargetEquipmentType == EquipmentIndex.ExtraWeaponSlot && ____currentCharacter.IsHero /*&& ____currentCharacter.HeroObject == Hero.MainHero*/)
                     __result = true;
 
                 if (__result && itemVM.ItemType < EquipmentIndex.ExtraWeaponSlot && __instance.CharacterBannerSlot.GetItemTypeWithItemObject() == EquipmentIndex.ExtraWeaponSlot)
@@ -32,11 +29,71 @@ namespace FlavorCraft
                     __result = false;
                 }
 
+                if (__result && IsBowItem(itemVM) && IsCurrentGlovesPlate(__instance))
+                {
+                    __result = false;
+                }
+
+                if (__result && IsTargetGlovesWithPlateItem(__instance, itemVM) && HasAnyBowEquipped(__instance))
+                {
+                    __result = false;
+                }
+
             }
             catch (Exception e)
             {
                 IM.WriteMessage("SPInventoryVM.IsItemEquipmentPossible threw exception: " + e, IM.MsgType.Warning);
             }
+        }
+
+        private static bool IsBowItem(SPItemVM itemVM)
+        {
+            ItemObject? item = itemVM?.ItemRosterElement.EquipmentElement.Item;
+            return item != null && item.ItemType == ItemObject.ItemTypeEnum.Bow;
+        }
+
+        private static bool IsCurrentGlovesPlate(SPInventoryVM inventoryVM)
+        {
+            ItemObject? gloveItem = inventoryVM?.CharacterGloveSlot?.ItemRosterElement.EquipmentElement.Item;
+            return IsPlateHandArmor(gloveItem);
+        }
+
+        private static bool IsTargetGlovesWithPlateItem(SPInventoryVM inventoryVM, SPItemVM itemVM)
+        {
+            if (inventoryVM == null || itemVM == null)
+            {
+                return false;
+            }
+
+            if (inventoryVM.TargetEquipmentType != EquipmentIndex.Gloves)
+            {
+                return false;
+            }
+
+            ItemObject item = itemVM.ItemRosterElement.EquipmentElement.Item;
+            return IsPlateHandArmor(item);
+        }
+
+        private static bool IsPlateHandArmor(ItemObject? item)
+        {
+            return item != null
+                && item.ItemType == ItemObject.ItemTypeEnum.HandArmor
+                && item.ArmorComponent != null
+                && item.ArmorComponent.MaterialType == ArmorComponent.ArmorMaterialTypes.Plate;
+        }
+
+        private static bool HasAnyBowEquipped(SPInventoryVM inventoryVM)
+        {
+            if (inventoryVM == null)
+            {
+                return false;
+            }
+
+            return IsBowItem(inventoryVM.CharacterWeapon1Slot)
+                || IsBowItem(inventoryVM.CharacterWeapon2Slot)
+                || IsBowItem(inventoryVM.CharacterWeapon3Slot)
+                || IsBowItem(inventoryVM.CharacterWeapon4Slot)
+                || IsBowItem(inventoryVM.CharacterBannerSlot);
         }
     }
 

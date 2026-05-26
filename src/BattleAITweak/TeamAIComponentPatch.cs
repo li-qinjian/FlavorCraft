@@ -27,7 +27,7 @@ namespace FlavorCraft.BattleAI
 
             if (__oldTactic != newTactic)
             {
-                if (newTactic != null && team != null && team.GeneralAgent != null)
+                if (newTactic != null && team != null && team.GeneralAgent != null && team.IsPlayerTeam)
                 {
                     IM.WriteMessage($"{team.GeneralAgent.Name} 采取战术： {newTactic?.GetType().Name}", IM.MsgType.Notify);
                 }

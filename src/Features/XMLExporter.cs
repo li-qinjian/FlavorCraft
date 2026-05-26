@@ -179,244 +179,322 @@ namespace FlavorCraft
         private void exportTree()
         {
             {
-                string text = Path.Combine(BasePath.Name, "Modules/" + string.Concat<char>(from c in XMLExporter.SaveFileName
+                string path = Path.Combine(BasePath.Name, "Modules/" + string.Concat<char>(from c in XMLExporter.SaveFileName
                                                                                            where !char.IsWhiteSpace(c)
-                                                                                           select c) + "/ModuleData/troops.xml");
-                InformationManager.DisplayMessage(new InformationMessage("部队树导出到 " + text));
-                string text2 = "";
-                text2 += "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
-                text2 += "<NPCCharacters>\n";
-                foreach (CharacterObject character in GetBookmarkedUnits(Occupation.Soldier))
-                {
-                    this.exportCharacter(character, ref text2);
-                }
-                foreach (CharacterObject character in GetBookmarkedUnits(Occupation.Mercenary))
-                {
-                    this.exportCharacter(character, ref text2);
-                }
-                text2 += "</NPCCharacters>\n";
-                File.WriteAllText(text, text2);
+                                                                                           select c) + "/ModuleData");
+                List<CharacterObject> troops = GetBookmarkedUnits(Occupation.Soldier);
+                troops.AddRange(GetBookmarkedUnits(Occupation.Mercenary));
+                troops.AddRange(GetBookmarkedUnits(Occupation.Bandit));
+
+                this.exportCharacterAsXSLT(troops, Path.Combine(path, "troops.xslt"));
+                InformationManager.DisplayMessage(new InformationMessage("部队树导出到 " + Path.Combine(path, "troops.xslt")));
             }
 
-            {
-                string text = Path.Combine(BasePath.Name, "Modules/" + string.Concat<char>(from c in XMLExporter.SaveFileName
-                                                                                           where !char.IsWhiteSpace(c)
-                                                                                           select c) + "/ModuleData/bandits.xml");
-                InformationManager.DisplayMessage(new InformationMessage("部队树导出到 " + text));
-                string text2 = "";
-                text2 += "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
-                text2 += "<NPCCharacters>\n";
-                foreach (CharacterObject character in GetBookmarkedUnits(Occupation.Bandit))
-                {
-                    this.exportCharacter(character, ref text2);
-                }
-                text2 += "</NPCCharacters>\n";
-                File.WriteAllText(text, text2);
-            }
+            //{
+            //    string text = Path.Combine(BasePath.Name, "Modules/" + string.Concat<char>(from c in XMLExporter.SaveFileName
+            //                                                                               where !char.IsWhiteSpace(c)
+            //                                                                               select c) + "/ModuleData/bandits.xml");
+            //    InformationManager.DisplayMessage(new InformationMessage("部队树导出到 " + text));
+            //    string text2 = "";
+            //    text2 += "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
+            //    text2 += "<NPCCharacters>\n";
+            //    foreach (CharacterObject character in GetBookmarkedUnits(Occupation.Bandit))
+            //    {
+            //        this.exportCharacter(character, ref text2);
+            //    }
+            //    text2 += "</NPCCharacters>\n";
+            //    File.WriteAllText(text, text2);
+            //}
         }
 
-        private string getFaceKey(string cultureId)
+        private void exportCharacterAsXSLT(List<CharacterObject> characters, string filePath)
         {
-            string faceKeyId = cultureId;
+            string xslt = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+            xslt += "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n";
+            xslt += "\t<xsl:output method=\"xml\" indent=\"yes\"/>\n";
 
-            if (cultureId == "looters" || cultureId == "neutral_culture")
-                faceKeyId = "empire";
-            else if (cultureId == "forest_bandits")
-                faceKeyId = "vlandia";
-            else if (cultureId == "steppe_bandits")
-                faceKeyId = "khuzait";
-            else if (cultureId == "mountain_bandits")
-                faceKeyId = "battania";
-            else if (cultureId == "sea_raiders" || cultureId == "nord" || cultureId == "vakken")
-                faceKeyId = "sturgia";
-            else if (cultureId == "desert_bandits" || cultureId == "darshi")
-                faceKeyId = "aserai";
-            else
-                faceKeyId = cultureId;
+            // Identity template - copy all nodes unchanged
+            xslt += "\t<xsl:template match=\"@*|node()\">\n";
+            xslt += "\t\t<xsl:copy>\n";
+            xslt += "\t\t\t<xsl:apply-templates select=\"@*|node()\"/>\n";
+            xslt += "\t\t</xsl:copy>\n";
+            xslt += "\t</xsl:template>\n";
 
-            return faceKeyId;
-        }
+            // Create specific templates for each character
+            foreach (CharacterObject character in characters)
+            {
+                // Skills template
+                xslt += "\t<xsl:template match=\"NPCCharacter[@id='copy_" + character.StringId + "']/skills\">\n";
+                xslt += "\t\t<skills>\n";
+                xslt += "\t\t\t<skill id=\"Athletics\" value=\"" + character.GetSkillValue(DefaultSkills.Athletics) + "\"/>\n";
+                xslt += "\t\t\t<skill id=\"Riding\" value=\"" + character.GetSkillValue(DefaultSkills.Riding) + "\"/>\n";
+                xslt += "\t\t\t<skill id=\"OneHanded\" value=\"" + character.GetSkillValue(DefaultSkills.OneHanded) + "\"/>\n";
+                xslt += "\t\t\t<skill id=\"TwoHanded\" value=\"" + character.GetSkillValue(DefaultSkills.TwoHanded) + "\"/>\n";
+                xslt += "\t\t\t<skill id=\"Polearm\" value=\"" + character.GetSkillValue(DefaultSkills.Polearm) + "\"/>\n";
+                xslt += "\t\t\t<skill id=\"Bow\" value=\"" + character.GetSkillValue(DefaultSkills.Bow) + "\"/>\n";
+                xslt += "\t\t\t<skill id=\"Crossbow\" value=\"" + character.GetSkillValue(DefaultSkills.Crossbow) + "\"/>\n";
+                xslt += "\t\t\t<skill id=\"Throwing\" value=\"" + character.GetSkillValue(DefaultSkills.Throwing) + "\"/>\n";
+                xslt += "\t\t</skills>\n";
+                xslt += "\t</xsl:template>\n";
 
-        private void exportCharacter(CharacterObject character, ref string s)
-        {
-            s = s + "\t<NPCCharacter id=\"copy_" + character.StringId + "\"\n";
-            if (character.IsFemale)
-            {
-                s = s + "\t\tis_female=\"true\"\n";
-            }
-            s = s + "\t\tdefault_group=\"" + character.DefaultFormationClass.ToString() + "\"\n";
-            s = s + "\t\tlevel=\"" + character.Level.ToString() + "\"\n";
-            s = string.Concat(new string[]
-            {
-                s,
-                "\t\tname=\"{=!}「",
-                character.Name.ToString(),
-                "」\"\n"
-            });
-            //bool flag = character.UpgradeRequiresItemFromCategory != null;
-            if (character.UpgradeRequiresItemFromCategory != null)
-            {
-                s = s + "\t\tupgrade_requires=\"ItemCategory." + character.UpgradeRequiresItemFromCategory.StringId + "\"\n";
-            }
-            s = s + "\t\toccupation=\"" + character.Occupation.ToString() + "\"\n";
-            if (character.IsBasicTroop)
-            {
-                s = s + "\t\tis_basic_troop=\"true\"\n";
-            }
-            s = s + "\t\tculture=\"Culture." + character.Culture.StringId + "\">\n";
-            s += "\t\t<face>\n";
-            s = s + "\t\t\t<face_key_template value=\"BodyProperty.villager_" + getFaceKey(character.Culture.StringId) + "\"/>\n";
-            s += "\t\t</face>\n";
-            s += "\t\t<skills >\n";
-            s = s + "\t\t\t<skill id=\"Athletics\" value=\"" + character.GetSkillValue(DefaultSkills.Athletics).ToString() + "\"/>\n";
-            s = s + "\t\t\t<skill id=\"Riding\" value=\"" + character.GetSkillValue(DefaultSkills.Riding).ToString() + "\"/>\n";
-            s = s + "\t\t\t<skill id=\"OneHanded\" value=\"" + character.GetSkillValue(DefaultSkills.OneHanded).ToString() + "\"/>\n";
-            s = s + "\t\t\t<skill id=\"TwoHanded\" value=\"" + character.GetSkillValue(DefaultSkills.TwoHanded).ToString() + "\"/>\n";
-            s = s + "\t\t\t<skill id=\"Polearm\" value=\"" + character.GetSkillValue(DefaultSkills.Polearm).ToString() + "\"/>\n";
-            s = s + "\t\t\t<skill id=\"Bow\" value=\"" + character.GetSkillValue(DefaultSkills.Bow).ToString() + "\"/>\n";
-            s = s + "\t\t\t<skill id=\"Crossbow\" value=\"" + character.GetSkillValue(DefaultSkills.Crossbow).ToString() + "\"/>\n";
-            s = s + "\t\t\t<skill id=\"Throwing\" value=\"" + character.GetSkillValue(DefaultSkills.Throwing).ToString() + "\"/>\n";
-            s += "\t\t</skills>\n";
-            //bool flag2 = character.UpgradeTargets != null && character.UpgradeTargets.Length != 0;
-            if (character.UpgradeTargets != null && character.UpgradeTargets.Length != 0)
-            {
-                s += "\t\t<upgrade_targets>\n";
-                s = s + "\t\t\t<upgrade_target id=\"NPCCharacter." + character.UpgradeTargets[0].StringId + "\"/>\n";
-                bool flag3 = character.UpgradeTargets.Length > 1;
-                if (flag3)
+                // Equipments template
+                xslt += "\t<xsl:template match=\"NPCCharacter[@id='copy_" + character.StringId + "']/Equipments\">\n";
+                xslt += "\t\t<Equipments>\n";
+
+                List<Equipment> battleEquips = character.BattleEquipments.ToList();
+                List<Equipment> civilianEquips = character.CivilianEquipments.ToList();
+
+                // Battle equipments
+                foreach (Equipment equip in battleEquips)
                 {
-                    s = s + "\t\t\t<upgrade_target id=\"NPCCharacter." + character.UpgradeTargets[1].StringId + "\"/>\n";
+                    this.exportEquipmentToXSLT(equip, ref xslt, false);
                 }
-                s += "\t\t</upgrade_targets>\n";
-            }
-            s += "\t\t<Equipments>\n";
-            List<Equipment> list = character.BattleEquipments.ToList();
-            List<Equipment> list2 = character.CivilianEquipments.ToList();
-            foreach (Equipment equip in list)
-            {
-                this.exportEquipmentRoaster(equip, ref s, false);
+
+                // Civilian equipments
+                foreach (Equipment equip in civilianEquips)
+                {
+                    this.exportEquipmentToXSLT(equip, ref xslt, true);
+                }
+
+                xslt += "\t\t</Equipments>\n";
+                xslt += "\t</xsl:template>\n";
             }
 
-            foreach (Equipment equip2 in list2)
-            {
-                this.exportEquipmentRoaster(equip2, ref s, true);
-            }
-            s += "\t\t</Equipments>\n";
-            s += "\t</NPCCharacter>\n";
+            xslt += "</xsl:stylesheet>\n";
+            File.WriteAllText(filePath, xslt);
         }
 
-        private void exportEquipmentRoaster(Equipment equipment, ref string s, bool isCivilian)
+        private void exportEquipmentToXSLT(Equipment equipment, ref string xslt, bool isCivilian)
         {
             if (isCivilian)
             {
-                s += "\t\t\t<EquipmentRoster civilian=\"true\">\n";
+                xslt += "\t\t\t<EquipmentRoster civilian=\"true\">\n";
             }
             else
             {
-                s += "\t\t\t<EquipmentRoster>\n";
-            }
-            bool flag = equipment[EquipmentIndex.Weapon0].Item != null;
-            if (flag)
-            {
-                ItemObject item = equipment[EquipmentIndex.Weapon0].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Item0\" id=\"Item." + equipment[EquipmentIndex.Weapon0].Item.StringId + "\"/>\n";
-            }
-            bool flag2 = equipment[EquipmentIndex.Weapon1].Item != null;
-            if (flag2)
-            {
-                ItemObject item = equipment[EquipmentIndex.Weapon1].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Item1\" id=\"Item." + equipment[EquipmentIndex.Weapon1].Item.StringId + "\"/>\n";
-            }
-            bool flag3 = equipment[EquipmentIndex.Weapon2].Item != null;
-            if (flag3)
-            {
-                ItemObject item = equipment[EquipmentIndex.Weapon2].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Item2\" id=\"Item." + equipment[EquipmentIndex.Weapon2].Item.StringId + "\"/>\n";
-            }
-            bool flag4 = equipment[EquipmentIndex.Weapon3].Item != null;
-            if (flag4)
-            {
-                ItemObject item = equipment[EquipmentIndex.Weapon3].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Item3\" id=\"Item." + equipment[EquipmentIndex.Weapon3].Item.StringId + "\"/>\n";
-            }
-            bool flag5 = equipment[EquipmentIndex.Head].Item != null;
-            if (flag5)
-            {
-                ItemObject item = equipment[EquipmentIndex.Head].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Head\" id=\"Item." + equipment[EquipmentIndex.Head].Item.StringId + "\"/>\n";
-            }
-            bool flag7 = equipment[EquipmentIndex.Body].Item != null;
-            if (flag7)
-            {
-                ItemObject item = equipment[EquipmentIndex.Body].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Body\" id=\"Item." + equipment[EquipmentIndex.Body].Item.StringId + "\"/>\n";
-            }
-            bool flag9 = equipment[EquipmentIndex.Leg].Item != null;
-            if (flag9)
-            {
-                ItemObject item = equipment[EquipmentIndex.Leg].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Leg\" id=\"Item." + equipment[EquipmentIndex.Leg].Item.StringId + "\"/>\n";
-            }
-            bool flag8 = equipment[EquipmentIndex.Gloves].Item != null;
-            if (flag8)
-            {
-                ItemObject item = equipment[EquipmentIndex.Gloves].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Gloves\" id=\"Item." + equipment[EquipmentIndex.Gloves].Item.StringId + "\"/>\n";
+                xslt += "\t\t\t<EquipmentRoster>\n";
             }
 
-            bool flag6 = equipment[EquipmentIndex.Cape].Item != null;
-            if (flag6)
+            string[] equipmentSlots = { "Item0", "Item1", "Item2", "Item3", "Head", "Body", "Leg", "Gloves", "Cape", "Horse", "HorseHarness" };
+            EquipmentIndex[] equipmentIndices = { EquipmentIndex.Weapon0, EquipmentIndex.Weapon1, EquipmentIndex.Weapon2, EquipmentIndex.Weapon3, EquipmentIndex.Head, EquipmentIndex.Body, EquipmentIndex.Leg, EquipmentIndex.Gloves, EquipmentIndex.Cape, EquipmentIndex.Horse, EquipmentIndex.HorseHarness };
+
+            for (int i = 0; i < equipmentSlots.Length; i++)
             {
-                ItemObject item = equipment[EquipmentIndex.Cape].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Cape\" id=\"Item." + equipment[EquipmentIndex.Cape].Item.StringId + "\"/>\n";
+                if (equipment[equipmentIndices[i]].Item != null)
+                {
+                    ItemObject item = equipment[equipmentIndices[i]].Item;
+                    string itemName = item.Name.ToString();
+                    string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+                    xslt += "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+                    xslt += "\t\t\t\t<equipment slot=\"" + equipmentSlots[i] + "\" id=\"Item." + item.StringId + "\"/>\n";
+                }
             }
-            bool flag10 = equipment[EquipmentIndex.Horse].Item != null;
-            if (flag10)
-            {
-                ItemObject item = equipment[EquipmentIndex.Horse].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"Horse\" id=\"Item." + equipment[EquipmentIndex.Horse].Item.StringId + "\"/>\n";
-            }
-            bool flag11 = equipment[EquipmentIndex.HorseHarness].Item != null;
-            if (flag11)
-            {
-                ItemObject item = equipment[EquipmentIndex.HorseHarness].Item;
-                string itemName = item.Name.ToString();
-                string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
-                s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
-                s = s + "\t\t\t\t<equipment slot=\"HorseHarness\" id=\"Item." + equipment[EquipmentIndex.HorseHarness].Item.StringId + "\"/>\n";
-            }
-            s += "\t\t\t</EquipmentRoster>\n";
+
+            xslt += "\t\t\t</EquipmentRoster>\n";
         }
+
+        //private string getFaceKey(string cultureId)
+        //{
+        //    string faceKeyId = cultureId;
+
+        //    if (cultureId == "looters" || cultureId == "neutral_culture")
+        //        faceKeyId = "empire";
+        //    else if (cultureId == "forest_bandits")
+        //        faceKeyId = "vlandia";
+        //    else if (cultureId == "steppe_bandits")
+        //        faceKeyId = "khuzait";
+        //    else if (cultureId == "mountain_bandits")
+        //        faceKeyId = "battania";
+        //    else if (cultureId == "sea_raiders" || cultureId == "nord" || cultureId == "vakken")
+        //        faceKeyId = "sturgia";
+        //    else if (cultureId == "desert_bandits" || cultureId == "darshi")
+        //        faceKeyId = "aserai";
+        //    else
+        //        faceKeyId = cultureId;
+
+        //    return faceKeyId;
+        //}
+
+        //private void exportCharacter(CharacterObject character, ref string s)
+        //{
+        //    s = s + "\t<NPCCharacter id=\"copy_" + character.StringId + "\"\n";
+        //    if (character.IsFemale)
+        //    {
+        //        s = s + "\t\tis_female=\"true\"\n";
+        //    }
+        //    s = s + "\t\tdefault_group=\"" + character.DefaultFormationClass.ToString() + "\"\n";
+        //    s = s + "\t\tlevel=\"" + character.Level.ToString() + "\"\n";
+        //    s = string.Concat(new string[]
+        //    {
+        //        s,
+        //        "\t\tname=\"{=!}「",
+        //        character.Name.ToString(),
+        //        "」\"\n"
+        //    });
+        //    //bool flag = character.UpgradeRequiresItemFromCategory != null;
+        //    if (character.UpgradeRequiresItemFromCategory != null)
+        //    {
+        //        s = s + "\t\tupgrade_requires=\"ItemCategory." + character.UpgradeRequiresItemFromCategory.StringId + "\"\n";
+        //    }
+        //    s = s + "\t\toccupation=\"" + character.Occupation.ToString() + "\"\n";
+        //    if (character.IsBasicTroop)
+        //    {
+        //        s = s + "\t\tis_basic_troop=\"true\"\n";
+        //    }
+        //    s = s + "\t\tculture=\"Culture." + character.Culture.StringId + "\">\n";
+        //    s += "\t\t<face>\n";
+        //    s = s + "\t\t\t<face_key_template value=\"BodyProperty.villager_" + getFaceKey(character.Culture.StringId) + "\"/>\n";
+        //    s += "\t\t</face>\n";
+        //    s += "\t\t<skills >\n";
+        //    s = s + "\t\t\t<skill id=\"Athletics\" value=\"" + character.GetSkillValue(DefaultSkills.Athletics).ToString() + "\"/>\n";
+        //    s = s + "\t\t\t<skill id=\"Riding\" value=\"" + character.GetSkillValue(DefaultSkills.Riding).ToString() + "\"/>\n";
+        //    s = s + "\t\t\t<skill id=\"OneHanded\" value=\"" + character.GetSkillValue(DefaultSkills.OneHanded).ToString() + "\"/>\n";
+        //    s = s + "\t\t\t<skill id=\"TwoHanded\" value=\"" + character.GetSkillValue(DefaultSkills.TwoHanded).ToString() + "\"/>\n";
+        //    s = s + "\t\t\t<skill id=\"Polearm\" value=\"" + character.GetSkillValue(DefaultSkills.Polearm).ToString() + "\"/>\n";
+        //    s = s + "\t\t\t<skill id=\"Bow\" value=\"" + character.GetSkillValue(DefaultSkills.Bow).ToString() + "\"/>\n";
+        //    s = s + "\t\t\t<skill id=\"Crossbow\" value=\"" + character.GetSkillValue(DefaultSkills.Crossbow).ToString() + "\"/>\n";
+        //    s = s + "\t\t\t<skill id=\"Throwing\" value=\"" + character.GetSkillValue(DefaultSkills.Throwing).ToString() + "\"/>\n";
+        //    s += "\t\t</skills>\n";
+        //    //bool flag2 = character.UpgradeTargets != null && character.UpgradeTargets.Length != 0;
+        //    if (character.UpgradeTargets != null && character.UpgradeTargets.Length != 0)
+        //    {
+        //        s += "\t\t<upgrade_targets>\n";
+        //        s = s + "\t\t\t<upgrade_target id=\"NPCCharacter." + character.UpgradeTargets[0].StringId + "\"/>\n";
+        //        bool flag3 = character.UpgradeTargets.Length > 1;
+        //        if (flag3)
+        //        {
+        //            s = s + "\t\t\t<upgrade_target id=\"NPCCharacter." + character.UpgradeTargets[1].StringId + "\"/>\n";
+        //        }
+        //        s += "\t\t</upgrade_targets>\n";
+        //    }
+        //    s += "\t\t<Equipments>\n";
+        //    List<Equipment> list = character.BattleEquipments.ToList();
+        //    List<Equipment> list2 = character.CivilianEquipments.ToList();
+        //    foreach (Equipment equip in list)
+        //    {
+        //        this.exportEquipmentRoaster(equip, ref s, false);
+        //    }
+
+        //    foreach (Equipment equip2 in list2)
+        //    {
+        //        this.exportEquipmentRoaster(equip2, ref s, true);
+        //    }
+        //    s += "\t\t</Equipments>\n";
+        //    s += "\t</NPCCharacter>\n";
+        //}
+
+        //private void exportEquipmentRoaster(Equipment equipment, ref string s, bool isCivilian)
+        //{
+        //    if (isCivilian)
+        //    {
+        //        s += "\t\t\t<EquipmentRoster civilian=\"true\">\n";
+        //    }
+        //    else
+        //    {
+        //        s += "\t\t\t<EquipmentRoster>\n";
+        //    }
+        //    bool flag = equipment[EquipmentIndex.Weapon0].Item != null;
+        //    if (flag)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Weapon0].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Item0\" id=\"Item." + equipment[EquipmentIndex.Weapon0].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag2 = equipment[EquipmentIndex.Weapon1].Item != null;
+        //    if (flag2)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Weapon1].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Item1\" id=\"Item." + equipment[EquipmentIndex.Weapon1].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag3 = equipment[EquipmentIndex.Weapon2].Item != null;
+        //    if (flag3)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Weapon2].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Item2\" id=\"Item." + equipment[EquipmentIndex.Weapon2].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag4 = equipment[EquipmentIndex.Weapon3].Item != null;
+        //    if (flag4)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Weapon3].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Item3\" id=\"Item." + equipment[EquipmentIndex.Weapon3].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag5 = equipment[EquipmentIndex.Head].Item != null;
+        //    if (flag5)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Head].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Head\" id=\"Item." + equipment[EquipmentIndex.Head].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag7 = equipment[EquipmentIndex.Body].Item != null;
+        //    if (flag7)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Body].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Body\" id=\"Item." + equipment[EquipmentIndex.Body].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag9 = equipment[EquipmentIndex.Leg].Item != null;
+        //    if (flag9)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Leg].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Leg\" id=\"Item." + equipment[EquipmentIndex.Leg].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag8 = equipment[EquipmentIndex.Gloves].Item != null;
+        //    if (flag8)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Gloves].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Gloves\" id=\"Item." + equipment[EquipmentIndex.Gloves].Item.StringId + "\"/>\n";
+        //    }
+
+        //    bool flag6 = equipment[EquipmentIndex.Cape].Item != null;
+        //    if (flag6)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Cape].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Cape\" id=\"Item." + equipment[EquipmentIndex.Cape].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag10 = equipment[EquipmentIndex.Horse].Item != null;
+        //    if (flag10)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.Horse].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"Horse\" id=\"Item." + equipment[EquipmentIndex.Horse].Item.StringId + "\"/>\n";
+        //    }
+        //    bool flag11 = equipment[EquipmentIndex.HorseHarness].Item != null;
+        //    if (flag11)
+        //    {
+        //        ItemObject item = equipment[EquipmentIndex.HorseHarness].Item;
+        //        string itemName = item.Name.ToString();
+        //        string itmCulture = (item.Culture == null) ? "未定义" : item.Culture.StringId;
+        //        s = s + "\t\t\t\t<!--" + itemName + "[" + itmCulture + "]-->\n";
+        //        s = s + "\t\t\t\t<equipment slot=\"HorseHarness\" id=\"Item." + equipment[EquipmentIndex.HorseHarness].Item.StringId + "\"/>\n";
+        //    }
+        //    s += "\t\t\t</EquipmentRoster>\n";
+        //}
 
         public override void SyncData(IDataStore dataStore)
         {

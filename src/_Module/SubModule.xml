@@ -53,12 +53,12 @@
         <!-- <XmlNode>
             <XmlName id="GameText" path="RBMAI_module_strings"/>
         </XmlNode> -->
-        <XmlNode>
+        <!--<XmlNode>
             <XmlName id="NPCCharacters" path="tor_charactertemplates" />
             <IncludedGameTypes>
                 <GameType value="Campaign" />
                 <GameType value="CampaignStoryMode" />
             </IncludedGameTypes>
-        </XmlNode>
+        </XmlNode>-->
     </Xmls>
 </Module>

@@ -105,9 +105,9 @@ namespace FlavorCraft.Settings
         [SettingPropertyGroup(StringConstants.PG_Sundry)]
         public string ItemPrefix { get; set; } = "cla_";
 
-        //[SettingPropertyBool(StringConstants.Settings_Sundry_07, Order = 6, RequireRestart = false, HintText = StringConstants.Settings_Sundry_07_Desc)]
-        //[SettingPropertyGroup(StringConstants.PG_Sundry)]
-        //public bool EnableCRR { get; set; } = false;
+        [SettingPropertyBool(StringConstants.Settings_Sundry_07, Order = 6, RequireRestart = false, HintText = StringConstants.Settings_Sundry_07_Desc)]
+        [SettingPropertyGroup(StringConstants.PG_Sundry)]
+        public bool EnableCRR { get; set; } = false;
 
         #endregion Sundry Options
 

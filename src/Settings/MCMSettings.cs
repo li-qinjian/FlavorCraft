@@ -93,9 +93,9 @@ namespace FlavorCraft.Settings
         [SettingPropertyGroup(StringConstants.PG_Sundry)]
         public bool NoNightBattle { get; set; } = false;
 
-        [SettingPropertyFloatingInteger(StringConstants.Settings_Sundry_04, 0.1f, 1.0f, "0.00", Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Sundry_04_Desc)]
-        [SettingPropertyGroup(StringConstants.PG_Sundry)]
-        public float WondererLostRate { get; set; } = 0.1f;
+        // [SettingPropertyFloatingInteger(StringConstants.Settings_Sundry_04, 0.1f, 1.0f, "0.00", Order = 3, RequireRestart = false, HintText = StringConstants.Settings_Sundry_04_Desc)]
+        // [SettingPropertyGroup(StringConstants.PG_Sundry)]
+        // public float WondererLostRate { get; set; } = 0.1f;
 
         //[SettingPropertyBool(StringConstants.Settings_Sundry_05, Order = 4, RequireRestart = false, HintText = StringConstants.Settings_Sundry_05_Desc)]
         //[SettingPropertyGroup(StringConstants.PG_Sundry)]
@@ -147,6 +147,7 @@ namespace FlavorCraft.Settings
                 //TradingByQuartermaster = false,
 
                 //ShareLoots = false,
+                EnableCRR = false,
 
                 //AI.
                 //DisableClanPartyJoinArmies = false,
@@ -157,7 +158,7 @@ namespace FlavorCraft.Settings
                 NoNightBattle = false,
 
                 //Wanderer
-                WondererLostRate = 0.1f,
+                // WondererLostRate = 0.1f,
 
                 ItemPrefix = "cla_",
             }); ;
@@ -174,7 +175,8 @@ namespace FlavorCraft.Settings
                 //TradingByQuartermaster = true,
 
                 //ShareLoots = true,
-
+                EnableCRR = true,
+                
                 //AI.
                 //DisableClanPartyJoinArmies = true,
                 //UpgradingTroopsConsumingHorses = true,
@@ -184,7 +186,7 @@ namespace FlavorCraft.Settings
                 NoNightBattle = true,
 
                 //Wanderer
-                WondererLostRate = 0.1f,
+                // WondererLostRate = 0.1f,
 
                 ItemPrefix = "cla_",
                 //TroopPanicThreshold = 0.8f,

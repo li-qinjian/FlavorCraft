@@ -183,8 +183,8 @@ namespace FlavorCraft
                                                                                            where !char.IsWhiteSpace(c)
                                                                                            select c) + "/ModuleData");
                 List<CharacterObject> troops = GetBookmarkedUnits(Occupation.Soldier);
-                troops.AddRange(GetBookmarkedUnits(Occupation.Mercenary));
-                troops.AddRange(GetBookmarkedUnits(Occupation.Bandit));
+                //troops.AddRange(GetBookmarkedUnits(Occupation.Mercenary));
+                //troops.AddRange(GetBookmarkedUnits(Occupation.Bandit));
 
                 this.exportCharacterAsXSLT(troops, Path.Combine(path, "troops.xslt"));
                 InformationManager.DisplayMessage(new InformationMessage("部队树导出到 " + Path.Combine(path, "troops.xslt")));
@@ -224,7 +224,7 @@ namespace FlavorCraft
             foreach (CharacterObject character in characters)
             {
                 // Skills template
-                xslt += "\t<xsl:template match=\"NPCCharacter[@id='copy_" + character.StringId + "']/skills\">\n";
+                xslt += "\t<xsl:template match=\"NPCCharacter[@id='" + character.StringId + "']/skills\">\n";
                 xslt += "\t\t<skills>\n";
                 xslt += "\t\t\t<skill id=\"Athletics\" value=\"" + character.GetSkillValue(DefaultSkills.Athletics) + "\"/>\n";
                 xslt += "\t\t\t<skill id=\"Riding\" value=\"" + character.GetSkillValue(DefaultSkills.Riding) + "\"/>\n";
@@ -238,7 +238,7 @@ namespace FlavorCraft
                 xslt += "\t</xsl:template>\n";
 
                 // Equipments template
-                xslt += "\t<xsl:template match=\"NPCCharacter[@id='copy_" + character.StringId + "']/Equipments\">\n";
+                xslt += "\t<xsl:template match=\"NPCCharacter[@id='" + character.StringId + "']/Equipments\">\n";
                 xslt += "\t\t<Equipments>\n";
 
                 List<Equipment> battleEquips = character.BattleEquipments.ToList();
@@ -250,11 +250,11 @@ namespace FlavorCraft
                     this.exportEquipmentToXSLT(equip, ref xslt, false);
                 }
 
-                // Civilian equipments
-                foreach (Equipment equip in civilianEquips)
-                {
-                    this.exportEquipmentToXSLT(equip, ref xslt, true);
-                }
+                //// Civilian equipments
+                //foreach (Equipment equip in civilianEquips)
+                //{
+                //    this.exportEquipmentToXSLT(equip, ref xslt, true);
+                //}
 
                 xslt += "\t\t</Equipments>\n";
                 xslt += "\t</xsl:template>\n";

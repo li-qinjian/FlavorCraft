@@ -60,6 +60,7 @@
         <Compile Remove="BattleAITweak\TacticBreachWallsPatch.cs" />
         <Compile Remove="BattleAITweak\Utilities.cs" />
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
+        <Compile Remove="CRR\DefaultBattleRewardModelPatch.cs" />
         <Compile Remove="CRR\LootCollectorPatch.cs" />
         <Compile Remove="CRR\MapEventSidePatch.cs" />
         <Compile Remove="CRR\PlayerTownVisitCampaignBehaviorPatch.cs" />

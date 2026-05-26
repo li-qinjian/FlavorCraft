@@ -179,19 +179,25 @@ namespace FlavorCraft
 
         public void openArmoury(bool elite)
         {
-            if (Hero.MainHero.Gold < 100000)
-                GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, 100000, false);
+            if (Hero.MainHero.Gold < 1000000)
+                GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, 1000000, false);
 
             ItemRoster itemRoster = new ItemRoster();
             foreach (ItemObject itemObject in Items.All)
             {
-                if (itemObject.Culture != Settlement.CurrentSettlement.Culture || itemObject.IsCraftedByPlayer)
+                if (itemObject.IsCraftedByPlayer)
                     continue;
 
-                if (elite && itemObject.Tier <= ItemObject.ItemTiers.Tier3)
+                if (elite && itemObject.Culture != Settlement.CurrentSettlement.Culture)
                     continue;
-                else if (!elite && itemObject.Tier > ItemObject.ItemTiers.Tier3)
+
+                if (!elite && itemObject.Culture == Settlement.CurrentSettlement.Culture)
                     continue;
+
+                //if (elite && itemObject.Tier <= ItemObject.ItemTiers.Tier3)
+                //    continue;
+                //else if (!elite && itemObject.Tier > ItemObject.ItemTiers.Tier3)
+                //    continue;
 
                 if (Statics._settings is not null && !Statics._settings.ItemPrefix.IsEmpty())
                 {

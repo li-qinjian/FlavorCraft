@@ -148,13 +148,13 @@ namespace FlavorCraft
             s += "\t\t\t\t<GameType value =\"EditorGame\"/>\n";
             s += "\t\t\t</IncludedGameTypes>\n";
             s += "\t\t</XmlNode>\n";
-            s += "\t\t<XmlNode>\n";
-            s += "\t\t\t<XmlName id=\"NPCCharacters\" path=\"bandits\"/>\n";
-            s += "\t\t\t<IncludedGameTypes>\n";
-            s += "\t\t\t\t<GameType value=\"Campaign\"/>\n";
-            s += "\t\t\t\t<GameType value=\"CampaignStoryMode\"/>\n";
-            s += "\t\t\t</IncludedGameTypes>\n";
-            s += "\t\t</XmlNode>\n";
+            // s += "\t\t<XmlNode>\n";
+            // s += "\t\t\t<XmlName id=\"NPCCharacters\" path=\"bandits\"/>\n";
+            // s += "\t\t\t<IncludedGameTypes>\n";
+            // s += "\t\t\t\t<GameType value=\"Campaign\"/>\n";
+            // s += "\t\t\t\t<GameType value=\"CampaignStoryMode\"/>\n";
+            // s += "\t\t\t</IncludedGameTypes>\n";
+            // s += "\t\t</XmlNode>\n";
             s += "\t</Xmls>\n";
             s += "</Module>\n";
             File.WriteAllText(path, s);
@@ -183,8 +183,8 @@ namespace FlavorCraft
                                                                                            where !char.IsWhiteSpace(c)
                                                                                            select c) + "/ModuleData");
                 List<CharacterObject> troops = GetBookmarkedUnits(Occupation.Soldier);
-                //troops.AddRange(GetBookmarkedUnits(Occupation.Mercenary));
-                //troops.AddRange(GetBookmarkedUnits(Occupation.Bandit));
+                troops.AddRange(GetBookmarkedUnits(Occupation.Mercenary));
+                troops.AddRange(GetBookmarkedUnits(Occupation.Bandit));
 
                 this.exportCharacterAsXSLT(troops, Path.Combine(path, "troops.xslt"));
                 InformationManager.DisplayMessage(new InformationMessage("部队树导出到 " + Path.Combine(path, "troops.xslt")));
@@ -250,6 +250,7 @@ namespace FlavorCraft
                     this.exportEquipmentToXSLT(equip, ref xslt, false);
                 }
 
+                xslt += "\t\t\t<xsl:copy-of select=\"EquipmentSet\"/>\n";
                 //// Civilian equipments
                 //foreach (Equipment equip in civilianEquips)
                 //{

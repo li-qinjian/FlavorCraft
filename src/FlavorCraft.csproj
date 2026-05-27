@@ -60,11 +60,6 @@
         <Compile Remove="BattleAITweak\TacticBreachWallsPatch.cs" />
         <Compile Remove="BattleAITweak\Utilities.cs" />
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
-        <Compile Remove="CRR\DefaultBattleRewardModelPatch.cs" />
-        <Compile Remove="CRR\LootCollectorPatch.cs" />
-        <Compile Remove="CRR\MapEventSidePatch.cs" />
-        <Compile Remove="CRR\PlayerTownVisitCampaignBehaviorPatch.cs" />
-        <Compile Remove="CRR\RecruitmentCampaignBehaviorPatch.cs" />
         <Compile Remove="EconomicTweaks\DefaultItemValueModelPatch.cs" />
         <Compile Remove="EconomicTweaks\DefaultPrisonerRecruitmentCalculationModel_Patch.cs" />
         <Compile Remove="EconomicTweaks\DefaultTradeItemPriceFactorModelPatch.cs" />

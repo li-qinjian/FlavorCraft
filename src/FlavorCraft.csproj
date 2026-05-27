@@ -13,16 +13,8 @@
 
     <ItemGroup>
     <Compile Remove="CombatTweaks\**" />
-    <Compile Remove="Helpers\**" />
-    <Compile Remove="NeatedNPCsupgradeEquipment\**" />
-    <EmbeddedResource Remove="BannerBearerFix\**" />
-    <EmbeddedResource Remove="BattleAITweak\AiModule\**" />
     <EmbeddedResource Remove="CombatTweaks\**" />
-    <EmbeddedResource Remove="Helpers\**" />
-    <EmbeddedResource Remove="NeatedNPCsupgradeEquipment\**" />
     <None Remove="CombatTweaks\**" />
-    <None Remove="Helpers\**" />
-    <None Remove="NeatedNPCsupgradeEquipment\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,10 +22,6 @@
     <PackageReference Include="Bannerlord.BuildResources" Version="1.1.0.104" PrivateAssets="all" />
     <PackageReference Include="Bannerlord.ReferenceAssemblies" Version="1.3.15.110062" />
     <PackageReference Include="Lib.Harmony" Version="2.4.2" IncludeAssets="compile" />
-    <!-- <PackageReference Include="Bannerlord.BUTR.Shared" Version="3.0.0.142">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference> -->
     <PackageReference Include="Bannerlord.MCM" Version="5.11.3" IncludeAssets="compile" />
     <PackageReference Include="Harmony.Extensions" Version="3.1.0.61" PrivateAssets="all" IncludeAssets="contentfiles" />
     </ItemGroup>
@@ -50,9 +38,6 @@
         <Compile Remove="EconomicTweaks\DefaultItemValueModelPatch.cs" />
         <Compile Remove="EconomicTweaks\DefaultPrisonerRecruitmentCalculationModel_Patch.cs" />
         <Compile Remove="EconomicTweaks\ItemModifier_Patch.cs" />
-        <Compile Remove="Features\ArmouryItem.cs" />
-        <Compile Remove="Features\LoadCAConstantsBehavior.cs" />
-        <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
         <Compile Remove="Patches\DefaultSkillLevelingManager.cs" />
         <Compile Remove="Patches\EquipmentElementPatch.cs" />
         <Compile Remove="Patches\PartySpeedCalculatingPatch.cs" />

@@ -12,24 +12,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-    <Compile Remove="BannerBearerFix\**" />
-    <Compile Remove="BattleAITweak\AiModule\**" />
     <Compile Remove="CombatTweaks\**" />
     <Compile Remove="Helpers\**" />
     <Compile Remove="NeatedNPCsupgradeEquipment\**" />
-    <Compile Remove="showTraitExp\**" />
     <EmbeddedResource Remove="BannerBearerFix\**" />
     <EmbeddedResource Remove="BattleAITweak\AiModule\**" />
     <EmbeddedResource Remove="CombatTweaks\**" />
     <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="NeatedNPCsupgradeEquipment\**" />
-    <EmbeddedResource Remove="showTraitExp\**" />
-    <None Remove="BannerBearerFix\**" />
-    <None Remove="BattleAITweak\AiModule\**" />
     <None Remove="CombatTweaks\**" />
     <None Remove="Helpers\**" />
     <None Remove="NeatedNPCsupgradeEquipment\**" />
-    <None Remove="showTraitExp\**" />
     </ItemGroup>
 
     <ItemGroup>
@@ -53,19 +46,10 @@
     </ItemGroup>-->
     
     <ItemGroup>
-        <Compile Remove="BattleAITweak\CommonAIComponentPatch.cs" />
-        <Compile Remove="BattleAITweak\GeneralsAndCaptainsAssignmentLogicPatch.cs" />
-        <Compile Remove="BattleAITweak\MapEventSidePatch.cs" />
-        <Compile Remove="BattleAITweak\RBMAIPatcher.cs" />
-        <Compile Remove="BattleAITweak\TacticBreachWallsPatch.cs" />
-        <Compile Remove="BattleAITweak\Utilities.cs" />
         <Compile Remove="battleAI\CommonAIComponentPatch.cs" />
         <Compile Remove="EconomicTweaks\DefaultItemValueModelPatch.cs" />
         <Compile Remove="EconomicTweaks\DefaultPrisonerRecruitmentCalculationModel_Patch.cs" />
-        <Compile Remove="EconomicTweaks\DefaultTradeItemPriceFactorModelPatch.cs" />
         <Compile Remove="EconomicTweaks\ItemModifier_Patch.cs" />
-        <Compile Remove="EconomicTweaks\LootCollectorPatch.cs" />
-        <Compile Remove="EconomicTweaks\MapEventPatch.cs" />
         <Compile Remove="Features\ArmouryItem.cs" />
         <Compile Remove="Features\LoadCAConstantsBehavior.cs" />
         <Compile Remove="IsExternalInit.cs" Condition="'$(TargetFramework)' == 'net5.0'" />
@@ -73,9 +57,6 @@
         <Compile Remove="Patches\EquipmentElementPatch.cs" />
         <Compile Remove="Patches\PartySpeedCalculatingPatch.cs" />
         <Compile Remove="Patches\PartyUpgraderPatch.cs" />
-        <Compile Remove="Patches\XMLParserAddons.cs" />
-        <Compile Remove="Utils\AgentCountCheck.cs" />
-        <Compile Remove="Utils\IbsBattleCheck.cs" />
     </ItemGroup>
     
     <ItemGroup>

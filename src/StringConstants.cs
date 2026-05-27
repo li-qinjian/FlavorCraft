@@ -40,8 +40,8 @@ namespace FlavorCraft {
         //public const string Settings_Sundry_05 = "{=Settings_Sundry_05}Extra Companion";
         //public const string Settings_Sundry_05_Desc = "{=Settings_Sundry_05_Desc}Extra Companion from tire[Native: 0].";
 
-        public const string Settings_Sundry_06 = "{=Settings_Sundry_06}Browse Armory";
-        public const string Settings_Sundry_06_Desc = "{=Settings_Sundry_06_Desc}Item prefix.";
+        public const string Settings_Sundry_06 = "{=Settings_Sundry_06}Item Prefixes";
+        public const string Settings_Sundry_06_Desc = "{=Settings_Sundry_06_Desc}Item prefixes, separated by comma/semicolon/pipe. Example: cla_,emp_,aser_.";
 
         public const string Settings_Sundry_07 = "{=Settings_Sundry_07}CRR.";
         public const string Settings_Sundry_07_Desc = "{=Settings_Sundry_07_Desc}CRR_Desc [Native : false].";

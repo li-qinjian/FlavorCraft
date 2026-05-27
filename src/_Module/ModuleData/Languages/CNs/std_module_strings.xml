@@ -36,7 +36,7 @@
         <string id="Settings_Sundry_05" text="分享战利品" />
         <string id="Settings_Sundry_05_Desc" text="分享战利品[默认: false]." />
         <string id="Settings_Sundry_06" text="物品前缀" />
-        <string id="Settings_Sundry_06_Desc" text="物品前缀[默认'cla_']." />
+        <string id="Settings_Sundry_06_Desc" text="支持多个前缀，使用逗号/分号/竖线分隔。例如: cla_,emp_,aser_。默认: cla_." />
         <string id="Settings_Sundry_07" text="文化限制" />
         <string id="Settings_Sundry_07_Desc" text="限制招募异文化兵种 [默认 : false]." />
         
@@ -60,7 +60,7 @@
 
         <!-- Notify Messages -->
         <string id="FC_MSG_1" text="额外武器槽已经装备了旗帜，请先移除旗帜在装备武器." />
-        <string id="FC_MSG_2" text="攻击方伤亡率: {RATE}." />
+        <!--<string id="FC_MSG_2" text="攻击方伤亡率: {RATE}." />-->
         
         <!-- ShowTraitExp Messages -->
         <!--<string id="cKKYSB0z" text="你失去了 {AMOUNT} {GOLD_ICON}." />
@@ -87,9 +87,9 @@
         <string id="RBM_STR_013" text="[*]我们打算让射手在侧翼构筑防线。" />
         <string id="RBM_STR_014" text="[*]我们打算率领骑兵正面冲锋，冲散敌方阵型。" />-->
 
-        <string id="RBM_STR_AS" text="[*]{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{?}{\?}{TROOP_NAMES_END}正在游击。"/>
+        <!--<string id="RBM_STR_AS" text="[*]{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{?}{\?}{TROOP_NAMES_END}正在游击。"/>
         <string id="RBM_STR_CC" text="[*]{TROOP_NAMES_BEGIN}{?IS_PLURAL}和{?}{\?}{TROOP_NAMES_END}正在向{?IS_PLURAL}多支敌军编队{?}一支敌军编队{\?}发起冲锋。"/>
-        <string id="RBM_STR_IAF" text="[*]{?IS_GENERAL_SIDE}侧{?}{SIDE_STRING}{\?}翼包抄"/>
+        <string id="RBM_STR_IAF" text="[*]{?IS_GENERAL_SIDE}侧{?}{SIDE_STRING}{\?}翼包抄"/>-->
         
         <!-- Vanilla CNS -->
         <!--<string id="DI9P2HDG" text="堆叠锥头箭"/>

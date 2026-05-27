@@ -25,86 +25,18 @@ namespace FlavorCraft
             CampaignEvents.OnSessionLaunchedEvent.AddNonSerializedListener(this, new Action<CampaignGameStarter>(this.MenuItems));
         }
 
-        private bool isRegularTroop(CharacterObject _character)
-        {
-            bool flag = (!_character.IsHero && (_character.Occupation == Occupation.Soldier || _character.Occupation == Occupation.Bandit || _character.Occupation == Occupation.Mercenary));
-
-            return flag;
-        }
-        //private void OnGameLoadFinished()
-        //{
-        //    //if (Statics._settings is not null && !Statics._settings.Debug)
-        //    //    return;
-
-        //    foreach (CharacterObject characterObject in Campaign.Current.Characters)
-        //    {
-        //        if (isRegularTroop(characterObject) && characterObject.StringId.StartsWith("tor_"))
-        //        {
-        //            CharacterObject tor_troop = Game.Current.ObjectManager.GetObject<CharacterObject>(characterObject.StringId);
-        //            if (tor_troop != null && Campaign.Current.EncyclopediaManager.ViewDataTracker.IsEncyclopediaBookmarked(tor_troop))
-        //            {
-        //                string name = characterObject.Name.ToString();
-        //                int tier = characterObject.Tier;
-
-        //                HashSet<SkillObject> relevantSkills = new HashSet<SkillObject>();
-        //                // 获取所有战斗装备（排除民用装备）
-        //                List<Equipment> battleEquipments = characterObject.BattleEquipments.ToList();
-        //                foreach (Equipment eupipment in battleEquipments)
-        //                {
-        //                    for (EquipmentIndex equipmentIndex = EquipmentIndex.WeaponItemBeginSlot; equipmentIndex < EquipmentIndex.NumEquipmentSetSlots; equipmentIndex++)
-        //                    {
-        //                        EquipmentElement itemRosterElement = eupipment[equipmentIndex];
-        //                        if (itemRosterElement.Item != null)
-        //                        {
-        //                            SkillObject skill = itemRosterElement.Item.RelevantSkill;
-        //                            if (skill != null)
-        //                                relevantSkills.Add(skill);
-        //                        }
-        //                    }
-        //                }
-
-        //                IM.WriteMessage("update skills of :" + name, IM.MsgType.Notify);
-
-        //                HashSet<SkillObject> wholeSkills = new HashSet<SkillObject>();
-        //                wholeSkills.Add(DefaultSkills.OneHanded);
-        //                wholeSkills.Add(DefaultSkills.TwoHanded);
-        //                wholeSkills.Add(DefaultSkills.Polearm);
-        //                wholeSkills.Add(DefaultSkills.Bow);
-        //                wholeSkills.Add(DefaultSkills.Crossbow);
-        //                wholeSkills.Add(DefaultSkills.Throwing);
-        //                wholeSkills.Add(DefaultSkills.Riding);
-        //                wholeSkills.Add(DefaultSkills.Athletics);
-
-        //                MBCharacterSkills mbSkills = MBObjectManager.Instance.CreateObject<MBCharacterSkills>(characterObject.StringId);
-        //                foreach (SkillObject skill in wholeSkills)
-        //                {
-        //                    mbSkills.Skills.SetPropertyValue(skill, tier * 10);
-        //                }
-        //                foreach (SkillObject skill in relevantSkills)
-        //                {
-        //                    mbSkills.Skills.SetPropertyValue(skill, tier * 30);
-        //                }
-
-        //                FieldInfo fieldSkills = characterObject.GetType().GetField("DefaultCharacterSkills", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        //                if (fieldSkills != null)
-        //                {
-        //                    fieldSkills.SetValue(characterObject, mbSkills);
-        //                }
-        //            }
-                    
-        //        }
-        //    }
-        //}
-
         private bool game_menu_browse_armory_on_condition(MenuCallbackArgs args)
         {
-            bool flag = false;
-            if (Statics._settings is not null && Statics._settings.Debug)
+            bool isDebugMode = Statics._settings?.Debug == true;
+            bool isPlayerClanTown = Settlement.CurrentSettlement?.OwnerClan == Clan.PlayerClan;
+
+            if (isDebugMode || isPlayerClanTown)
             {
                 args.optionLeaveType = GameMenuOption.LeaveType.HostileAction;
-                flag = true;
+                return true;
             }
-            return flag;
+
+            return false;
         }
 
 
@@ -179,10 +111,12 @@ namespace FlavorCraft
 
         public void openArmoury(bool elite)
         {
-            if (Hero.MainHero.Gold < 1000000)
-                GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, 1000000, false);
+            bool isDebugMode = Statics._settings?.Debug == true;
+            if (isDebugMode && Hero.MainHero.Gold < 10000000)
+                GiveGoldAction.ApplyBetweenCharacters(null, Hero.MainHero, 10000000, false);
 
             ItemRoster itemRoster = new ItemRoster();
+            List<string> itemPrefixes = Statics._settings?.GetItemPrefixes() ?? new List<string>();
             foreach (ItemObject itemObject in Items.All)
             {
                 if (itemObject.IsCraftedByPlayer)
@@ -199,32 +133,13 @@ namespace FlavorCraft
                 //else if (!elite && itemObject.Tier > ItemObject.ItemTiers.Tier3)
                 //    continue;
 
-                if (Statics._settings is not null && !Statics._settings.ItemPrefix.IsEmpty())
+                if (itemPrefixes.Count > 0)
                 {
-                    if (!itemObject.StringId.StartsWith(Statics._settings.ItemPrefix))
+                    if (!itemPrefixes.Any(prefix => itemObject.StringId.StartsWith(prefix)))
                         continue;
                 }
 
                 itemRoster.AddToCounts(itemObject, 1);
-
-                //Browse all armors/wepapons/horses
-                //if ( itemObject.IsCraftedWeapon || itemObject.ItemType == ItemObject.ItemTypeEnum.Shield || itemObject.IsMountable )
-                //{
-                //    itemRoster.AddToCounts(itemObject, 1);
-                //}
-
-                //if (itemObject.ArmorComponent != null)
-                //{
-                //    bool bIsMetal = false;
-                //    ArmorComponent.ArmorMaterialTypes armorMaterialTypes = itemObject.ArmorComponent.MaterialType;
-                //    if (armorMaterialTypes == ArmorComponent.ArmorMaterialTypes.Chainmail || armorMaterialTypes == ArmorComponent.ArmorMaterialTypes.Plate)
-                //        bIsMetal = true;
-
-                //    if (elite && bIsMetal)
-                //        itemRoster.AddToCounts(itemObject, 1);
-                //    else if (!elite && !bIsMetal)
-                //        itemRoster.AddToCounts(itemObject, 1);
-                //}
             }
 
             InventoryScreenHelper.OpenScreenAsTrade(itemRoster, Settlement.CurrentSettlement.Town, InventoryScreenHelper.InventoryCategoryType.None, null);

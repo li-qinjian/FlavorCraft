@@ -75,11 +75,7 @@ namespace FlavorCraft
                                                                                        select c) + "/ChosenItems.csv");
             InformationManager.DisplayMessage(new InformationMessage("导出物品列表到 " + filePath));
 
-            string itemPrefix = "";
-            if (Statics._settings is not null && !Statics._settings.ItemPrefix.IsEmpty())
-            {
-                itemPrefix = Statics._settings.ItemPrefix;
-            }
+            List<string> itemPrefixes = Statics._settings?.GetItemPrefixes() ?? new List<string>();
 
             string text = "";
             foreach (ItemRosterElement itemRosterElement in PartyBase.MainParty.ItemRoster)
@@ -87,7 +83,7 @@ namespace FlavorCraft
                 ItemObject x = itemRosterElement.EquipmentElement.Item;
                 if ( (x.HasWeaponComponent || x.HasArmorComponent)
                         && !x.IsCraftedByPlayer
-                        && x.StringId.StartsWith(itemPrefix))
+                        && (itemPrefixes.Count == 0 || itemPrefixes.Any(prefix => x.StringId.StartsWith(prefix))))
                 {
                     string itemtext = x.StringId + "\t" + x.Name.GetID() + "\t\"" + x.Name.ToString() + "\"\r\n";
                     text+= itemtext;

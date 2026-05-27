@@ -1,11 +1,13 @@
 ﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
 using MCM.Abstractions.Base.Global;
+using System;
 using System.Collections.Generic;
 using MCM.Abstractions;
 using MCM.Common;
 using TaleWorlds.Localization;
 using MCM.Abstractions.Attributes.v1;
+using TaleWorlds.Core;
 
 namespace FlavorCraft.Settings
 {
@@ -103,7 +105,29 @@ namespace FlavorCraft.Settings
 
         [SettingProperty(StringConstants.Settings_Sundry_06, Order = 5, RequireRestart = false, HintText = StringConstants.Settings_Sundry_06_Desc)]
         [SettingPropertyGroup(StringConstants.PG_Sundry)]
-        public string ItemPrefix { get; set; } = "cla_";
+        public string ItemPrefix { get; set; } = "cla_;tor_";
+
+        private static readonly char[] ItemPrefixSeparators = new[] { ',', ';', '|' };
+
+        public List<string> GetItemPrefixes()
+        {
+            List<string> prefixes = new List<string>();
+            if (ItemPrefix.IsEmpty())
+            {
+                return prefixes;
+            }
+
+            foreach (string rawPrefix in ItemPrefix.Split(ItemPrefixSeparators, StringSplitOptions.RemoveEmptyEntries))
+            {
+                string prefix = rawPrefix.Trim();
+                if (!prefix.IsEmpty() && !prefixes.Contains(prefix))
+                {
+                    prefixes.Add(prefix);
+                }
+            }
+
+            return prefixes;
+        }
 
         [SettingPropertyBool(StringConstants.Settings_Sundry_07, Order = 6, RequireRestart = false, HintText = StringConstants.Settings_Sundry_07_Desc)]
         [SettingPropertyGroup(StringConstants.PG_Sundry)]
@@ -160,7 +184,7 @@ namespace FlavorCraft.Settings
                 //Wanderer
                 // WondererLostRate = 0.1f,
 
-                ItemPrefix = "cla_",
+                ItemPrefix = "cla_;tor_",
             }); ;
 
             yield return new MemorySettingsPreset(Id, "native all on", "Native All On", () => new MCMSettings
@@ -188,7 +212,7 @@ namespace FlavorCraft.Settings
                 //Wanderer
                 // WondererLostRate = 0.1f,
 
-                ItemPrefix = "cla_",
+                ItemPrefix = "cla_;tor_",
                 //TroopPanicThreshold = 0.8f,
             });
         }

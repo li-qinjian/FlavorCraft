@@ -1,19 +1,15 @@
-﻿using FlavorCraft.Utils;
-using Helpers;
+﻿using Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Extensions;
 using TaleWorlds.CampaignSystem.GameMenus;
-using TaleWorlds.CampaignSystem.Inventory;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.CampaignSystem.Actions;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
-using TaleWorlds.ObjectSystem;
 
 namespace FlavorCraft
 {
@@ -139,7 +135,14 @@ namespace FlavorCraft
                         continue;
                 }
 
-                itemRoster.AddToCounts(itemObject, 1);
+                //Browse all armors/wepapons/horses/shield
+                if (itemObject.IsCraftedWeapon
+                    || itemObject.ItemType == ItemObject.ItemTypeEnum.Shield
+                    || itemObject.IsMountable
+                    || itemObject.ArmorComponent != null)
+                {
+                    itemRoster.AddToCounts(itemObject, 1);
+                }
             }
 
             InventoryScreenHelper.OpenScreenAsTrade(itemRoster, Settlement.CurrentSettlement.Town, InventoryScreenHelper.InventoryCategoryType.None, null);

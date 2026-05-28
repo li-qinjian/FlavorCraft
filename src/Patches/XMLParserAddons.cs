@@ -13,6 +13,9 @@ namespace FlavorCraft
         [HarmonyPatch(typeof(ItemObject), "Deserialize")]
         private static void DeserializeItemObject(ItemObject __instance, MBObjectManager objectManager, XmlNode node)
         {
+            if (Statics._settings is not null && !Statics._settings.Debug)
+                return;
+
             bool hasCustomAttribute = false;
 
             // 检查节点名称是否为"item"

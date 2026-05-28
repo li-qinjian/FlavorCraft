@@ -135,9 +135,13 @@ namespace FlavorCraft
                         continue;
                 }
 
-                //Browse all armors/wepapons/horses/shield
+                //Browse all armors/wepapons/horses/shield/banner
                 if (itemObject.IsCraftedWeapon
                     || itemObject.ItemType == ItemObject.ItemTypeEnum.Shield
+                    || itemObject.ItemType == ItemObject.ItemTypeEnum.Bow
+                    || itemObject.ItemType == ItemObject.ItemTypeEnum.Arrows
+                    || itemObject.ItemType == ItemObject.ItemTypeEnum.Crossbow
+                    || itemObject.ItemType == ItemObject.ItemTypeEnum.Banner
                     || itemObject.IsMountable
                     || itemObject.ArmorComponent != null)
                 {

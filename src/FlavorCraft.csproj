@@ -42,6 +42,7 @@
         <Compile Remove="Patches\EquipmentElementPatch.cs" />
         <Compile Remove="Patches\PartySpeedCalculatingPatch.cs" />
         <Compile Remove="Patches\PartyUpgraderPatch.cs" />
+        <Compile Remove="Patches\XMLParserAddons.cs" />
     </ItemGroup>
     
     <ItemGroup>
